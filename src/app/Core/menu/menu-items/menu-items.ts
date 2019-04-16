@@ -13,7 +13,7 @@ export interface Menu {
 
 const HeaderOneItems= [
   {
-    state: "home-two",
+    state: "home",
     name: "HOME",
     type: "link",
     icon: "home",
