@@ -15,28 +15,10 @@ const HeaderOneItems= [
   {
     state: "home",
     name: "HOME",
-    type: "sub",
+    type: "link",
     icon: "home",
-    children: [
-      {  
-        state: 'home', 
-        name: 'HOME ONE',
-        type: 'link',
-        icon: 'home'
-      },
-      {  
-        state: 'home-two', 
-        name: 'HOME TWO',
-        type: 'link',
-        icon: 'home'
-      }, {
-        state:'home-three',
-        name: 'HOME THREE',
-        type: 'link',
-        icon: 'home'
-      }
-    ]
   },
+  /*
   {
     state: "",
     name : "SHOP",
@@ -69,14 +51,15 @@ const HeaderOneItems= [
       }
     ]
   },
- 
+ */
  
   {
     state:'products/accessories',
-    name:"ACCESSORIES",
+    name:"TRABAJOS",
     type:"link",
     icon: 'party_mode'
   },
+  /*
   {
     state:'products',
     name:"CATEGORIES",
@@ -215,7 +198,7 @@ const HeaderOneItems= [
         ]
       }
     ]
-  },
+  },*/
   {
   state: "pages",
   name: "PAGES",

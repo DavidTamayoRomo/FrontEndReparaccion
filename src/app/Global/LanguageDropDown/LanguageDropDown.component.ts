@@ -8,9 +8,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class LanguageDropDownComponent implements OnInit {
 
-   currentLang = 'en';
+   currentLang = 'es';
 
    langArray = [
+      {
+         name:"Español",
+         value:"es"
+      }, 
       {
          name:"English",
          value:"en"

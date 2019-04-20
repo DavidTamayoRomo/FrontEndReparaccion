@@ -1,18 +1,18 @@
 <form>
-  <div class="mb-4">
-    <mat-form-field class="w-100">
-      <input matInput type="email" placeholder="Email" required>
-    </mat-form-field>
-  </div>
-  <div class="mb-4">
-    <mat-form-field class="w-100">
-      <input matInput type="password" placeholder="Password" required>
-    </mat-form-field>
-  </div>
-  <div class="mb-3">
-    <mat-checkbox>Remember Me</mat-checkbox>
-    <span fxFlex></span> <a [routerLink]="['/session/forgot-password']">Forgot Password?</a>
-  </div>
-  <button color="accent" class="button-lg mb-3" mat-raised-button [routerLink]="['/checkout/payment']">Sign In</button>
-  <p>Don't have an account? <a [routerLink]="['/session/signup']">Click here to create one</a></p>
+    <div class="mb-4">
+        <mat-form-field class="w-100">
+            <input matInput type="email" placeholder="Email" required>
+        </mat-form-field>
+    </div>
+    <div class="mb-4">
+        <mat-form-field class="w-100">
+            <input matInput type="password" placeholder="Contraseña" required>
+        </mat-form-field>
+    </div>
+    <div class="mb-3">
+        <mat-checkbox>Recuérdame</mat-checkbox>
+        <span fxFlex></span> <a [routerLink]="['/session/forgot-password']">Olvido su contraseña?</a>
+    </div>
+    <button color="accent" class="button-lg mb-3" mat-raised-button [routerLink]="['/checkout/payment']">Entrar</button>
+    <p>No tienes una cuenta? <a [routerLink]="['/session/signup']">Click para crear una cuenta</a></p>
 </form>
