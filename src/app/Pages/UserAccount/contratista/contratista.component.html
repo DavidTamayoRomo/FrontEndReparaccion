@@ -4,24 +4,23 @@
     <!--Step material-->
     <!--Este es un wizard de material angular-->
 
-    <!-- Este es el boton que activa y desactiva aplastar sobre los numeros
-       <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
-        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
-      </button>-->
-    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+
+
+    <mat-horizontal-stepper linear #stepper>
+
         <mat-step [stepControl]="firstFormGroup">
-            <form [formGroup]="firstFormGroup">
+            <form ngNativeValidate [formGroup]="firstFormGroup">
+
                 <ng-template matStepLabel>Areas</ng-template>
 
-
-                <!--Chips-->
                 <mat-form-field class="example-chip-list">
+
                     <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)">
+                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)" required>
                             {{fruit}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input placeholder="Nuevo Trabajo" #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                        <input placeholder="Nuevo Trabajo" #fruitInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                         <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
@@ -30,7 +29,12 @@
                     </mat-autocomplete>
                 </mat-form-field>
 
-                <!---->
+                <br>
+
+                <br>
+                <mat-form-field>
+                    <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion" required></textarea>
+                </mat-form-field>
 
 
                 <div>
@@ -38,27 +42,10 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Datos</ng-template>
-                <div class="example-container">
-                    <mat-form-field>
-                        <input matInput placeholder="Ultima Ubicacion???">
-                    </mat-form-field>
-                    <br>
-                    <mat-form-field>
-                        <textarea matInput placeholder="Descripcion"></textarea>
-                    </mat-form-field>
 
-                </div>
-                <div>
-                    <button mat-button matStepperPrevious>Atras</button>
-                    <button mat-button matStepperNext>Siguiente</button>
-                </div>
-            </form>
-        </mat-step>
+
         <mat-step [stepControl]="secondFormGroup">
-            <form [formGroup]="secondFormGroup">
+            <form ngNativeValidate [formGroup]="secondFormGroup">
                 <ng-template matStepLabel>Plan</ng-template>
 
                 <mat-card>
@@ -109,6 +96,7 @@
                 </div>
             </form>
         </mat-step>
+
         <mat-step>
             <ng-template matStepLabel>Finaliza</ng-template>
             Muchas gracias estas por finalizar el proceso.
@@ -119,6 +107,5 @@
             </div>
         </mat-step>
     </mat-horizontal-stepper>
-
 
 </mat-card>

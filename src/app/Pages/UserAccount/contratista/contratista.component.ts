@@ -19,9 +19,9 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class ContratistaComponent implements OnInit {
   //material
-  isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  isEditable = false;
 
   //chips
   visible = true;
@@ -37,6 +37,10 @@ export class ContratistaComponent implements OnInit {
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
+
+  
+  
+
   constructor(private _formBuilder: FormBuilder) {
     //chips
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
@@ -45,11 +49,12 @@ export class ContratistaComponent implements OnInit {
    }
 
   ngOnInit() {
+    
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      descripcion: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      
     });
   }
 
