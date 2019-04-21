@@ -1,0 +1,124 @@
+<mat-card>
+    <h4>Modulo ser contratista</h4>
+
+    <!--Step material-->
+    <!--Este es un wizard de material angular-->
+
+    <!-- Este es el boton que activa y desactiva aplastar sobre los numeros
+       <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+        {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+      </button>-->
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+                <ng-template matStepLabel>Areas</ng-template>
+
+
+                <!--Chips-->
+                <mat-form-field class="example-chip-list">
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)">
+                            {{fruit}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Nuevo Trabajo" #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                            {{fruit}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <!---->
+
+
+                <div>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Datos</ng-template>
+                <div class="example-container">
+                    <mat-form-field>
+                        <input matInput placeholder="Ultima Ubicacion???">
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field>
+                        <textarea matInput placeholder="Descripcion"></textarea>
+                    </mat-form-field>
+
+                </div>
+                <div>
+                    <button mat-button matStepperPrevious>Atras</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Plan</ng-template>
+
+                <mat-card>
+                    <mat-card-title>
+                        <mat-card-subtitle>
+                            <span class="md-headline">Free</span>
+
+                        </mat-card-subtitle>
+
+                    </mat-card-title>
+                    <mat-card-actions layout="row" layout-align="end center">
+                        <button mat-button>Lo quiero</button>
+
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>
+                        <mat-card-subtitle>
+                            <span class="md-headline">Gold</span>
+
+                        </mat-card-subtitle>
+
+                    </mat-card-title>
+                    <mat-card-actions layout="row" layout-align="end center">
+                        <button mat-button>Lo quiero</button>
+
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>
+                        <mat-card-subtitle>
+                            <span class="md-headline">Ultra Gold</span>
+
+                        </mat-card-subtitle>
+
+                    </mat-card-title>
+                    <mat-card-actions layout="row" layout-align="end center">
+                        <button mat-button>Lo quiero</button>
+
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+                <div>
+                    <button mat-button matStepperPrevious>Atras</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Finaliza</ng-template>
+            Muchas gracias estas por finalizar el proceso.
+            <div>
+                <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button>Solicitar Proceso </button>
+                <button mat-button (click)="stepper.reset()">Iniciar otra vez</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+
+</mat-card>

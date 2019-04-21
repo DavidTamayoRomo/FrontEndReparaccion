@@ -6,6 +6,7 @@ import { EditProfileComponent } from './EditProfile/EditProfile.component';
 import { CardsComponent } from './Cards/Cards.component';
 import { AddressComponent } from './Address/Address.component';
 import { OrderHistoryComponent } from './OrderHistory/OrderHistory.component';
+import { ContratistaComponent } from './contratista/contratista.component';
 
 export const UserAccountRoutes : Routes = [
    {
@@ -31,6 +32,10 @@ export const UserAccountRoutes : Routes = [
          {
             path: 'profile/edit',
             component: EditProfileComponent
+         },
+         {
+            path: 'profile/contratista',
+            component: ContratistaComponent
          }
       ]
    }
