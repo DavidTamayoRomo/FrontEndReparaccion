@@ -26,7 +26,9 @@ import { MatButtonModule,
    MatSliderModule,
    MatRadioModule,
    MatDialogModule,
-   MatGridListModule
+   MatGridListModule,
+   MatStepperModule,
+   MatAutocompleteModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +40,8 @@ import { EditProfileComponent } from './EditProfile/EditProfile.component';
 import { CardsComponent } from './Cards/Cards.component';
 import { AddressComponent } from './Address/Address.component';
 import { OrderHistoryComponent } from './OrderHistory/OrderHistory.component';
+import { ContratistaComponent } from './contratista/contratista.component';
+
 
 
 @NgModule({
@@ -71,7 +75,9 @@ import { OrderHistoryComponent } from './OrderHistory/OrderHistory.component';
     MatDialogModule,
     MatGridListModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatStepperModule,
+    MatAutocompleteModule
   ],
   declarations: [
      AccountComponent, 
@@ -79,7 +85,8 @@ import { OrderHistoryComponent } from './OrderHistory/OrderHistory.component';
      EditProfileComponent, 
      CardsComponent, 
      AddressComponent, 
-     OrderHistoryComponent
+     OrderHistoryComponent, 
+     ContratistaComponent
    ]
 })
 export class UserAccountModule { }

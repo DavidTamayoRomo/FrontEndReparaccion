@@ -10,27 +10,37 @@
                     <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
                         <mat-card class="register-form form-margin">
                             <h4>Ingrese sus datos</h4>
-                            <form>
+                            <form ngNativeValidate [formGroup]="info1" (ngSubmit)="registrarUsuario()">
                                 <div class="mb-4">
                                     <mat-form-field class="w-100">
-                                        <input matInput type="text" placeholder="Nombre" required>
+                                        <input matInput type="text" placeholder="Nombre" formControlName="name" name="name" required>
                                     </mat-form-field>
                                     <mat-form-field class="w-100">
-                                        <input matInput type="text" placeholder="Apellido" required>
+                                        <input matInput type="text" placeholder="Nombre Usuario" formControlName="username" name="username" required>
                                     </mat-form-field>
                                     <mat-form-field class="w-100">
-                                        <input matInput type="email" placeholder="Email" required>
+                                        <input matInput type="email" placeholder="Email" formControlName="email" name="email" required>
                                     </mat-form-field>
                                     <mat-form-field class="w-100">
-                                        <input matInput type="password" placeholder="Ingresa contraseña" required>
+                                        <input matInput type="password" placeholder="Ingresa contrasea" formControlName="password" name="password" required>
                                     </mat-form-field>
+                                    <mat-form-field class="w-100">
+                                        <input matInput type="password" placeholder="Repita contrasea" formControlName="pwd" name="pwd" required>
+                                    </mat-form-field>
+                                    <!--
+                                    {{info1.errors | json}}
+                                    pristine es si el formulario no a sido tocado
+                                    -->
+                                    <mat-form-field class="w-100" *ngIf="info1.errors?.sonIguales">
+                                        <p>
+                                            Las contraseñas deben de se iguales
+                                        </p>
+                                    </mat-form-field>
+
+
                                 </div>
-                                <div class="mb-4">
-                                    <mat-form-field class="w-100">
-                                        <input matInput type="password" placeholder="Repita contraseña" required>
-                                    </mat-form-field>
-                                </div>
-                                <button color="accent" class="button-lg mb-3" mat-raised-button>Enviar</button>
+
+                                <button color="accent" class="button-lg mb-3" mat-raised-button type="submit">Enviar</button>
                                 <div> Ya tienes una cuenta? <a class="accent-color" [routerLink]="['/session/signin']">Ingresa</a></div>
                             </form>
                         </mat-card>

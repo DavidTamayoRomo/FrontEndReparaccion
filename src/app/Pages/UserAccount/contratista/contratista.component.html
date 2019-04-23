@@ -1,0 +1,111 @@
+<mat-card>
+    <h4>Modulo ser contratista</h4>
+
+    <!--Step material-->
+    <!--Este es un wizard de material angular-->
+
+
+
+    <mat-horizontal-stepper linear #stepper>
+
+        <mat-step [stepControl]="firstFormGroup">
+            <form ngNativeValidate [formGroup]="firstFormGroup">
+
+                <ng-template matStepLabel>Areas</ng-template>
+
+                <mat-form-field class="example-chip-list">
+
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)" required>
+                            {{fruit}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Nuevo Trabajo" #fruitInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                            {{fruit}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+
+                <br>
+
+                <br>
+                <mat-form-field>
+                    <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion" required></textarea>
+                </mat-form-field>
+
+
+                <div>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+
+
+        <mat-step [stepControl]="secondFormGroup">
+            <form ngNativeValidate [formGroup]="secondFormGroup">
+                <ng-template matStepLabel>Plan</ng-template>
+
+                <mat-card>
+                    <mat-card-title>
+                        <mat-card-subtitle>
+                            <span class="md-headline">Free</span>
+
+                        </mat-card-subtitle>
+
+                    </mat-card-title>
+                    <mat-card-actions layout="row" layout-align="end center">
+                        <button mat-button>Lo quiero</button>
+
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>
+                        <mat-card-subtitle>
+                            <span class="md-headline">Gold</span>
+
+                        </mat-card-subtitle>
+
+                    </mat-card-title>
+                    <mat-card-actions layout="row" layout-align="end center">
+                        <button mat-button>Lo quiero</button>
+
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+                <mat-card>
+                    <mat-card-title>
+                        <mat-card-subtitle>
+                            <span class="md-headline">Ultra Gold</span>
+
+                        </mat-card-subtitle>
+
+                    </mat-card-title>
+                    <mat-card-actions layout="row" layout-align="end center">
+                        <button mat-button>Lo quiero</button>
+
+                    </mat-card-actions>
+                </mat-card>
+                <br>
+                <div>
+                    <button mat-button matStepperPrevious>Atras</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step>
+            <ng-template matStepLabel>Finaliza</ng-template>
+            Muchas gracias estas por finalizar el proceso.
+            <div>
+                <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button>Solicitar Proceso </button>
+                <button mat-button (click)="stepper.reset()">Iniciar otra vez</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+
+</mat-card>
