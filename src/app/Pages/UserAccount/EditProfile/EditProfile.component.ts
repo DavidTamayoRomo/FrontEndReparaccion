@@ -16,8 +16,8 @@ export class EditProfileComponent implements OnInit {
    card         : FormGroup;
    emailPattern : any = /\S+@\S+\.\S+/;
    toastOption  : ToastOptions = {
-      title     : "Account Information",
-      msg       : "Your account information updated successfully!",
+      title     : "Informacion de cuenta",
+      msg       : "Su informacion a sido actualizada correctamente!",
       showClose : true,
       timeout   : 3000,
       theme     : "material"
@@ -45,7 +45,7 @@ export class EditProfileComponent implements OnInit {
          location     : [''],
          email        : ['', [Validators.required, Validators.pattern(this.emailPattern)]]
       });
-
+      /*
       this.address = this.formGroup.group({
          address      : ['', [Validators.required]],
          buiding_name : ['', [Validators.required]],
@@ -61,7 +61,7 @@ export class EditProfileComponent implements OnInit {
          name        : ['', [Validators.required]],
          month       : ['', [Validators.required]],
          year        : ['', [Validators.required]]
-      })
+      })*/
    }
 
    /**
