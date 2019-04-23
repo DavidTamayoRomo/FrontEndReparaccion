@@ -1,18 +1,18 @@
-<form>
+<form ngNativeValidate [formGroup]="form" (ngSubmit)="ingresarUsuario()">
     <div class="mb-4">
         <mat-form-field class="w-100">
-            <input matInput type="email" placeholder="Email" required>
+            <input matInput type="email" formControlName="email" name="email" placeholder="Email" required>
         </mat-form-field>
     </div>
     <div class="mb-4">
         <mat-form-field class="w-100">
-            <input matInput type="password" placeholder="Contraseña" required>
+            <input matInput type="password" formControlName="password" name="password" placeholder="Contraseña" required>
         </mat-form-field>
     </div>
-    <div class="mb-3">
+    <!--<div class="mb-3">
         <mat-checkbox>Recuérdame</mat-checkbox>
         <span fxFlex></span> <a [routerLink]="['/session/forgot-password']">Olvido su contraseña?</a>
-    </div>
-    <button color="accent" class="button-lg mb-3" mat-raised-button [routerLink]="['/checkout/payment']">Entrar</button>
+    </div>-->
+    <button type="submit" color="accent" class="button-lg mb-3" mat-raised-button>Entrar</button>
     <p>No tienes una cuenta? <a [routerLink]="['/session/signup']">Click para crear una cuenta</a></p>
 </form>
