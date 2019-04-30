@@ -12,17 +12,11 @@
    </div>
    <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
      <div class="detail-content mb-5">
-       <h2 class="font-normal">Deal of the day</h2>
-       <h5 class="font-normal">{{singleProduct?.name}}</h5>
-       <p>
-         <del class="mr-2">{{singleProduct?.price | currency:currency}}</del>
-         <span class="accent-color">Now Only {{singleProduct?.discount_price | currency:currency}}</span>
-       </p>
+       <h2 class="font-normal">Plomeria</h2>
+      
        <p>{{singleProduct?.description}}</p>
-       
-       <embryo-TimerCountDown [dateTime]="counterDateTime"></embryo-TimerCountDown>
        <div>
-         <button mat-raised-button color="accent" [routerLink]="['/products', singleProduct?.type, singleProduct?.id]">Shop Now</button>
+         <button mat-raised-button color="accent" [routerLink]="['/products', singleProduct?.type, singleProduct?.id]">Contratar</button>
        </div>
      </div>
      <mat-grid-list cols="3" rowHeight="1:1" gutterSize="20px" class="mat-gallery-grid">

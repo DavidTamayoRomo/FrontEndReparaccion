@@ -25,7 +25,10 @@ export class RegisterComponent implements OnInit {
       username: new FormControl( null , Validators.required ),
       email: new FormControl( null ,[ Validators.required,, Validators.email] ),
       password: new FormControl( null , Validators.required ),
-      pwd: new FormControl( null , Validators.required )
+      pwd: new FormControl( null , Validators.required ),
+      telefono: new FormControl( null , Validators.required ),
+      direccion: new FormControl( null , Validators.required ),
+      ubicacion: new FormControl( null , Validators.required )
     }, { validators: this.sonIguales( 'password', 'pwd' )  } )
 
     
