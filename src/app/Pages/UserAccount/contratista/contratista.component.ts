@@ -2,27 +2,26 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatStepper } from '@angular/material';
 import {MatStepperModule} from '@angular/material/stepper';
-
-
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete} from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-
-
+import {UsuarioService} from '../services/usuario.service';
+import {ContratistaService} from '../services/contratista.service';
+import{ContratistaModel} from '../models/contratista.model';
 
 @Component({
   selector: 'app-contratista',
   templateUrl: './contratista.component.html',
-  styleUrls: []
+  styleUrls: ['./contratista.component.scss']
 })
 export class ContratistaComponent implements OnInit {
   //material
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
-
+  contratistaForm:FormGroup;
   //chips
   visible = true;
   selectable = true;
@@ -31,17 +30,16 @@ export class ContratistaComponent implements OnInit {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
-  fruits: string[] = ['Plomero'];
+
+  planes:any[]=[{plan:"premium",id:1},{plan:"free",id:2}]
+  trabajos: string[] = ['Plomero'];
   allFruits: string[] = ['Plomero', 'Fontanero', 'Carpintero', 'Limpieza', 'Electricidad'];
+
 
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-
-  
-  
-
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private _usuarioService:UsuarioService,private _contratistaService:ContratistaService) {
     //chips
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
@@ -49,15 +47,38 @@ export class ContratistaComponent implements OnInit {
    }
 
   ngOnInit() {
-    
-    this.firstFormGroup = this._formBuilder.group({
-      descripcion: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      
-    });
+    this.createForm();
   }
 
+  get f() { return this.contratistaForm.controls; }
+	createForm() {
+		this.contratistaForm = this._formBuilder.group({
+			plan_id: [2, Validators.required],
+			descripcion:['',Validators.maxLength(255)]
+		});
+  }
+  
+  prepareImportacion(): ContratistaModel {
+		const controls = this.contratistaForm.controls;
+		const _contratista = new ContratistaModel();
+		_contratista.plan_id = controls['plan_id'].value;
+		_contratista.descripcion = controls['descripcion'].value;
+		_contratista.user_id = 1;
+	// 	//valores de la interfaz
+
+		return _contratista;
+	}
+
+  guardarContratista(){
+    console.log("click");
+      this._contratistaService.createContratista(this.prepareImportacion()).subscribe((res)=>{
+      alert(res);
+      console.log(res);
+    },error=>{
+      alert(error);
+      console.log(error);
+    })
+  }
 
   //chips
   add(event: MatChipInputEvent): void {
@@ -69,7 +90,7 @@ export class ContratistaComponent implements OnInit {
 
       // Add our fruit
       if ((value || '').trim()) {
-        this.fruits.push(value.trim());
+        this.trabajos.push(value.trim());
       }
 
       // Reset the input value
@@ -82,15 +103,15 @@ export class ContratistaComponent implements OnInit {
   }
 
   remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
+    const index = this.trabajos.indexOf(fruit);
 
     if (index >= 0) {
-      this.fruits.splice(index, 1);
+      this.trabajos.splice(index, 1);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
+    this.trabajos.push(event.option.viewValue);
     this.fruitInput.nativeElement.value = '';
     this.fruitCtrl.setValue(null);
   }

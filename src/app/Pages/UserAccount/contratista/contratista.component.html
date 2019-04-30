@@ -1,54 +1,97 @@
 <mat-card>
-    <h4>Modulo ser contratista</h4>
-
+    <h4>Módulo ser contratista</h4>
     <!--Step material-->
     <!--Este es un wizard de material angular-->
-
-
-
     <mat-horizontal-stepper linear #stepper>
 
-        <mat-step [stepControl]="firstFormGroup">
-            <form ngNativeValidate [formGroup]="firstFormGroup">
-
-                <ng-template matStepLabel>Areas</ng-template>
+        <mat-step [stepControl]="contratistaForm">
+            <form ngNativeValidate [formGroup]="contratistaForm">
+<!--
+                <ng-template matStepLabel>Áreas</ng-template>
 
                 <mat-form-field class="example-chip-list">
 
                     <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)" required>
-                            {{fruit}}
+                        <mat-chip *ngFor="let trabajo of trabajos" [selectable]="selectable" [removable]="removable" (removed)="remove(trabajo)" required>
+                            {{trabajo}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input placeholder="Nuevo Trabajo" #fruitInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                        <mat-option *ngFor="let trabajo of filteredFruits | async" [value]="trabajo">
                             {{fruit}}
                         </mat-option>
                     </mat-autocomplete>
                 </mat-form-field>
-
+-->
                 <br>
-
                 <br>
+                <!--INICIO DE PLAN -->
+                <label id="example-radio-group-label">Elija el plan</label>
+                <br>
+                <br>
+                <mat-radio-group
+                    aria-labelledby="example-radio-group-label"
+                    class="example-radio-group"
+                    formControlName="plan_id">
+                    <mat-radio-button class="example-radio-button" *ngFor="let plan of planes" [value]="plan.id" >
+                        {{plan.plan}}
+                    </mat-radio-button>
+                     <mat-error *ngIf="f.plan_id.errors?.required">
+						<strong>EL plan es requerido</strong>
+					</mat-error>
+                </mat-radio-group>
+                <!--FIN DE PLAN -->
+                <br>
+                <br>
+                
                 <mat-form-field>
-                    <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion" required></textarea>
+                    <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion"></textarea>
+                    <mat-error *ngIf="f.descripcion.errors?.maxlength">
+						<strong>Máximo 255 caracteres</strong>
+					</mat-error>
                 </mat-form-field>
 
 
                 <div>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <button mat-button matStepperNext (click)="guardarContratista()">Siguiente</button>
                 </div>
             </form>
         </mat-step>
 
-
+<!--
         <mat-step [stepControl]="secondFormGroup">
             <form ngNativeValidate [formGroup]="secondFormGroup">
-                <ng-template matStepLabel>Plan</ng-template>
+                <div>
+                     The front is based on of my SVG link hover effect https://codepen.io/Zeaklous/pen/kyGqm 
 
-                <mat-card>
+                    <div class="container">
+                        <div class="card">
+
+                            <div class="front side">
+                                <h1 class="logo">Zach Saucier</h1>
+                            </div>
+
+                            <div class="back side">
+                                <h3 class="name">Zach Saucier</h3>
+                                <div>Front-end developer</div>
+                                <div class="info">
+                                    <p><span class="property">Email: </span>hello@zachsaucier.com</p>
+                                    <p><span class="property">Twitter: </span>@ZachSaucier</p>
+                                    <p><span class="property">Phone: </span>(123) 456-7890</p>
+                                    <p><span class="property">Website: </span>zachsaucier.com</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- <ng-template matStepLabel>Plan</ng-template> -->
+
+                <!-- <mat-card>
                     <mat-card-title>
                         <mat-card-subtitle>
                             <span class="md-headline">Free</span>
@@ -89,19 +132,20 @@
 
                     </mat-card-actions>
                 </mat-card>
-                <br>
+                <br> 
                 <div>
                     <button mat-button matStepperPrevious>Atras</button>
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </form>
         </mat-step>
+        -->
 
         <mat-step>
             <ng-template matStepLabel>Finaliza</ng-template>
             Muchas gracias estas por finalizar el proceso.
             <div>
-                <button mat-button matStepperPrevious>Atras</button>
+                <button mat-button matStepperPrevious>Atrás</button>
                 <button mat-button>Solicitar Proceso </button>
                 <button mat-button (click)="stepper.reset()">Iniciar otra vez</button>
             </div>

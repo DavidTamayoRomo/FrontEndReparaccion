@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule} from '@angular/common/http';
 
 import { MatButtonModule, 
    MatBadgeModule,
@@ -41,7 +42,10 @@ import { CardsComponent } from './Cards/Cards.component';
 import { AddressComponent } from './Address/Address.component';
 import { OrderHistoryComponent } from './OrderHistory/OrderHistory.component';
 import { ContratistaComponent } from './contratista/contratista.component';
+import {UsuarioService} from './services/usuario.service';
+import {ContratistaService} from './services/contratista.service';
 
+import { HttpUtilsService } from './../../utils/http-utils.service';
 
 
 @NgModule({
@@ -77,7 +81,8 @@ import { ContratistaComponent } from './contratista/contratista.component';
     FormsModule,
     ReactiveFormsModule,
     MatStepperModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientModule
   ],
   declarations: [
      AccountComponent, 
@@ -87,6 +92,7 @@ import { ContratistaComponent } from './contratista/contratista.component';
      AddressComponent, 
      OrderHistoryComponent, 
      ContratistaComponent
-   ]
+   ],
+   providers:[UsuarioService,ContratistaService,HttpUtilsService]
 })
 export class UserAccountModule { }
