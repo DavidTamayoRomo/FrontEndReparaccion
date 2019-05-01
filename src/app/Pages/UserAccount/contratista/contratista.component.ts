@@ -7,7 +7,6 @@ import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatChipInputEvent, MatAutocomplete} from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {UsuarioService} from '../services/usuario.service';
 import {ContratistaService} from '../services/contratista.service';
 import{ContratistaModel} from '../models/contratista.model';
 
@@ -31,6 +30,8 @@ export class ContratistaComponent implements OnInit {
   fruitCtrl = new FormControl();
   filteredFruits: Observable<string[]>;
 
+  arrayPlanes:any[]=[];
+  arrayTiposTrabajo:any[]=[];
   planes:any[]=[{plan:"premium",id:1},{plan:"free",id:2}]
   trabajos: string[] = ['Plomero'];
   allFruits: string[] = ['Plomero', 'Fontanero', 'Carpintero', 'Limpieza', 'Electricidad'];
@@ -39,7 +40,7 @@ export class ContratistaComponent implements OnInit {
   @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
-  constructor(private _formBuilder: FormBuilder, private _usuarioService:UsuarioService,private _contratistaService:ContratistaService) {
+  constructor(private _formBuilder: FormBuilder,private _contratistaService:ContratistaService) {
     //chips
     this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
       startWith(null),
@@ -50,6 +51,25 @@ export class ContratistaComponent implements OnInit {
     this.createForm();
   }
 
+  //******** valores necesarios para registro ******************
+  getPlanes(){
+    this._contratistaService.getPlanes().subscribe(res=>{
+      this.arrayPlanes=res;
+    },error=>{
+      alert("ha ocurrido un error al obtener los planes");
+    })
+  }
+  
+  getTipoTrabajo(){
+    this._contratistaService.getTiposTrabajo().subscribe(res=>{
+      this.arrayTiposTrabajo=res;
+    },error=>{
+      alert("ha ocurrido un error al obtener los tipo de trabajo");
+    })
+  }
+
+  //******* */valores necesarios para registro *****************
+
   get f() { return this.contratistaForm.controls; }
 	createForm() {
 		this.contratistaForm = this._formBuilder.group({
@@ -58,20 +78,18 @@ export class ContratistaComponent implements OnInit {
 		});
   }
   
-  prepareImportacion(): ContratistaModel {
+  prepareContratista(): ContratistaModel {
 		const controls = this.contratistaForm.controls;
 		const _contratista = new ContratistaModel();
 		_contratista.plan_id = controls['plan_id'].value;
 		_contratista.descripcion = controls['descripcion'].value;
 		_contratista.user_id = 1;
-	// 	//valores de la interfaz
-
 		return _contratista;
 	}
 
   guardarContratista(){
     console.log("click");
-      this._contratistaService.createContratista(this.prepareImportacion()).subscribe((res)=>{
+      this._contratistaService.createContratista(this.prepareContratista()).subscribe((res)=>{
       alert(res);
       console.log(res);
     },error=>{

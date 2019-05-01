@@ -6,7 +6,7 @@
 
         <mat-step [stepControl]="contratistaForm">
             <form ngNativeValidate [formGroup]="contratistaForm">
-<!--
+                <!--
                 <ng-template matStepLabel>Áreas</ng-template>
 
                 <mat-form-field class="example-chip-list">
@@ -31,26 +31,23 @@
                 <label id="example-radio-group-label">Elija el plan</label>
                 <br>
                 <br>
-                <mat-radio-group
-                    aria-labelledby="example-radio-group-label"
-                    class="example-radio-group"
-                    formControlName="plan_id">
-                    <mat-radio-button class="example-radio-button" *ngFor="let plan of planes" [value]="plan.id" >
+                <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="plan_id">
+                    <mat-radio-button class="example-radio-button" *ngFor="let plan of planes" [value]="plan.id">
                         {{plan.plan}}
                     </mat-radio-button>
-                     <mat-error *ngIf="f.plan_id.errors?.required">
-						<strong>EL plan es requerido</strong>
-					</mat-error>
+                    <mat-error *ngIf="f.plan_id.errors?.required">
+                        <strong>EL plan es requerido</strong>
+                    </mat-error>
                 </mat-radio-group>
                 <!--FIN DE PLAN -->
                 <br>
                 <br>
-                
+
                 <mat-form-field>
                     <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion"></textarea>
                     <mat-error *ngIf="f.descripcion.errors?.maxlength">
-						<strong>Máximo 255 caracteres</strong>
-					</mat-error>
+                        <strong>Máximo 255 caracteres</strong>
+                    </mat-error>
                 </mat-form-field>
 
 
@@ -60,86 +57,62 @@
             </form>
         </mat-step>
 
-<!--
+
         <mat-step [stepControl]="secondFormGroup">
             <form ngNativeValidate [formGroup]="secondFormGroup">
-                <div>
-                     The front is based on of my SVG link hover effect https://codepen.io/Zeaklous/pen/kyGqm 
+                <!--
+                    <div>
+                        The front is based on of my SVG link hover effect https://codepen.io/Zeaklous/pen/kyGqm 
 
-                    <div class="container">
-                        <div class="card">
+                        <div class="container">
+                            <div class="card">
 
-                            <div class="front side">
-                                <h1 class="logo">Zach Saucier</h1>
-                            </div>
-
-                            <div class="back side">
-                                <h3 class="name">Zach Saucier</h3>
-                                <div>Front-end developer</div>
-                                <div class="info">
-                                    <p><span class="property">Email: </span>hello@zachsaucier.com</p>
-                                    <p><span class="property">Twitter: </span>@ZachSaucier</p>
-                                    <p><span class="property">Phone: </span>(123) 456-7890</p>
-                                    <p><span class="property">Website: </span>zachsaucier.com</p>
+                                <div class="front side">
+                                    <h1 class="logo">Zach Saucier</h1>
                                 </div>
+
+                                <div class="back side">
+                                    <h3 class="name">Zach Saucier</h3>
+                                    <div>Front-end developer</div>
+                                    <div class="info">
+                                        <p><span class="property">Email: </span>hello@zachsaucier.com</p>
+                                        <p><span class="property">Twitter: </span>@ZachSaucier</p>
+                                        <p><span class="property">Phone: </span>(123) 456-7890</p>
+                                        <p><span class="property">Website: </span>zachsaucier.com</p>
+                                    </div>
+                                </div>
+
                             </div>
-
                         </div>
+
                     </div>
+                -->
 
-                </div>
+                <ng-template matStepLabel>Áreas</ng-template>
 
-                <!-- <ng-template matStepLabel>Plan</ng-template> -->
+                <mat-form-field class="example-chip-list">
 
-                <!-- <mat-card>
-                    <mat-card-title>
-                        <mat-card-subtitle>
-                            <span class="md-headline">Free</span>
-
-                        </mat-card-subtitle>
-
-                    </mat-card-title>
-                    <mat-card-actions layout="row" layout-align="end center">
-                        <button mat-button>Lo quiero</button>
-
-                    </mat-card-actions>
-                </mat-card>
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let trabajo of trabajos" [selectable]="selectable" [removable]="removable" (removed)="remove(trabajo)" required>
+                            {{trabajo}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Nuevo Trabajo" #fruitInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                    </mat-chip-list>
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let trabajo of filteredFruits | async" [value]="trabajo">
+                            {{trabajo}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
                 <br>
-                <mat-card>
-                    <mat-card-title>
-                        <mat-card-subtitle>
-                            <span class="md-headline">Gold</span>
-
-                        </mat-card-subtitle>
-
-                    </mat-card-title>
-                    <mat-card-actions layout="row" layout-align="end center">
-                        <button mat-button>Lo quiero</button>
-
-                    </mat-card-actions>
-                </mat-card>
-                <br>
-                <mat-card>
-                    <mat-card-title>
-                        <mat-card-subtitle>
-                            <span class="md-headline">Ultra Gold</span>
-
-                        </mat-card-subtitle>
-
-                    </mat-card-title>
-                    <mat-card-actions layout="row" layout-align="end center">
-                        <button mat-button>Lo quiero</button>
-
-                    </mat-card-actions>
-                </mat-card>
-                <br> 
                 <div>
                     <button mat-button matStepperPrevious>Atras</button>
                     <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </form>
         </mat-step>
-        -->
+
 
         <mat-step>
             <ng-template matStepLabel>Finaliza</ng-template>

@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "embryo-version-2.appspot.com",
     messagingSenderId: "73552048992"
   },
-  url:"http://reparaccion.test/api"
+  // url:"http://reparaccion.test/api"
+  url:"http://localhost/reparaccion/api"
 };
 
 /*
