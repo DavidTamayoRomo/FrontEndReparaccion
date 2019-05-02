@@ -33,7 +33,7 @@
                 <br>
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="plan_id">
                     <mat-radio-button class="example-radio-button" *ngFor="let plan of arrayPlanes" [value]="plan.id">
-                        {{plan.plan}}
+                        {{plan?.titulo}}
                     </mat-radio-button>
                     <mat-error *ngIf="f.plan_id.errors?.required">
                         <strong>EL plan es requerido</strong>

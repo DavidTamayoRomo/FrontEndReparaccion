@@ -123,6 +123,7 @@ export class ContratistaComponent implements OnInit {
 
  
   remove(indice: number): void {
+    console.log(indice);
     this.trabajosSelecionados.splice(indice,1);
   }
 
