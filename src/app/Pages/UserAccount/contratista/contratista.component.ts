@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ContratistaService} from '../services/contratista.service';
 import{ContratistaModel} from '../models/contratista.model';
-
+import {ContratistaTipoTrabajoModel} from '../models/contratistaTipoTrabajo.model';
 @Component({
   selector: 'app-contratista',
   templateUrl: './contratista.component.html',
@@ -27,34 +27,38 @@ export class ContratistaComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  filteredFruits: Observable<string[]>;
+  trabajoCtrl = new FormControl();
+  trabajosFiltrados: Observable<any[]>;
 
   arrayPlanes:any[]=[];
   arrayTiposTrabajo:any[]=[];
   planes:any[]=[{plan:"premium",id:1},{plan:"free",id:2}]
-  trabajos: string[] = ['Plomero'];
-  allFruits: string[] = ['Plomero', 'Fontanero', 'Carpintero', 'Limpieza', 'Electricidad'];
+  trabajosSelecionados: any[] = [];
+  // allFruits: string[] = ['Plomero', 'Fontanero', 'Carpintero', 'Limpieza', 'Electricidad'];
 
-
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  trabajoControl = new FormControl();
+  // @ViewChild('trabajoInput') trabajoInput: ElementRef<HTMLInputElement>;
+  // @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private _formBuilder: FormBuilder,private _contratistaService:ContratistaService) {
-    //chips
-    this.filteredFruits = this.fruitCtrl.valueChanges.pipe(
-      startWith(null),
-      map((fruit: string | null) => fruit ? this._filter(fruit) : this.allFruits.slice()));
    }
 
   ngOnInit() {
     this.createForm();
+    this.getPlanes();
+    this.getTipoTrabajo();
+    //iniciar escucha en input de trabajos
+     this.trabajosFiltrados = this.trabajoControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
   //******** valores necesarios para registro ******************
   getPlanes(){
     this._contratistaService.getPlanes().subscribe(res=>{
       this.arrayPlanes=res;
+      console.log(this.arrayPlanes);
     },error=>{
       alert("ha ocurrido un error al obtener los planes");
     })
@@ -63,12 +67,29 @@ export class ContratistaComponent implements OnInit {
   getTipoTrabajo(){
     this._contratistaService.getTiposTrabajo().subscribe(res=>{
       this.arrayTiposTrabajo=res;
+      console.log(this.arrayTiposTrabajo);
     },error=>{
       alert("ha ocurrido un error al obtener los tipo de trabajo");
     })
   }
-
   //******* */valores necesarios para registro *****************
+
+  guardarAreas(){
+    
+    this.trabajosSelecionados.forEach(trabajo=>{
+      this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(1,trabajo.id)).subscribe((res)=>{
+        console.log(res);
+      },error=>{
+        console.log(error);
+        alert(error);
+      })
+    })
+
+    // this._contratistaService.createContratistaTipoTrabajo()
+
+  }
+
+  
 
   get f() { return this.contratistaForm.controls; }
 	createForm() {
@@ -87,10 +108,12 @@ export class ContratistaComponent implements OnInit {
 		return _contratista;
 	}
 
+  idContratista:number;
   guardarContratista(){
     console.log("click");
       this._contratistaService.createContratista(this.prepareContratista()).subscribe((res)=>{
-      alert(res);
+      // alert(res);
+      this.idContratista=res.id;
       console.log(res);
     },error=>{
       alert(error);
@@ -98,49 +121,29 @@ export class ContratistaComponent implements OnInit {
     })
   }
 
-  //chips
-  add(event: MatChipInputEvent): void {
-    // Add fruit only when MatAutocomplete is not open
-    // To make sure this does not conflict with OptionSelected Event
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-
-      // Add our fruit
-      if ((value || '').trim()) {
-        this.trabajos.push(value.trim());
-      }
-
-      // Reset the input value
-      if (input) {
-        input.value = '';
-      }
-
-      this.fruitCtrl.setValue(null);
-    }
-  }
-
-  remove(fruit: string): void {
-    const index = this.trabajos.indexOf(fruit);
-
-    if (index >= 0) {
-      this.trabajos.splice(index, 1);
-    }
+ 
+  remove(indice: number): void {
+    this.trabajosSelecionados.splice(indice,1);
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.trabajos.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.trabajosSelecionados.push(event.option.value);
+    this.trabajoControl.setValue(null);
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allFruits.filter(fruit => fruit.toLowerCase().indexOf(filterValue) === 0);
+  private _filter(value): any[] {
+    if(value){
+      if(typeof(value)==="object"){
+        const filterValue = value.nombre.toLowerCase();
+        return this.arrayTiposTrabajo.filter(option => option.nombre.toLowerCase().indexOf(filterValue) === 0);
+      }else{
+      const filterValue = value.toLowerCase();
+      return this.arrayTiposTrabajo.filter(option => option.nombre.toLowerCase().indexOf(filterValue) === 0);
+      }
+    }else{
+      return this.arrayTiposTrabajo;
+    }
   }
-
-
 }
 
 

@@ -16,7 +16,7 @@
                             {{trabajo}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input placeholder="Nuevo Trabajo" #fruitInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                        <input placeholder="Nuevo Trabajo" #trabajoInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
                         <mat-option *ngFor="let trabajo of filteredFruits | async" [value]="trabajo">
@@ -32,7 +32,7 @@
                 <br>
                 <br>
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="plan_id">
-                    <mat-radio-button class="example-radio-button" *ngFor="let plan of planes" [value]="plan.id">
+                    <mat-radio-button class="example-radio-button" *ngFor="let plan of arrayPlanes" [value]="plan.id">
                         {{plan.plan}}
                     </mat-radio-button>
                     <mat-error *ngIf="f.plan_id.errors?.required">
@@ -59,7 +59,7 @@
 
 
         <mat-step [stepControl]="secondFormGroup">
-            <form ngNativeValidate [formGroup]="secondFormGroup">
+            <form ngNativeValidate>
                 <!--
                     <div>
                         The front is based on of my SVG link hover effect https://codepen.io/Zeaklous/pen/kyGqm 
@@ -91,24 +91,27 @@
                 <ng-template matStepLabel>Áreas</ng-template>
 
                 <mat-form-field class="example-chip-list">
-
                     <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let trabajo of trabajos" [selectable]="selectable" [removable]="removable" (removed)="remove(trabajo)" required>
-                            {{trabajo}}
+                        <mat-chip *ngFor="let trabajo of trabajosSelecionados" [selectable]="selectable" (removed)="remove(trabajo.id)" [removable]="removable">
+                            {{trabajo.nombre}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input placeholder="Nuevo Trabajo" #fruitInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
                     </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let trabajo of filteredFruits | async" [value]="trabajo">
-                            {{trabajo}}
-                        </mat-option>
-                    </mat-autocomplete>
+                    
+                    <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="trabajoControl" [matAutocomplete]="auto">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let option of trabajosFiltrados | async" [value]="option">
+                                {{option.nombre}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    
                 </mat-form-field>
                 <br>
                 <div>
                     <button mat-button matStepperPrevious>Atras</button>
-                    <button mat-button matStepperNext>Siguiente</button>
+                    <button mat-button matStepperNext (click)="guardarAreas()">Siguiente</button>
                 </div>
             </form>
         </mat-step>
