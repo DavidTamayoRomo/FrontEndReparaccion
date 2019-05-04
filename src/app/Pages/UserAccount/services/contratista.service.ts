@@ -14,7 +14,24 @@ export class ContratistaService {
 
 	createContratista(contratista): Observable<any> {
 		const httpHeaders = this.httpUtils.getHTTPHeaders();
-		return this.http.post<any>(URL+'/contratista', contratista,{headers:httpHeaders});
+		return this.http.post<any>(URL+'/contratista', contratista);
+	}
+	// createContratista(contratista): Observable<any> {
+	// 	const httpHeaders = this.httpUtils.getHTTPHeaders();
+	// 	return this.http.post<any>(URL+'/estado', contratista);
+	// }
+	//maestro detalle entre contratista  tipo de trabajo
+	createContratistaTipoTrabajo(contratistaTipotrabajo): Observable<any> {
+		const httpHeaders = this.httpUtils.getHTTPHeaders();
+		return this.http.post<any>(URL+'/contratista-addTrabajo', contratistaTipotrabajo);
+	}
+
+	getPlanes():Observable<any>{
+		return this.http.get<any>(URL+'/plan');
+	}
+
+	getTiposTrabajo():Observable<any>{
+		return this.http.get<any>(URL+'/tipotrabajo');
 	}
 
 }
