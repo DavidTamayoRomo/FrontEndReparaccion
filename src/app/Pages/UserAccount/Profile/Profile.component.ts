@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ToastOptions, ToastaService } from 'ngx-toasta';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import { UsuarioService } from '../services/usuario.service';
+import { UsuarioModel } from '../models/usuario.model';
+import { RegistroModel } from '../models/registro.model';
+import { LoginModel } from '../models/login.model';
 
 
 @Component({
@@ -10,6 +14,10 @@ import {MatSnackBar} from '@angular/material';
   styleUrls: ['./Profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  //usuario:UsuarioModel;
+  usuario:LoginModel;
+  usuarioCompleto:UsuarioModel;
+  
   type         : string;
   toastOption  : ToastOptions = {
     title     : "Eliminar usuario",
@@ -21,7 +29,8 @@ export class ProfileComponent implements OnInit {
    constructor( private route: ActivatedRoute,
                 private router: Router,
                 private toastyService: ToastaService,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar,
+                public _usuarioService: UsuarioService) {
 
                   this.route.params.subscribe(params => {
                     this.route.queryParams.forEach(queryParams => {
@@ -29,11 +38,16 @@ export class ProfileComponent implements OnInit {
                     });   
                  });
 
+                 //inicializao el usuario
+                 this.usuarioCompleto = _usuarioService.usuarioCompleto;
+                 
+                console.log(this.usuarioCompleto.name);
                  
 
     }
 
    ngOnInit() {
+
    }
    
   //funcion para abriri un dialogo para eliminar usuario

@@ -1,40 +1,42 @@
 <mat-card>
     <h4>Información del usuario</h4>
     <div class="pt-3">
+
         <div class="proflie-field mb-3">
             <label>Nombre:</label>
-            <span>David</span>
+            <input [ngModel]="usuarioCompleto.name" name="name" disabled/>
         </div>
+
         <div class="proflie-field mb-3">
             <label>Username:</label>
-            <span>Tamayo</span>
+            <input [ngModel]="usuarioCompleto.username" name="username" disabled>
         </div>
         <div class="proflie-field mb-3">
             <label>E-mail:</label>
-            <span>david95tamayo@hotmail.com</span>
+            <input [ngModel]="usuarioCompleto.email" name="email" disabled>
         </div>
         <div class="proflie-field mb-3">
             <label>Numero telefono:</label>
-            <span>+120 256 254 125</span>
+            <input [ngModel]="usuarioCompleto.telefono" name="telefono" disabled>
         </div>
         <div class="proflie-field mb-3">
             <label>Direccion:</label>
-            <span>New York</span>
+            <input [ngModel]="usuarioCompleto.direccion" name="direccion" disabled>
         </div>
         <div class="proflie-field mb-3">
             <label>Locacion:</label>
-            <span>New York</span>
+            <input [ngModel]="usuarioCompleto.ubicacion" name="ubicacion" disabled>
         </div>
         <div class="proflie-field mb-3">
             <label>Role:</label>
-            <span>user</span>
+            <input [ngModel]="usuarioCompleto.role_id" name="role_id" disabled>
         </div>
 
 
 
 
 
-        <button mat-raised-button color="accent" [routerLink]="['edit']" [queryParams]="{type:'info'}">Edit</button>
+        <button mat-raised-button color="accent" [routerLink]="['edit']">Edit</button>
         <button mat-raised-button color="warnig" (click)="openDialog()">Eliminar</button>
 
 

@@ -38,6 +38,8 @@ import { SignInComponent } from './SignIn/SignIn.component';
 import { ForgotPasswordComponent } from './ForgotPassword/ForgotPassword.component';
 import { ThankYouComponent } from './ThankYou/ThankYou.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsuarioService } from '../UserAccount/services/usuario.service';
+import { HttpUtilsService } from 'src/app/utils/http-utils.service';
 
 @NgModule({
    imports: [
@@ -77,7 +79,11 @@ import { ReactiveFormsModule } from '@angular/forms';
       RegisterComponent,
       SignInComponent,
       ThankYouComponent,
-      ForgotPasswordComponent
+      ForgotPasswordComponent,
+   ],
+   providers:[
+      UsuarioService,
+      HttpUtilsService
    ]
 })
 export class SessionModule { }
