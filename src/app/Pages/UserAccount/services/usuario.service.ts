@@ -26,6 +26,7 @@ export class UsuarioService {
 	//						LocalStorage
 	//====================================================
 	guardarStorage( usuario: UsuarioModel ) {
+		console.log(usuario);
 		localStorage.setItem('usuario1', JSON.stringify(usuario) );
 		this.usuarioCompleto = usuario;
 	  }
@@ -37,6 +38,7 @@ export class UsuarioService {
 		let url = URL+'loginAPI';
 		return this.http.post(url, usuario)
 			.map( (resp: any) => {
+				console.log(resp);
 				this.guardarStorage( resp );
 				//console.log('Hola local storage');
 				//console.log(JSON.parse(localStorage.getItem('usuario1')));
