@@ -126,7 +126,10 @@ export class ContratistaComponent implements OnInit {
 		const _contratista = new ContratistaModel();
 		_contratista.plan_id = controls['plan_id'].value;
 		_contratista.descripcion = controls['descripcion'].value;
-		_contratista.user_id = this._usuarioService.usuarioCompleto.id;
+    _contratista.user_id = this._usuarioService.usuarioCompleto.id;
+    if(this.contratista){
+      _contratista.id=this.contratista.id;
+    }
 		return _contratista;
 	}
 
@@ -155,6 +158,7 @@ export class ContratistaComponent implements OnInit {
     })
   }
   guardarAreas(idcontratista){
+    console.log(this.trabajosSelecionados);
     this.trabajosSelecionados.forEach(trabajo=>{
       this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,trabajo.id)).subscribe((res)=>{
         console.log(res);
@@ -174,6 +178,7 @@ export class ContratistaComponent implements OnInit {
 
 //**************logica del autocomplete
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event.option.value)
     this.trabajosSelecionados.push(event.option.value);
     this.trabajoControl.setValue(null);
   }
