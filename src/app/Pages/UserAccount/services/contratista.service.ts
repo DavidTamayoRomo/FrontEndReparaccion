@@ -34,4 +34,8 @@ export class ContratistaService {
 		return this.http.get<any>(URL+'/tipotrabajo');
 	}
 
+	getContratistaByIdUsuario(idusuario):Observable<any>{
+		return this.http.get<any>(URL+`/contratista/${idusuario}`);
+	}
+
 }

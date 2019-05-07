@@ -9,7 +9,14 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ContratistaService} from '../services/contratista.service';
 import{ContratistaModel} from '../models/contratista.model';
+import{UsuarioModel} from '../models/usuario.model';
+
 import {ContratistaTipoTrabajoModel} from '../models/contratistaTipoTrabajo.model';
+import{UsuarioService} from '../services/usuario.service';
+import {ContratistaService} from '../services/ContratistaService';
+import { ActivatedRoute, Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-contratista',
   templateUrl: './contratista.component.html',
@@ -36,14 +43,19 @@ export class ContratistaComponent implements OnInit {
   trabajosSelecionados: any[] = [];
   // allFruits: string[] = ['Plomero', 'Fontanero', 'Carpintero', 'Limpieza', 'Electricidad'];
 
+  Usuario:UsuarioModel;
   trabajoControl = new FormControl();
   // @ViewChild('trabajoInput') trabajoInput: ElementRef<HTMLInputElement>;
   // @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  contratista;
 
-  constructor(private _formBuilder: FormBuilder,private _contratistaService:ContratistaService) {
+  constructor(private _formBuilder: FormBuilder,
+    private _contratistaService:ContratistaService,
+    private _usuarioService:UsuarioService,private activatedRoute: ActivatedRoute) {
    }
 
   ngOnInit() {
+    this.Usuario=this._usuarioService.usuarioCompleto;
     this.createForm();
     this.getPlanes();
     this.getTipoTrabajo();
@@ -52,7 +64,28 @@ export class ContratistaComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+
+//optencion de parametros de la url actual
+    this.activatedRoute.queryParams.subscribe(params => {
+			const opcion = params.opcion;
+			if (opcion && opcion > 0) {
+				obtenerContratista());
+			} 
+		},error=>{
+			alert(error.message);
+		});
   }
+
+  
+  obtenerContratista(){
+    this._contratistaService.getContratistaByIdUsuario(this._usuarioService.usuarioCompleto.id).subscribe(res=>{
+      this.contratista=res;
+
+    },error=>{
+      alert("Error al obtener contratista")
+    })
+  }
+
 
   //******** valores necesarios para registro ******************
   getPlanes(){
@@ -74,21 +107,7 @@ export class ContratistaComponent implements OnInit {
   }
   //******* */valores necesarios para registro *****************
 
-  guardarAreas(){
-    
-    this.trabajosSelecionados.forEach(trabajo=>{
-      this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(1,trabajo.id)).subscribe((res)=>{
-        console.log(res);
-      },error=>{
-        console.log(error);
-        alert(error);
-      })
-    })
-
-    // this._contratistaService.createContratistaTipoTrabajo()
-
-  }
-
+  
   
 
   get f() { return this.contratistaForm.controls; }
@@ -110,9 +129,10 @@ export class ContratistaComponent implements OnInit {
 
   idContratista:number;
   guardarContratista(){
-    console.log("click");
+      //guarda el contratista
       this._contratistaService.createContratista(this.prepareContratista()).subscribe((res)=>{
-      // alert(res);
+        //una vez guardado se guardan sus areas
+      this.guardarAreas(1);
       this.idContratista=res.id;
       console.log(res);
     },error=>{
@@ -120,13 +140,25 @@ export class ContratistaComponent implements OnInit {
       console.log(error);
     })
   }
-
+  guardarAreas(idcontratista){
+    this.trabajosSelecionados.forEach(trabajo=>{
+      this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,trabajo.id)).subscribe((res)=>{
+        console.log(res);
+      },error=>{
+        console.log(error);
+        alert(error);
+      })
+    })
+  }
  
   remove(indice: number): void {
     console.log(indice);
+    console.log(this.trabajosSelecionados);
+    console.log(this.trabajosSelecionados[indice]);
     this.trabajosSelecionados.splice(indice,1);
   }
 
+//**************logica del autocomplete
   selected(event: MatAutocompleteSelectedEvent): void {
     this.trabajosSelecionados.push(event.option.value);
     this.trabajoControl.setValue(null);
@@ -145,6 +177,7 @@ export class ContratistaComponent implements OnInit {
       return this.arrayTiposTrabajo;
     }
   }
+  //************logica del autocomplete
 }
 
 

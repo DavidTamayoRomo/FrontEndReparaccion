@@ -6,25 +6,6 @@
 
         <mat-step [stepControl]="contratistaForm">
             <form ngNativeValidate [formGroup]="contratistaForm">
-                <!--
-                <ng-template matStepLabel>Áreas</ng-template>
-
-                <mat-form-field class="example-chip-list">
-
-                    <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let trabajo of trabajos" [selectable]="selectable" [removable]="removable" (removed)="remove(trabajo)" required>
-                            {{trabajo}}
-                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                        </mat-chip>
-                        <input placeholder="Nuevo Trabajo" #trabajoInput formControlName="trabajo" name="trabajo" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
-                    </mat-chip-list>
-                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                        <mat-option *ngFor="let trabajo of filteredFruits | async" [value]="trabajo">
-                            {{fruit}}
-                        </mat-option>
-                    </mat-autocomplete>
-                </mat-form-field>
--->
                 <br>
                 <br>
                 <!--INICIO DE PLAN -->
@@ -35,7 +16,7 @@
                     <mat-radio-button class="example-radio-button" *ngFor="let plan of arrayPlanes" [value]="plan.id">
                         {{plan?.titulo}}
                     </mat-radio-button>
-                    <mat-error *ngIf="f.plan_id.errors?.required">
+                    <mat-error *ngIf="f.plan_id.errors?.required && f.plan_id.touched">
                         <strong>EL plan es requerido</strong>
                     </mat-error>
                 </mat-radio-group>
@@ -52,7 +33,7 @@
 
 
                 <div>
-                    <button mat-button matStepperNext (click)="guardarContratista()">Siguiente</button>
+                    <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </form>
         </mat-step>
@@ -60,58 +41,27 @@
 
         <mat-step [stepControl]="secondFormGroup">
             <form ngNativeValidate>
-                <!--
-                    <div>
-                        The front is based on of my SVG link hover effect https://codepen.io/Zeaklous/pen/kyGqm 
-
-                        <div class="container">
-                            <div class="card">
-
-                                <div class="front side">
-                                    <h1 class="logo">Zach Saucier</h1>
-                                </div>
-
-                                <div class="back side">
-                                    <h3 class="name">Zach Saucier</h3>
-                                    <div>Front-end developer</div>
-                                    <div class="info">
-                                        <p><span class="property">Email: </span>hello@zachsaucier.com</p>
-                                        <p><span class="property">Twitter: </span>@ZachSaucier</p>
-                                        <p><span class="property">Phone: </span>(123) 456-7890</p>
-                                        <p><span class="property">Website: </span>zachsaucier.com</p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                -->
 
                 <ng-template matStepLabel>Áreas</ng-template>
 
                 <mat-form-field class="example-chip-list">
                     <mat-chip-list #chipList>
-                        <mat-chip *ngFor="let trabajo of trabajosSelecionados" [selectable]="selectable" (removed)="remove(trabajo.id)" [removable]="removable">
+                        <mat-chip *ngFor="let trabajo of trabajosSelecionados;let i=index; " [selectable]="selectable" (removed)="remove(i)" [removable]="removable">
                             {{trabajo.nombre}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                     </mat-chip-list>
-                    
-                    <mat-form-field class="example-full-width">
-                        <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="trabajoControl" [matAutocomplete]="auto">
+                        <input type="text" placeholder="Elija un trabajo" aria-label="Number" matInput [formControl]="trabajoControl" [matAutocomplete]="auto">
                         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selected($event)">
                             <mat-option *ngFor="let option of trabajosFiltrados | async" [value]="option">
                                 {{option.nombre}}
                             </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
-                    
+                        </mat-autocomplete>                    
                 </mat-form-field>
                 <br>
                 <div>
-                    <button mat-button matStepperPrevious>Atras</button>
-                    <button mat-button matStepperNext (click)="guardarAreas()">Siguiente</button>
+                    <button mat-button matStepperPrevious>Atrás</button>
+                    <button mat-button matStepperNext>Siguiente</button>
                 </div>
             </form>
         </mat-step>
@@ -122,7 +72,7 @@
             Muchas gracias estas por finalizar el proceso.
             <div>
                 <button mat-button matStepperPrevious>Atrás</button>
-                <button mat-button>Solicitar Proceso </button>
+                <button mat-button (click)="guardarContratista()">Enviar Solicitud </button>
                 <button mat-button (click)="stepper.reset()">Iniciar otra vez</button>
             </div>
         </mat-step>
