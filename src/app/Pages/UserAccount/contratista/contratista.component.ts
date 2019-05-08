@@ -125,7 +125,8 @@ export class ContratistaComponent implements OnInit {
 		const controls = this.contratistaForm.controls;
 		const _contratista = new ContratistaModel();
 		_contratista.plan_id = controls['plan_id'].value;
-		_contratista.descripcion = controls['descripcion'].value;
+    _contratista.descripcion = controls['descripcion'].value;
+    this._usuarioService.obtenerUsuario();
     _contratista.user_id = this._usuarioService.usuarioCompleto.id;
     if(this.contratista){
       _contratista.id=this.contratista.id;

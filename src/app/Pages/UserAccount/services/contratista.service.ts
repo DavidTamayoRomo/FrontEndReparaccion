@@ -44,9 +44,8 @@ export class ContratistaService {
 	}
 
 	updateContratistaTipoTrabajo(contratistaTipotrabajo): Observable<any> {
-		console.log(contratistaTipotrabajo);
 		const httpHeaders = this.httpUtils.getHTTPHeaders();
-		return this.http.put<any>(URL+'/contratista-addTrabajo', contratistaTipotrabajo);
+		return this.http.post<any>(URL+'/contratista-addTrabajo', contratistaTipotrabajo);
 	}
 
 	updateContratista(contratista): Observable<any> {
