@@ -15,6 +15,8 @@ import {ContratistaTipoTrabajoModel} from '../models/contratistaTipoTrabajo.mode
 import{UsuarioService} from '../services/usuario.service';
 // import {ContratistaService} from '../services/ContratistaService';
 import { ActivatedRoute, Router } from '@angular/router';
+import swal from 'sweetalert';
+
 
 
 @Component({
@@ -83,9 +85,8 @@ export class ContratistaComponent implements OnInit {
 
       this.trabajosSelecionados=res.trabajos;
 
-
     },error=>{
-      alert("Error al obtener contratista")
+      swal('Error', 'Error al obtener los datos de contratista, por favor recarge nuevamente la página, error:'+error.message, 'warning');
     })
   }
 
@@ -96,7 +97,7 @@ export class ContratistaComponent implements OnInit {
       this.arrayPlanes=res;
       console.log(this.arrayPlanes);
     },error=>{
-      alert("ha ocurrido un error al obtener los planes");
+      swal('Error', 'Error al obtener los planes, por favor recarge nuevamente la página, error:'+error.message, 'warning');
     })
   }
   
@@ -105,7 +106,7 @@ export class ContratistaComponent implements OnInit {
       this.arrayTiposTrabajo=res;
       console.log(this.arrayTiposTrabajo);
     },error=>{
-      alert("ha ocurrido un error al obtener los tipo de trabajo");
+      swal('Error', 'Error al obtener los trabajos, por favor recarge nuevamente la página, error:'+error.message, 'warning');
     })
   }
   //******* */valores necesarios para registro *****************
@@ -117,7 +118,7 @@ export class ContratistaComponent implements OnInit {
 	createForm() {
 		this.contratistaForm = this._formBuilder.group({
 			plan_id: [2, Validators.required],
-			descripcion:['',Validators.maxLength(255)]
+			descripcion:['',[Validators.required,Validators.maxLength(255)]]
 		});
   }
   
@@ -154,20 +155,26 @@ export class ContratistaComponent implements OnInit {
       this.guardarAreas(this.contratistaGuardado.id);
       console.log(res);
     },error=>{
-      alert(error);
+      swal('Error', 'Error al guardar contratista, por favor inténtelo nuevamente, error:'+error.message, 'warning');
       console.log(error);
     })
   }
   guardarAreas(idcontratista){
+    // prepearar datos
     console.log(this.trabajosSelecionados);
+    let idsTrabajos:any []=[];
     this.trabajosSelecionados.forEach(trabajo=>{
-      this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,trabajo.id)).subscribe((res)=>{
-        console.log(res);
-      },error=>{
-        console.log(error);
-        alert(error);
-      })
+      idsTrabajos.push(trabajo.id);
     })
+
+    this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,idsTrabajos)).subscribe((res)=>{
+          console.log(res);
+          swal('Éxito', 'Contratista registrado correctamente', 'success');
+        },error=>{
+          console.log(error);
+          swal('Error', 'Error al guardar los trabajos, por favor inténtelo nuevamente, error:'+error.message, 'warning');
+        })
+        
   }
  
   remove(indice: number): void {
@@ -206,19 +213,22 @@ export class ContratistaComponent implements OnInit {
     this.updateAreas(this.contratista.id);
     console.log(res);
   },error=>{
-    alert(error);
-    console.log(error);
+    swal('Error', 'Error al actualizar contratista, por favor inténtelo nuevamente, error:'+error, 'warning');
+    console.log(error.message);
   })
 }
 updateAreas(idcontratista){
-  this.trabajosSelecionados.forEach(trabajo=>{
-    this._contratistaService.updateContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,trabajo.id)).subscribe((res)=>{
-      console.log(res);
-    },error=>{
-      console.log(error);
-      alert(error);
+  let idsTrabajos:any []=[];
+    this.trabajosSelecionados.forEach(trabajo=>{
+      idsTrabajos.push(trabajo.id);
     })
-  })
+
+    this._contratistaService.updateContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,idsTrabajos)).subscribe((res)=>{
+      swal('Éxito', 'Contratista actualizado correctamente', 'success');
+    },error=>{
+      console.log(error.message);
+      swal('Error', 'Error al actualizar los trabajos, por favor inténtelo nuevamente, error:'+error, 'warning');
+    })
 }
   
 }
