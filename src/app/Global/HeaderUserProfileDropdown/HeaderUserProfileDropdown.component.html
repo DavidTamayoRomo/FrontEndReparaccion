@@ -4,7 +4,6 @@
 <mat-menu #loginuser="matMenu">
     <button mat-menu-item fxLayoutAlign="start center" [routerLink]="['/account/profile']"><i class="material-icons mr-1">account_circle</i> <span>Perfil</span>
   </button>
-    <!--<button mat-menu-item [routerLink]="['/account/profile']"><i class="material-icons mr-1">settings</i><span>Configuracion</span></button>
-    -->
-    <button mat-menu-item [routerLink]="['/session/signin']"><i class="material-icons mr-1">power_settings_new</i><span>Salir</span></button>
+
+    <button mat-menu-item (click)="salirUsuario()"><i class="material-icons mr-1">power_settings_new</i><span>Salir</span></button>
 </mat-menu>

@@ -28,18 +28,28 @@ export class UsuarioService {
 	guardarStorage( usuario: UsuarioModel ) {
 		localStorage.setItem('usuario1', JSON.stringify(usuario) );
 		this.usuarioCompleto = usuario;
+	  } 
+
+	  //Para eliminar 
+	  borrarStorage() {
+		//El modelo usuario se iguala a null para que no quede cargado los datos
+		this.usuarioCompleto=null;
+		this.usuario=null;
+		//Elimina el usuario del localstorage(almacenamiento local),elimina un elemento por clave de LocalStorage
+		localStorage.removeItem('usuario1');
 	  }
 
 	//====================================================
 
+	//====================================================
 	//ingresar - login - singin
+	//====================================================
 	login( usuario:LoginModel ){
 		let url = URL+'loginAPI';
 		return this.http.post(url, usuario)
 			.map( (resp: any) => {
+				console.log(resp);
 				this.guardarStorage( resp );
-				//console.log('Hola local storage');
-				//console.log(JSON.parse(localStorage.getItem('usuario1')));
 
 				return true;
 		  	});
@@ -73,9 +83,26 @@ export class UsuarioService {
 	//			Actualizar usuario
 	//==================================
 	actualizarUsuario( usuario:UsuarioModel ){
-		let url = URL+'userap/'+usuario.id;
-		return this.http.put(url, usuario);
+		let url = URL+'user/edit-userap?api_token='+usuario.api_token;	
+		return this.http.put(url, usuario).map( (resp: any) => {
+			this.guardarStorage( resp );
+		  });;
+	}
 
+	//==================================
+	//logout Usuario
+	//==================================
+	logoutUsuario( usuario: UsuarioModel ){
+		//llenar el modelo con los datos del localstorage(almacenamiento local)
+		this.usuarioCompleto = usuario;
+		//crear ruta con el token, el api se encarga de cifrar el token(valor randomico incriptado)
+		let url = URL+'logoutAPI?api_token='+this.usuarioCompleto.api_token;
+		//realiza la peticion map recibe la respuesta
+		return this.http.get(url).map(resp => {
+			
+			this.borrarStorage();
 
+		});
+		
 	}
 }

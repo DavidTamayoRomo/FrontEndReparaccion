@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuarioModel } from '../models/usuario.model';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-Account',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccountComponent implements OnInit {
 
-  constructor() { }
+  usuarioCompleto:UsuarioModel;
+  constructor(public _usuarioService: UsuarioService) { 
+    //inicializado el usuario
+    this.usuarioCompleto = _usuarioService.usuarioCompleto;
+  }
 
   ngOnInit() {
   }

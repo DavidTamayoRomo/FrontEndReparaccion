@@ -10,6 +10,8 @@ import {map, startWith} from 'rxjs/operators';
 import {ContratistaService} from '../services/contratista.service';
 import{ContratistaModel} from '../models/contratista.model';
 import {ContratistaTipoTrabajoModel} from '../models/contratistaTipoTrabajo.model';
+import { UsuarioModel } from '../models/usuario.model';
+
 @Component({
   selector: 'app-contratista',
   templateUrl: './contratista.component.html',
@@ -17,6 +19,7 @@ import {ContratistaTipoTrabajoModel} from '../models/contratistaTipoTrabajo.mode
 })
 export class ContratistaComponent implements OnInit {
   //material
+  usuarioCompleto:UsuarioModel;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isEditable = false;
@@ -41,6 +44,7 @@ export class ContratistaComponent implements OnInit {
   // @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor(private _formBuilder: FormBuilder,private _contratistaService:ContratistaService) {
+    
    }
 
   ngOnInit() {
@@ -52,6 +56,7 @@ export class ContratistaComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+    
   }
 
   //******** valores necesarios para registro ******************
