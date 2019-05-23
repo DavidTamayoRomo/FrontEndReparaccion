@@ -36,6 +36,10 @@ export const UserAccountRoutes : Routes = [
          {
             path: 'profile/contratista',
             component: ContratistaComponent
+         },
+         {
+            path: 'profile/contratista/:opcion',
+            component: ContratistaComponent
          }
       ]
    }

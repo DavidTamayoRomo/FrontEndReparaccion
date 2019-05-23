@@ -16,6 +16,7 @@ export const environment = {
   //url1:"http://localhost/Backend/reparaccion/api/",//para compu david
   url1:"http://localhost/reparaccion/api/",
   url:"http://localhost/reparaccion/api"
+
 };
 
 /*

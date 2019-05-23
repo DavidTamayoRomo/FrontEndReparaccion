@@ -25,7 +25,11 @@ export class UsuarioService {
 	//====================================================
 	//						LocalStorage
 	//====================================================
+	obtenerUsuario(){
+		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
+	}
 	guardarStorage( usuario: UsuarioModel ) {
+		console.log(usuario);
 		localStorage.setItem('usuario1', JSON.stringify(usuario) );
 		this.usuarioCompleto = usuario;
 	  } 

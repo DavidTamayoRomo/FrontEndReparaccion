@@ -9,8 +9,15 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ContratistaService} from '../services/contratista.service';
 import{ContratistaModel} from '../models/contratista.model';
+import{UsuarioModel} from '../models/usuario.model';
+
 import {ContratistaTipoTrabajoModel} from '../models/contratistaTipoTrabajo.model';
-import { UsuarioModel } from '../models/usuario.model';
+import{UsuarioService} from '../services/usuario.service';
+// import {ContratistaService} from '../services/ContratistaService';
+import { ActivatedRoute, Router } from '@angular/router';
+import swal from 'sweetalert';
+
+
 
 @Component({
   selector: 'app-contratista',
@@ -39,15 +46,20 @@ export class ContratistaComponent implements OnInit {
   trabajosSelecionados: any[] = [];
   // allFruits: string[] = ['Plomero', 'Fontanero', 'Carpintero', 'Limpieza', 'Electricidad'];
 
+  Usuario:UsuarioModel;
   trabajoControl = new FormControl();
   // @ViewChild('trabajoInput') trabajoInput: ElementRef<HTMLInputElement>;
   // @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  contratista;
 
-  constructor(private _formBuilder: FormBuilder,private _contratistaService:ContratistaService) {
-    
+  constructor(private _formBuilder: FormBuilder,
+    private _contratistaService:ContratistaService,
+    private _usuarioService:UsuarioService,
+    private activatedRoute: ActivatedRoute) {
    }
 
   ngOnInit() {
+    this.Usuario=this._usuarioService.usuarioCompleto;
     this.createForm();
     this.getPlanes();
     this.getTipoTrabajo();
@@ -56,8 +68,30 @@ export class ContratistaComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
-    
+
+//obtencion de parametros de la url actual
+  if(this.activatedRoute.snapshot.params.opcion){
+    this.obtenerContratista()
   }
+   
+  }
+    
+  obtenerContratista(){
+    this._contratistaService.getContratistaLogueado().subscribe(res=>{
+      console.log(res);
+      this.contratista=res.contratista[0];
+      this.contratistaForm.patchValue({
+        plan_id: this.contratista.plan_id,
+        descripcion:this.contratista.descripcion
+      });
+
+      this.trabajosSelecionados=res.trabajos;
+
+    },error=>{
+      swal('Error', 'Error al obtener los datos de contratista, por favor recarge nuevamente la página, error:'+error.message, 'warning');
+    })
+  }
+
 
   //******** valores necesarios para registro ******************
   getPlanes(){
@@ -65,7 +99,7 @@ export class ContratistaComponent implements OnInit {
       this.arrayPlanes=res;
       console.log(this.arrayPlanes);
     },error=>{
-      alert("ha ocurrido un error al obtener los planes");
+      swal('Error', 'Error al obtener los planes, por favor recarge nuevamente la página, error:'+error.message, 'warning');
     })
   }
   
@@ -74,33 +108,19 @@ export class ContratistaComponent implements OnInit {
       this.arrayTiposTrabajo=res;
       console.log(this.arrayTiposTrabajo);
     },error=>{
-      alert("ha ocurrido un error al obtener los tipo de trabajo");
+      swal('Error', 'Error al obtener los trabajos, por favor recarge nuevamente la página, error:'+error.message, 'warning');
     })
   }
   //******* */valores necesarios para registro *****************
 
-  guardarAreas(){
-    
-    this.trabajosSelecionados.forEach(trabajo=>{
-      this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(1,trabajo.id)).subscribe((res)=>{
-        console.log(res);
-      },error=>{
-        console.log(error);
-        alert(error);
-      })
-    })
-
-    // this._contratistaService.createContratistaTipoTrabajo()
-
-  }
-
+  
   
 
   get f() { return this.contratistaForm.controls; }
 	createForm() {
 		this.contratistaForm = this._formBuilder.group({
 			plan_id: [2, Validators.required],
-			descripcion:['',Validators.maxLength(255)]
+			descripcion:['',[Validators.required,Validators.maxLength(255)]]
 		});
   }
   
@@ -108,31 +128,67 @@ export class ContratistaComponent implements OnInit {
 		const controls = this.contratistaForm.controls;
 		const _contratista = new ContratistaModel();
 		_contratista.plan_id = controls['plan_id'].value;
-		_contratista.descripcion = controls['descripcion'].value;
-		_contratista.user_id = 1;
+    _contratista.descripcion = controls['descripcion'].value;
+    this._usuarioService.obtenerUsuario();
+    _contratista.user_id = this._usuarioService.usuarioCompleto.id;
+    if(this.contratista){
+      _contratista.id=this.contratista.id;
+    }
 		return _contratista;
 	}
 
-  idContratista:number;
+  //crear nuevo contratista
+  onSumit(){
+    if(this.contratista){
+      this.updateContratista();
+    }else{
+      console.log("nueevo");
+      this.guardarContratista()
+    }
+
+  }
+
+  contratistaGuardado:any;
   guardarContratista(){
-    console.log("click");
+      //guarda el contratista
       this._contratistaService.createContratista(this.prepareContratista()).subscribe((res)=>{
-      // alert(res);
-      this.idContratista=res.id;
+        //una vez guardado se guardan sus areas
+      this.contratistaGuardado=res;
+      this.guardarAreas(this.contratistaGuardado.id);
       console.log(res);
     },error=>{
-      alert(error);
+      swal('Error', 'Error al guardar contratista, por favor inténtelo nuevamente, error:'+error.message, 'warning');
       console.log(error);
     })
   }
+  guardarAreas(idcontratista){
+    // prepearar datos
+    console.log(this.trabajosSelecionados);
+    let idsTrabajos:any []=[];
+    this.trabajosSelecionados.forEach(trabajo=>{
+      idsTrabajos.push(trabajo.id);
+    })
 
+    this._contratistaService.createContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,idsTrabajos)).subscribe((res)=>{
+          console.log(res);
+          swal('Éxito', 'Contratista registrado correctamente', 'success');
+        },error=>{
+          console.log(error);
+          swal('Error', 'Error al guardar los trabajos, por favor inténtelo nuevamente, error:'+error.message, 'warning');
+        })
+        
+  }
  
   remove(indice: number): void {
     console.log(indice);
+    console.log(this.trabajosSelecionados);
+    console.log(this.trabajosSelecionados[indice]);
     this.trabajosSelecionados.splice(indice,1);
   }
 
+//**************logica del autocomplete
   selected(event: MatAutocompleteSelectedEvent): void {
+    console.log(event.option.value)
     this.trabajosSelecionados.push(event.option.value);
     this.trabajoControl.setValue(null);
   }
@@ -150,7 +206,38 @@ export class ContratistaComponent implements OnInit {
       return this.arrayTiposTrabajo;
     }
   }
+
+  //actualizacion de contratista **********
+
+  updateContratista(){
+    //guarda el contratista
+    this._contratistaService.updateContratista(this.prepareContratista()).subscribe((res)=>{
+    this.updateAreas(this.contratista.id);
+    console.log(res);
+  },error=>{
+    swal('Error', 'Error al actualizar contratista, por favor inténtelo nuevamente, error:'+error, 'warning');
+    console.log(error.message);
+  })
 }
+updateAreas(idcontratista){
+  let idsTrabajos:any []=[];
+    this.trabajosSelecionados.forEach(trabajo=>{
+      idsTrabajos.push(trabajo.id);
+    })
+
+    this._contratistaService.updateContratistaTipoTrabajo(new ContratistaTipoTrabajoModel(idcontratista,idsTrabajos)).subscribe((res)=>{
+      swal('Éxito', 'Contratista actualizado correctamente', 'success');
+    },error=>{
+      console.log(error.message);
+      swal('Error', 'Error al actualizar los trabajos, por favor inténtelo nuevamente, error:'+error, 'warning');
+    })
+}
+  
+}
+
+
+
+
 
 
 
