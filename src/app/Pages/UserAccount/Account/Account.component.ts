@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UsuarioService} from '../services/usuario.service';
+import { UsuarioModel } from '../models/usuario.model';
+import { UsuarioService } from '../services/usuario.service';
 import {ContratistaService} from '../services/contratista.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,10 +10,15 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./Account.component.scss']
 })
 export class AccountComponent implements OnInit {
+
   contratista;
+  usuarioCompleto:UsuarioModel;
   constructor(private activatedRoute: ActivatedRoute,
 		private router: Router,private _usuarioService:UsuarioService,
-    private _contratistaService:ContratistaService) { }
+    private _contratistaService:ContratistaService) { 
+      //inicializado el usuario
+      this.usuarioCompleto = _usuarioService.usuarioCompleto;
+    }
  
   ngOnInit() {
     

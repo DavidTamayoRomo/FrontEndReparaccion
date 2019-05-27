@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpUtilsService } from '../../../utils/http-utils.service';
 import{UsuarioService} from './usuario.service';
 import { Observable } from 'rxjs';
+import { ContratistaTipoTrabajoModel } from '../models/contratistaTipoTrabajo.model';
 const URL=environment.url;
 
 @Injectable({
@@ -23,9 +24,9 @@ export class ContratistaService {
 	// 	return this.http.post<any>(URL+'/estado', contratista);
 	// }
 	//maestro detalle entre contratista  tipo de trabajo
-	createContratistaTipoTrabajo(contratistaTipotrabajo): Observable<any> {
+	createContratistaTipoTrabajo(contratistaTipoTrabajoModel:ContratistaTipoTrabajoModel): Observable<any> {
 		const httpHeaders = this.httpUtils.getHTTPHeaders();
-		return this.http.post<any>(URL+'/contratista-addTrabajo', contratistaTipotrabajo);
+		return this.http.post<any>(URL+'/contratista-addTrabajo', contratistaTipoTrabajoModel);
 	}
 
 	getPlanes():Observable<any>{
@@ -43,8 +44,8 @@ export class ContratistaService {
 		return this.http.get<any>(URL+`/userap?api_token=`+this._usuarioService.usuarioCompleto.api_token);
 	}
 
-	updateContratistaTipoTrabajo(contratistaTipotrabajo): Observable<any> {
-		//const httpHeaders = this.httpUtils.getHTTPHeaders();
+	updateContratistaTipoTrabajo(contratistaTipotrabajo:ContratistaTipoTrabajoModel): Observable<any> {
+		const httpHeaders = this.httpUtils.getHTTPHeaders();
 		return this.http.post<any>(URL+'/contratista-addTrabajo', contratistaTipotrabajo);
 	}
 

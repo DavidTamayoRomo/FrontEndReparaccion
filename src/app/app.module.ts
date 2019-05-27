@@ -61,6 +61,7 @@ import { MenuComponent } from './Layouts/Menu/Menu/Menu.component';
 import { HomeoneComponent } from './Pages/Home/HomeOne/HomeOne.component';
 import { HomeTwoComponent } from './Pages/Home/HomeTwo/HomeTwo.component';
 import { HomeThreeComponent } from './Pages/Home/HomeThree/HomeThree.component';
+import { ContratoComponent } from './Pages/contrato/contrato.component';
 import { CartComponent } from './Pages/Cart/Cart.component';
 import { NotFoundComponent } from './Pages/NotFound/NotFound.component';
 import { SideBarMenuComponent } from './Layouts/Menu/SidebarMenu/SidebarMenu.component';
@@ -89,6 +90,7 @@ export function createTranslateLoader(http: HttpClient) {
     HeaderTwoComponent,
     FooterTwoComponent,
     HomeThreeComponent,
+    ContratoComponent,
     HeaderThreeComponent,
     FixedHeaderComponent
   ],

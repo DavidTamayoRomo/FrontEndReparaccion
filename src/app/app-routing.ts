@@ -6,6 +6,7 @@ import { MainComponent } from './Main/Main.component';
 import { HomeoneComponent } from './Pages/Home/HomeOne/HomeOne.component';
 import { HomeTwoComponent } from './Pages/Home/HomeTwo/HomeTwo.component';
 import { HomeThreeComponent } from './Pages/Home/HomeThree/HomeThree.component';
+import { ContratoComponent } from './Pages/contrato/contrato.component';
 import { CartComponent } from './Pages/Cart/Cart.component';
 import { NotFoundComponent } from './Pages/NotFound/NotFound.component';
 
@@ -21,6 +22,10 @@ export const AppRoutes : Routes = [
          {
             path : 'home',
             component : HomeoneComponent
+         },
+         {
+            path : 'contrato',
+            component : ContratoComponent
          },
          {
             path : 'home-two',
@@ -60,7 +65,7 @@ export const AppRoutes : Routes = [
          },
          {
             path: 'account',
-            loadChildren: './Pages/UserAccount/UserAccount.module#UserAccountModule'
+            loadChildren: './Pages/contrato/UserAccount.module#UserAccountModule'
          }
       ]
    },

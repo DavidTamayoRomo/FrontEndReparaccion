@@ -26,7 +26,10 @@
 
                 <mat-form-field>
                     <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion"></textarea>
-                    <mat-error *ngIf="f.descripcion.errors?.maxlength">
+                     <mat-error *ngIf="f.descripcion.touched && f.descripcion.errors?.required">
+                        <strong>La descrición es requerida</strong>
+                    </mat-error>
+                    <mat-error *ngIf="f.descripcion.touched && f.descripcion.errors?.maxlength">
                         <strong>Máximo 255 caracteres</strong>
                     </mat-error>
                 </mat-form-field>

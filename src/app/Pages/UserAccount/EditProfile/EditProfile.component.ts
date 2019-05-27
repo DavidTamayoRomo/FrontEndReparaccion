@@ -62,7 +62,9 @@ export class EditProfileComponent implements OnInit {
       console.log(this.usuarioCompleto);
       this._usuarioService.actualizarUsuario(this.usuarioCompleto)
                           .subscribe(resp =>{
-                              console.log(resp)
+                              console.log(resp);
+                              this.router.navigate(['/account/profile']);
+                              
                           });
    }
 
