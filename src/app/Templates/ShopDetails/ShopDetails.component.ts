@@ -3,16 +3,23 @@ import { Router, ActivatedRoute, Params }   from '@angular/router';
 declare var $: any;
 
 import {EmbryoService } from '../../Services/Embryo.service';
+//import {ContratoService } from '../../Pages/UserAccount/services/contrato.service';
+//import{ContratistaModel} from '../../Pages/UserAccount/models/contratista.model';
 
 @Component({
   selector: 'embryo-ShopDetails',
   templateUrl: './ShopDetails.component.html',
   styleUrls: ['./ShopDetails.component.scss']
 })
+
 export class ShopDetailsComponent implements OnInit, OnChanges {
 
    @Input() detailData : any;
    @Input() currency   : string;
+
+   @Input() contratista : any;
+
+   
 
    mainImgPath   : string;
    totalPrice    : any;
@@ -21,6 +28,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    sizeArray     : number[] = [36,38,40,42,44,46,48];
    quantityArray : number[] = [1,2,3,4,5,6,7,8,9,10];
    productReviews : any;
+   contratistaDatos : any;
 
    constructor(private route: ActivatedRoute,
                private router: Router, 
@@ -44,6 +52,9 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       this.totalPrice  = null;
       this.mainImgPath = this.detailData.image;
       this.totalPrice  = this.detailData.price; 
+      this.contratistaDatos = this.contratista;
+      console.log(this.contratistaDatos);
+      
    }
 
    /**

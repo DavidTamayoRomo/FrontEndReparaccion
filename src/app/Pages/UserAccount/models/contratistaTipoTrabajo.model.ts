@@ -1,6 +1,6 @@
 
-import {ContratistaModel} from './contratista.model';
-import { tipoTrabajoModel } from './tipoTrabajo.model';
+//import {ContratistaModel} from './contratista.model';
+//import { tipoTrabajoModel } from './tipoTrabajo.model';
 export class ContratistaTipoTrabajoModel  {
 
     contratista_id:number;

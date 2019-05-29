@@ -7,6 +7,7 @@ declare var $: any;
   styleUrls: ['./ProductGrid.component.scss']
 })
 export class ProductGridComponent implements OnInit {
+   //@Input() 
 
    @Input() products : any ;
 

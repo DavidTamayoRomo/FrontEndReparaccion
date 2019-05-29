@@ -4,6 +4,8 @@ import { Observable ,  BehaviorSubject } from 'rxjs';
 import { MatDialogRef, MatDialog, MatDialogConfig, MatSidenav } from '@angular/material';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from "@angular/fire/database";
 import { ToastaService, ToastaConfig, ToastOptions, ToastData } from 'ngx-toasta';
+import{environment} from '../../environments/environment';
+const URL=environment.url;
 import 'rxjs/Rx';
 
 import { ReviewPopupComponent } from '../Global/ReviewPopup/ReviewPopup.component';
@@ -24,9 +26,9 @@ export class EmbryoService {
 
    /**** Get currency code:- https://en.wikipedia.org/wiki/ISO_4217 *****/
    currency  : string = 'USD';
-   language  : string = 'english';     
+   language  : string = 'spanish';     
 
-   shipping  : number = 12.95;
+   shipping  : number = 100.95;
    tax       : number = 27.95;
 
    products  : AngularFireObject<any>;
@@ -415,5 +417,11 @@ export class EmbryoService {
       about_info = this.db.object("about_info");
       return about_info;
    }
+
+
+   getContratista(contratista_id):Observable<any>{
+		return this.http.get<any>(URL+'/contratista/'+contratista_id);
+	}
+
 
 }
