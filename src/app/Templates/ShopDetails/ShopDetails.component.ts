@@ -28,7 +28,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    sizeArray     : number[] = [36,38,40,42,44,46,48];
    quantityArray : number[] = [1,2,3,4,5,6,7,8,9,10];
    productReviews : any;
-   contratistaDatos : any;
+   contratistaDatos : any=null;
 
    constructor(private route: ActivatedRoute,
                private router: Router, 
@@ -38,8 +38,8 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    }
 
    ngOnInit() {
-      this.mainImgPath = this.detailData.image;
-      this.totalPrice  = this.detailData.price; 
+      // this.mainImgPath = this.detailData.image;
+      // this.totalPrice  = this.detailData.price; 
 
       this.route.params.subscribe(res => {
          this.type = null;
@@ -50,8 +50,10 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    ngOnChanges() {
       this.mainImgPath = null;
       this.totalPrice  = null;
-      this.mainImgPath = this.detailData.image;
-      this.totalPrice  = this.detailData.price; 
+      // this.mainImgPath = this.detailData.image;
+      this.mainImgPath = null;
+      // this.totalPrice  = this.detailData.price; 
+      this.totalPrice  = null; 
       this.contratistaDatos = this.contratista;
       console.log(this.contratistaDatos);
       

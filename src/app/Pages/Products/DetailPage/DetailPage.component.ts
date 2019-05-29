@@ -9,7 +9,6 @@ import { EmbryoService } from '../../../Services/Embryo.service';
 })
 export class DetailPageComponent implements OnInit {
 
-
    contratista_id    : any;
    tipotrabajo_id    : any;
    type              : any;
