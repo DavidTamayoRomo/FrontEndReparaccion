@@ -34,6 +34,7 @@ import { Grid3Component } from './Grid/Grid3/Grid3.component';
 import { ReviewComponent } from './Review/Review.component';
 import { ShopDetailsComponent } from './ShopDetails/ShopDetails.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductSuggestedGridComponent } from './Grid/ProductSuggestedGrid/ProductSuggestedGrid.component';
 
 
 @NgModule({
@@ -73,13 +74,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       ProductGridComponent,
       Grid3Component,
       ReviewComponent,
-      ShopDetailsComponent
+      ShopDetailsComponent,
+      ProductSuggestedGridComponent
    ],
    exports: [
       ProductGridComponent,
       Grid3Component,
       ReviewComponent,
-      ShopDetailsComponent
+      ShopDetailsComponent,
+      ProductSuggestedGridComponent
    ]
 })
 export class TemplatesModule {}
