@@ -28,7 +28,7 @@
           <div class="block-title text-center gap">
             <h2>Más trabajadores de {{contratista?.contratista?.tipotrabajos[0]?.nombre}}...</h2>
           </div>
-          <embryo-ProductGrid [currency]="embryoService?.currency" [products]="productsList" gridLength="4" (addToCart)="addToCart($event)" (addToWishList)="addToWishList($event)"></embryo-ProductGrid>
+          <embryo-ProductGrid [currency]="embryoService?.currency" [products]="productsList" [trabajos]="trabajos" gridLength="4" (addToCart)="addToCart($event)" (addToWishList)="addToWishList($event)"></embryo-ProductGrid>
           <div class="text-center mt-4">
             <button mat-raised-button [routerLink]="['/products', type]">Mostrar todos</button>
           </div>

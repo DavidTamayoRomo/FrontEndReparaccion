@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output,OnChanges, EventEmitter} from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -6,7 +6,7 @@ declare var $: any;
   templateUrl: './ProductGrid.component.html',
   styleUrls: ['./ProductGrid.component.scss']
 })
-export class ProductGridComponent implements OnInit {
+export class ProductGridComponent implements OnInit ,OnChanges {
    //@Input() 
 
    @Input() products : any ;
@@ -20,6 +20,12 @@ export class ProductGridComponent implements OnInit {
    @Output() addToCart: EventEmitter<any> = new EventEmitter();
 
    @Output() addToWishList: EventEmitter<any> = new EventEmitter();
+
+   @Input() trabajos : any;
+
+
+   trabajosDatos : any;
+
 
    loaded = false;
    lg     = 25;
@@ -36,8 +42,21 @@ export class ProductGridComponent implements OnInit {
       if(this.gridThree) {
          this.lg = 33;
          this.xl = 33;
-      }
+      } 
+   
    }
+
+   ngOnChanges() {
+
+      this.trabajosDatos = this.trabajos;
+      console.log("trabajos",this.trabajosDatos);
+      
+   }
+
+   
+
+
+
 
    public addToCartProduct(value:any) {
       this.addToCart.emit(value);
@@ -46,6 +65,7 @@ export class ProductGridComponent implements OnInit {
    public onLoad() {
       this.loaded = true;
    }
+
 
    public productAddToWishlist(value:any, parentClass) {
       if(!($('.'+parentClass).hasClass('wishlist-active'))) {

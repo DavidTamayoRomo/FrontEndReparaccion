@@ -18,7 +18,7 @@ export class DetailPageComponent implements OnInit {
    productsList      : any;
    contratista       : any;
    //tipoTrabajo       : any;
-   //trabajos          : any;
+   trabajos          : any;
 
    
 
@@ -37,6 +37,7 @@ export class DetailPageComponent implements OnInit {
          this.type = res.type;
          this.getData();
          this.obtenerContratista();
+         this.obtenerTrabajos();
 
       })
    }
@@ -52,6 +53,13 @@ export class DetailPageComponent implements OnInit {
          //this.tipoTrabajo=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
       });
 
+   }
+   public obtenerTrabajos(){
+      this.embryoService.getTrabajos(this.tipotrabajo_id).subscribe(res => {
+         console.log(res);
+         this.trabajos=res;
+         
+      });
    }
 
 
