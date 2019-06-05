@@ -8,6 +8,7 @@ import { HomeTwoComponent } from './Pages/Home/HomeTwo/HomeTwo.component';
 import { HomeThreeComponent } from './Pages/Home/HomeThree/HomeThree.component';
 import { CartComponent } from './Pages/Cart/Cart.component';
 import { NotFoundComponent } from './Pages/NotFound/NotFound.component';
+import { ListaContratistaComponent } from './Pages/lista-contratista/lista-contratista.component';
 
 export const AppRoutes : Routes = [
    {
@@ -33,6 +34,10 @@ export const AppRoutes : Routes = [
          {
             path: 'products',
             loadChildren: './Pages/Products/Products.module#ProductsModule'
+         },
+         {
+            path: 'lista-contratistas',
+            component: ListaContratistaComponent
          },
          {
             path: 'cart',

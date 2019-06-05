@@ -2,8 +2,8 @@
   <img src="assets/images/log-in-user.jpg" width="250" height="250" alt="log-in-user">
 </button>
 <mat-menu #loginuser="matMenu">
-    <button mat-menu-item fxLayoutAlign="start center" [routerLink]="['/account/profile']"><i class="material-icons mr-1">account_circle</i> <span>Perfil</span>
-  </button>
-
-    <button mat-menu-item (click)="salirUsuario()"><i class="material-icons mr-1">power_settings_new</i><span>Salir</span></button>
+    <button *ngIf="mostrar" mat-menu-item fxLayoutAlign="start center" [routerLink]="['/account/profile']"><i class="material-icons mr-1">account_circle</i> <span>Perfil</span></button>
+    <button mat-menu-item (click)="salirUsuario()" *ngIf="mostrar"><i class="material-icons mr-1">power_settings_new</i><span>Salir</span></button>
+    <button mat-menu-item *ngIf="mostrar1" [routerLink]="['/session/signin']"><i class="material-icons mr-1"  >account_box</i><span>Ingresar</span></button>
+    <button mat-menu-item *ngIf="mostrar1" [routerLink]="['/session/signup']"><i class="material-icons mr-1"  >group_add</i><span>Registrar</span></button>
 </mat-menu>

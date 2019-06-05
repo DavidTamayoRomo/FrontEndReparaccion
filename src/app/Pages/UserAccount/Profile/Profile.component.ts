@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   //usuario:UsuarioModel;
   usuario:LoginModel;
   usuarioCompleto:UsuarioModel;
+  public usuarios: any[] = [];
   
   type         : string;
   toastOption  : ToastOptions = {

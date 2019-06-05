@@ -24,7 +24,8 @@ import { MatButtonModule,
          MatSliderModule,
          MatRadioModule,
          MatDialogModule,
-         MatGridListModule
+         MatGridListModule,
+         MatPaginatorModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -63,7 +64,8 @@ import { ShopDetailsComponent } from './ShopDetails/ShopDetails.component';
       MatRadioModule,
       MatDialogModule,
       MatGridListModule,
-      GlobalModule
+      GlobalModule,
+      MatPaginatorModule
    ],
    declarations: [
       ProductGridComponent,

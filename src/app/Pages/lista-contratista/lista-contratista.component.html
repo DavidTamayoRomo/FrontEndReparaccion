@@ -1,0 +1,71 @@
+<ng-container>
+    <embryo-PageTitle heading="Contratista" subHeading="Son los mejores de la ciudad"></embryo-PageTitle>
+    <div class="inner-container section-gap">
+
+        <div class="container">
+
+
+            <!--Inicio de la pagina contenedora de todo-->
+            <div fxLayout="row wrap" class="col-gap">
+                <!--Barra derecha-->
+                <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="35" fxFlex.lg="25" fxFlex.xl="25">
+                    <div class="mat-card mb-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Buscar</mat-label>
+                            <input matInput placeholder="Buscar">
+                            <mat-icon matSuffix>search</mat-icon>
+
+                        </mat-form-field>
+                    </div>
+                    <div class="mat-card mb-4">
+
+
+
+                        <h5>Tipo de trabajo</h5><br>
+                        <mat-radio-group aria-label="Select an option" class="example-radio-group">
+                            <mat-radio-button class="example-radio-button" [value]="tipo.id" *ngFor="let tipo of tipos" (change)="onChange($event)">{{ tipo.nombre }}</mat-radio-button>
+                        </mat-radio-group>
+
+
+                    </div>
+                    <div class="mat-card mb-4">
+                        Dos
+                    </div>
+                    <div class="mat-card mb-4">
+                        Tres
+                    </div>
+                    <div class="mat-card mb-4">
+
+                    </div>
+                    <div class="mat-card mb-4">
+
+                    </div>
+                    <div class="mat-card mb-4">
+
+                    </div>
+                </div>
+
+
+                <!--Contenido central-->
+                <!--Inicio de los productos por cualquier busqueda-->
+                <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="75" fxFlex.xl="75" class="algolia-main-list">
+
+
+                    <!--Aqui debe ir los contratistas-->
+                    <embryo-ProductGrid>
+                    </embryo-ProductGrid>
+                    <!--Fin contenido central-->
+
+
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</ng-container>
