@@ -14,7 +14,10 @@ import { ContratistasTipoTrabajoModel } from '../UserAccount/models/contratistaL
 })
 export class ListaContratistaComponent implements OnInit {
   tipos:tipodeTrabajoModel;
-  contratistas:ContratistasTipoTrabajoModel;
+  contratistas:any=[];
+  
+  
+
 
   @Output()
   change: EventEmitter<MatRadioChange> 
@@ -34,7 +37,12 @@ export class ListaContratistaComponent implements OnInit {
     let mrButton: MatRadioButton = mrChange.source;   
     this.mostrarContratistasTiposDeTrabajo(mrChange.value); 
   } 
-
+  //todos los trabajos
+  onChange1(mrChange: MatRadioChange) {
+    let mrButton: MatRadioButton = mrChange.source;   
+    this._contratistasService.getContratistas()
+          .then(contratistas=>{this.contratistas=contratistas;console.log(this.contratistas);}); 
+  } 
   //===============================================================
    //                    Todos los tipos de trabajo
    //===============================================================

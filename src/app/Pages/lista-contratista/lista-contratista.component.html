@@ -23,6 +23,7 @@
 
                         <h5>Tipo de trabajo</h5><br>
                         <mat-radio-group aria-label="Select an option" class="example-radio-group">
+                            <mat-radio-button class="example-radio-button" (change)="onChange1($event)">Todos</mat-radio-button>
                             <mat-radio-button class="example-radio-button" [value]="tipo.id" *ngFor="let tipo of tipos" (change)="onChange($event)">{{ tipo.nombre }}</mat-radio-button>
                         </mat-radio-group>
 
@@ -52,7 +53,7 @@
 
 
                     <!--Aqui debe ir los contratistas-->
-                    <embryo-ProductGrid>
+                    <embryo-ProductGrid [trabajos]="contratistas">
                     </embryo-ProductGrid>
                     <!--Fin contenido central-->
 

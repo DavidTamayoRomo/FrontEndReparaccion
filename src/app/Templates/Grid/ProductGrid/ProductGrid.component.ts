@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
 import { AllContratistaService } from '../../../Services/AllContratistas/all-contratista.service';
 import { ListaContratistasModel } from '../../../Pages/UserAccount/models/contratistaListar/listaContratistas.model';
 import { MatPaginator, PageEvent } from '@angular/material';
@@ -9,9 +9,13 @@ import { MatPaginator, PageEvent } from '@angular/material';
   templateUrl: './ProductGrid.component.html',
   styleUrls: ['./ProductGrid.component.scss']
 })
-export class ProductGridComponent implements OnInit {
+export class ProductGridComponent implements OnInit, OnChanges {
+  
+  
+  @Input()trabajos:any;
+
+  contratistas:ListaContratistasModel;
    
-   contratistas:ListaContratistasModel;
    pageEvent: PageEvent;
     
    @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -20,7 +24,7 @@ export class ProductGridComponent implements OnInit {
 
    ngOnInit() {
       this._contratistasService.getContratistas()
-          .then(contratistas=>this.contratistas=contratistas);   
+          .then(contratistas=>{this.contratistas=contratistas;console.log(this.contratistas);});   
    }
 
   
@@ -42,6 +46,10 @@ export class ProductGridComponent implements OnInit {
     siguientePagina(){
       this._contratistasService.getContratistasUrl(this.contratistas.next_page_url)
           .then(contratistas=>this.contratistas=contratistas);
+    }
+
+    ngOnChanges(){
+      this.contratistas=this.trabajos;
     }
 
     

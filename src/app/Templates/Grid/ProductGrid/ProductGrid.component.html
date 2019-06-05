@@ -25,9 +25,37 @@
 
     </div>
 
+    <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="33" fxFlex.xl="33" *ngFor="let contratista of trabajos?.contratistas">
 
+        <mat-card class="example-card">
+            <a [routerLink]="['/products/accessories',contratista?.id,trabajos.id ]" class="title-link">
+                <!--cargamos la imagen-->
+                <a class="p-link">
+                    <img width="626" height="800" mat-card-image src="http://localhost/reparaccion-master//storage/users/default.png" alt="Photo">
+                </a>
+
+
+                <mat-card-content class="product-content relative">
+
+
+
+                    <div>
+                        <div fxFlex fxLayoutAlign="space-between">
+                            <h6 class="accent-color">{{contratista.user.name}}</h6>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+            </a>
+
+        </mat-card>
+
+    </div>
 
 </div>
 
-<mat-paginator [length]="contratistas?.total" [pageSize]="contratistas?.per_page" (page)="paginar($event)">
+<mat-paginator *ngIf="contratistas?.data" [length]="contratistas?.total" [pageSize]="contratistas?.per_page" (page)="paginar($event)">
+</mat-paginator>
+
+<mat-paginator *ngIf="trabajos?.contratistas" [length]="trabajos.contratistas.length" [pageSize]="trabajos?.per_page" (page)="paginar($event)">
 </mat-paginator>
