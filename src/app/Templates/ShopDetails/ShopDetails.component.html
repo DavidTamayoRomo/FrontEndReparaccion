@@ -136,7 +136,7 @@
                   </mat-grid-list>
                 </div>
               </div> -->
-              <!-- <div fxFlex.xs="85" fxFlex.sm="85" fxFlex.md="85" fxFlex.lg="85" fxFlex.xl="85" class="relative" *ngIf="mainImgPath">
+              <div fxFlex.xs="85" fxFlex.sm="85" fxFlex.md="85" fxFlex.lg="85" fxFlex.xl="85" class="relative" *ngIf="mainImgPath">
                 <embryo-ImgZoom 
                 [imgSrc]="mainImgPath" 
                     imgStyle="width:auto; height:auto;" 
@@ -146,47 +146,59 @@
                     lensStyle="width:100px; height:100px"
                     containerStyle="">
                 </embryo-ImgZoom>
-              </div> -->
+              </div>
             </div>
           </div>
           <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=50 fxFlex.lg="50" fxFlex.xl="50">
             <div class="product-detail-content">
-              <a href="javascript:void(0)" [routerLink]="['/']">Inicio</a>
-              <h3>{{contratistaDatos?.id}}</h3>
-              <!-- <div fxLayoutAlign="start center" class="mb-3">
+              <a href="javascript:void(0)"  [routerLink]="['/']">Inicio</a>
+              <h3>{{contratistaDatos?.contratista?.user?.name}}</h3>
+              <div fxLayoutAlign="start center" class="mb-3">
                 <div>
-                  <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(detailData)">ADD A REVIEW</a>
+                  <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">MÁS INFORMACIÓN...</a>
                 </div>
-              </div> -->
+              </div>
               <div class="product-detail-price">
                 <h4 class="accent-color">{{totalPrice | currency:currency}} </h4>
               </div>
               <ul class="no-style mb-4">
                 <li>
-                  <span class="font-medium"> Télefono: </span>: 
+                  <span class="font-medium"> Télefono </span>: {{contratistaDatos?.contratista?.user?.telefono}}
                     <!-- <span *ngIf="detailData?.availablity">In Stocks</span> -->
                     <!-- <span *ngIf="!(detailData?.availablity)">Out Of Stocks</span> -->
                 </li>
                 <li>
-                  <span class="font-medium">Correo Electrónico: </span>: {{detailData?.product_code}}
+                  <span class="font-medium">Correo Electrónico </span>: {{contratistaDatos?.contratista?.user?.email}}
                 </li>
                 <li>
-                  <span class="font-medium">Dirección: </span>: {{detailData?.product_code}}
+                  <span class="font-medium">Dirección </span>: {{contratistaDatos?.contratista?.user?.direccion}}
                     
                 </li>
               </ul>
               <div class="short-des">
-                <p>{{contratista?.descripcion}}
+                <p>{{contratistaDatos?.contratista?.descripcion}}
                 </p>
               </div>
+              <form class="example-form" [formGroup]="contratoForm">
+
+                <mat-form-field class="example-full-width">
+                  <input matInput #message maxlength="256" placeholder="Descripción de trabajo solicitado" formControlName="descripcion">
+                  <mat-hint align="start"><strong></strong> </mat-hint>
+                  <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                </mat-form-field>
+                
+              </form> <br> 
+
               <div class="bullets-points">
+                <span class="font-medium">Además realiza los siguientes trabajos: </span>
                 <ul class="bullets-list">
-                  <li *ngFor="contratista?.tipotrabajos[0]?.nombre">
-                    {{feature}}
+                  <li  *ngFor="let trabajo of contratistaDatos.tiposTrabajo">
+                    <a [routerLink]="['/products', 'accessories',contratista.contratista.id,trabajo.id]">{{trabajo.nombre}}</a> 
                   </li>
                 </ul>
-              </div>
-              <div fxLayoutGap="30px" class="mb-3 select-group">
+              </div><br> 
+             
+              <!-- <div fxLayoutGap="30px" class="mb-3 select-group">
                 <ng-container *ngIf="type == 'men' || type == 'women'">
                   <mat-form-field>
                     <mat-select class="product-detail-select" placeholder="Color">
@@ -210,20 +222,20 @@
                     </ng-container>
                   </mat-select>
                 </mat-form-field>
-              </div>
-              <div class="mb-4">
+              </div> -->
+              <!-- <div class="mb-4">
                 <a href="javascript:void(0)" class="text-underline" (click)="addToWishlist(detailData)"> Add To Wishlist</a>
-              </div>
+              </div> -->
               <div class="mb-5 detail-btns">
-                <button mat-raised-button color="accent" class="button-lg mr-3" (click)="addToCart(detailData)">Add To Cart</button>
-                <button class="button-lg" mat-raised-button (click)="buyNow(detailData)">Buy Now</button>
+                <button mat-raised-button  color="accent" class="button-lg mr-3" [routerLink]="['/products', type]">Cancelar</button>
+                <button class="button-lg"   mat-raised-button (click)="onSumit()">Aceptar</button>
               </div>
-              <div fxLayoutAlign="start center">
+              <!-- <div fxLayoutAlign="start center">
                 <div class="mr-3"> <span>Share Now</span></div>
                 <div class="detail-product-share">
                   <embryo-SocialShare></embryo-SocialShare>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

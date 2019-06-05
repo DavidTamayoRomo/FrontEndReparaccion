@@ -79,7 +79,9 @@ export class EmbryoService {
       }
 
       review = this.dialog.open(ReviewPopupComponent, dialogConfig);
-      review.componentInstance.singleProductDetails = singleProductDetails;
+      // review.componentInstance.contristaDtos = singleProductDetails;
+     review.componentInstance.singleProductDetails = singleProductDetails;
+
       review.componentInstance.reviews = reviews;
 
       return review.afterClosed();
@@ -419,9 +421,15 @@ export class EmbryoService {
    }
 
 
+
+
    getContratista(contratista_id):Observable<any>{
 		return this.http.get<any>(URL+'/contratista/'+contratista_id);
 	}
 
+   createContrato(contrato): Observable<any> {
+		console.log(contrato);
+		return this.http.post<any>(URL+'/contrato', contrato);
+	}
 
 }

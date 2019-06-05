@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 import { EmbryoService } from '../../../Services/Embryo.service';
 
@@ -16,9 +17,10 @@ export class DetailPageComponent implements OnInit {
    singleProductData : any;
    productsList      : any;
    contratista       : any;
-   tipoTrabajo       : any;
-   trabajos          : any;
+   //tipoTrabajo       : any;
+   //trabajos          : any;
 
+   
 
    constructor(private route: ActivatedRoute,
               private router: Router,
@@ -44,12 +46,17 @@ export class DetailPageComponent implements OnInit {
       this.embryoService.getContratista(this.contratista_id).subscribe(res => {
          console.log(res);
          //this.trabajos = res.contratista.tipotrabajos;
-         this.contratista=res.contratista;
-         this.contratista.tipotrabajos=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
+         this.contratista=res;
+         this.contratista.contratista.tipotrabajos=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
+         this.contratista.tiposTrabajo=res.tiposTrabajo.filter(trabajo=>trabajo.id!=this.tipotrabajo_id);
          //this.tipoTrabajo=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
       });
 
    }
+
+
+   
+
 
 
 

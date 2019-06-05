@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, OnChanges, Renderer2, ElementRef, ViewChild, AfterViewInit} from '@angular/core';
 import { Router, ActivatedRoute, Params }   from '@angular/router';
 declare var $: any;
-
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormControl} from '@angular/forms';
 import {EmbryoService } from '../../Services/Embryo.service';
-//import {ContratoService } from '../../Pages/UserAccount/services/contrato.service';
-//import{ContratistaModel} from '../../Pages/UserAccount/models/contratista.model';
+import { ContratoModel } from '../../Pages/Products/DetailPage/models/contrato.model';
+
 
 @Component({
   selector: 'embryo-ShopDetails',
@@ -17,28 +18,32 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    @Input() detailData : any;
    @Input() currency   : string;
 
-   @Input() contratista : any;
-
    
-
-   mainImgPath   : string;
+   @Input() contratista : any;
+   contratoForm:FormGroup;
+   
+   mainImgPath   : any;
    totalPrice    : any;
    type          : any;
    colorsArray   : string[] = ["Red", "Blue", "Yellow", "Green"];
    sizeArray     : number[] = [36,38,40,42,44,46,48];
    quantityArray : number[] = [1,2,3,4,5,6,7,8,9,10];
    productReviews : any;
-   contratistaDatos : any=null;
+   contratistaDatos : any;
+  
 
    constructor(private route: ActivatedRoute,
                private router: Router, 
-               public embryoService : EmbryoService
+               public embryoService : EmbryoService,
+               private _formBuilder: FormBuilder
                ) {
       this.embryoService.getProductReviews().valueChanges().subscribe(res => {this.productReviews = res});
    }
 
    ngOnInit() {
-      // this.mainImgPath = this.detailData.image;
+      this.createForm();
+      this.mainImgPath = "assets/images/gadgets/g-2-a.jpg";
+      
       // this.totalPrice  = this.detailData.price; 
 
       this.route.params.subscribe(res => {
@@ -48,12 +53,13 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    }
 
    ngOnChanges() {
-      this.mainImgPath = null;
+
+      this.mainImgPath = "assets/images/gadgets/g-2-a.jpg";      
       this.totalPrice  = null;
       // this.mainImgPath = this.detailData.image;
-      this.mainImgPath = null;
       // this.totalPrice  = this.detailData.price; 
       this.totalPrice  = null; 
+
       this.contratistaDatos = this.contratista;
       console.log(this.contratistaDatos);
       
@@ -73,7 +79,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       this.totalPrice = detailData.price*value;
    }
 
-   public reviewPopup(detailData) {
+   public reviewPopup(contratistaDatos) {
       let reviews : any = null;
       for(let review of this.productReviews) {
          // if((review.id == detailData.id) && (review.type == detailData.type) && (review.category == detailData.category)){
@@ -84,7 +90,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
         reviews = review.user_rating;
       }
 
-      this.embryoService.reviewPopup(detailData, reviews);
+      this.embryoService.reviewPopup(contratistaDatos, reviews);
    }
 
    public addToWishlist(value:any) {
@@ -99,5 +105,48 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       this.embryoService.buyNow(value);
       this.router.navigate(['/checkout']);
    }
+
+   // --------------------Contrato---------------
+   prepareContrato(): ContratoModel {
+		const controls = this.contratoForm.controls;
+		const _contrato = new ContratoModel();
+      _contrato.contratista_id = this.contratistaDatos.contratista.id;
+      _contrato.user_id = this.contratistaDatos.contratista.user_id;
+      _contrato.estado_id = 1;
+      _contrato.descripcion = controls['descripcion'].value;
+      _contrato.foto = 'por confirmar';
+
+		return _contrato;
+	}
+
+   //crear nuevo contrato
+   onSumit(){
+      
+      this.guardarContrato()
+
+   }
+   contratoGuardado:any;
+   guardarContrato(){
+      //guarda el contrato
+      this.embryoService.createContrato(this.prepareContrato()).subscribe((res)=>{
+         //poner mensaje de guardado
+         alert("guardado");
+      
+   },error=>{
+      //  swal('Error', 'Error al guardar contrato, por favor inténtelo nuevamente, error:'+error.message, 'warning');
+      console.log(error);
+      alert("error");
+   })
+   }
+
+   get f() { return this.contratoForm.controls; }
+	createForm() {
+		this.contratoForm = this._formBuilder.group({
+			descripcion:['',[Validators.required,Validators.maxLength(255)]]
+		});
+  }
+
+
+
 
 }

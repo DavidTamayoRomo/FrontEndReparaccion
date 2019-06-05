@@ -1,28 +1,32 @@
   <div fxLayoutAlign="space-between" *ngIf="singleProductDetails">
     <div fxFlex.xs="100" fxFlex.sm="80" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
-      <h4 class="primary-color">{{singleProductDetails?.name}} </h4>
-      <p> {{singleProductDetails?.description}}</p>
+      <h4 class="primary-color">{{singleProductDetails?.contratista?.user?.name}} </h4>
+      <p> {{singleProductDetails?.contratista?.descripcion}}</p>
       <h3><embryo-Rating [rate]="singleProductDetails?.rating"></embryo-Rating></h3>
 
       <h5 *ngIf="reviews && reviews.length>0">{{reviews.length}} Reviews</h5>
     </div>
     <div>
-      <button mat-raised-button color="accent" class="button-lg" (click)="dialogRef.close()">Add Later</button>
+      <button mat-raised-button color="accent" class="button-lg" (click)="dialogRef.close()">Volver</button>
     </div>
   </div>
   <hr class="spacer">
   <div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap">
       <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50" *ngIf="reviews && reviews.length>0">
           <div class="user-list-wrap">
-              <div class="user-list" *ngFor="let userRate of reviews">
+              <div class="user-list" *ngFor="let trabajo of singleProductDetails?.tiposTrabajo"> 
                 <div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap">
                   <div fxFlex.xs="100" fxFlex.sm="20" fxFlex.md="20" fxFlex.lg="20" fxFlex.xl="20">
-                    <img class="round-radius" [src]="userRate.img" width="90" alt="Review user">
+                    <!-- <img class="round-radius" [src]="userRate.img" width="90" alt="Review user"> -->
+                    <img class="round-radius" src="../../assets/images/user-5.jpg" width="90" alt="Review user">
                   </div>
                   <div fxFlex.xs="100" fxFlex.sm="80" fxFlex.md="80" fxFlex.lg="80" fxFlex.xl="80">
-                    <h6>{{userRate.name}}</h6>
-                    <div class="star"></div><span>{{userRate.date}}</span>
-                    <p>{{userRate?.comment}}</p>
+                    <h6> <ul>
+                            <li> <a (click)="dialogRef.close()" [routerLink]="['/products', 'accessories',singleProductDetails?.contratista.id,trabajo.id]">{{trabajo.nombre}}</a> </li>
+                       </ul>
+                    </h6>
+                    <!-- <div class="star"></div><span>{{userRate.date}}</span>
+                    <p>{{userRate?.comment}}</p> -->
                   </div>
                 </div>
               </div>

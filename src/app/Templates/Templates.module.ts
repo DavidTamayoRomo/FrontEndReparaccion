@@ -33,6 +33,8 @@ import { ProductGridComponent } from './Grid/ProductGrid/ProductGrid.component';
 import { Grid3Component } from './Grid/Grid3/Grid3.component';
 import { ReviewComponent } from './Review/Review.component';
 import { ShopDetailsComponent } from './ShopDetails/ShopDetails.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
    imports: [
@@ -63,7 +65,9 @@ import { ShopDetailsComponent } from './ShopDetails/ShopDetails.component';
       MatRadioModule,
       MatDialogModule,
       MatGridListModule,
-      GlobalModule
+      GlobalModule,
+      FormsModule, 
+      ReactiveFormsModule
    ],
    declarations: [
       ProductGridComponent,
