@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ContratistaService } from '../services/contratista.service';
+import { AllContratistaService } from '../../../Services/AllContratistas/all-contratista.service';
 
-const order_history = [
-   {position: 1, orderid:1801, name: 'LEGITIM', price: 1.0079, status: 'Sent',action:''},
-   {position: 2, orderid:1832, name: 'GRUNDTAL', price: 4.0026, status: 'In processing',action:''},
-   {position: 3, orderid:1881, name: 'BOHOLMEN', price: 6.941, status: 'Sent',action:''},
-   {position: 4, orderid:1832, name: 'ROSTAD LÖK', price: 9.0122, status: 'Return',action:''},
-   {position: 5, orderid:1810, name: 'TÅRTA CHOKLADKROKANT', price: 10.811, status: 'Sent',action:''},
-];
+
 
 @Component({
   selector: 'app-OrderHistory',
@@ -14,13 +10,41 @@ const order_history = [
   styleUrls: ['./OrderHistory.component.scss']
 })
 export class OrderHistoryComponent implements OnInit {
+   displayedColumns: string[] = ['id', 'descripcion'];
+   dataSource :any[]=[]
+   contratista;
 
-   displayedColumns: string[] = ['position', 'orderid', 'name', 'price', 'status','action'];
-   dataSource = order_history;
+   constructor(private _contratistaService:ContratistaService,
+               public _contratistasService : AllContratistaService) {
+              
+                  
+               }
 
-   constructor() { }
-
+   
    ngOnInit() {
+     this._contratistaService.getContratistaLogueado().subscribe(res=>{
+        this.contratista=res;
+        this.mostrarContratistas();
+        console.log(res);
+     },error=>{
+        alert('error');
+     })
+    
    }
+   
+   //===============================================================
+   //                    Todos los contratis
+   //===============================================================
+   mostrarContratistas(){
+      this._contratistasService.contratosContratistas(this.contratista.contratista[0].id)
+      .subscribe((res:any)=>{
+         console.log(res);
+         this.dataSource=res.contratos;
+         console.log(this.dataSource);
+      },error=>{
+         alert("Error");
+      });  
+   }
+
 
 }

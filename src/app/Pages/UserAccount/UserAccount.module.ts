@@ -29,7 +29,9 @@ import { MatButtonModule,
    MatDialogModule,
    MatGridListModule,
    MatStepperModule,
-   MatAutocompleteModule
+   MatAutocompleteModule,
+   
+   
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -82,7 +84,7 @@ import { HttpUtilsService } from './../../utils/http-utils.service';
     ReactiveFormsModule,
     MatStepperModule,
     MatAutocompleteModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   declarations: [
      AccountComponent, 

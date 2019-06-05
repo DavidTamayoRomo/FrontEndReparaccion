@@ -66,6 +66,11 @@ import { NotFoundComponent } from './Pages/NotFound/NotFound.component';
 import { SideBarMenuComponent } from './Layouts/Menu/SidebarMenu/SidebarMenu.component';
 import { PaymentDetailSideBarComponent } from './Layouts/PaymentDetailSideBar/PaymentDetailSideBar.component';
 import { FixedHeaderComponent } from './Layouts/Header/FixedHeader/FixedHeader.component';
+import { AllContratistaService } from './Services/AllContratistas/all-contratista.service';
+import { ListaContratistaComponent } from './Pages/lista-contratista/lista-contratista.component';
+//paginacion
+import { tipoTrabajoService } from './Services/tipoTrabajo.service';
+
 
 
 /********** Custom option for ngx-translate ******/
@@ -90,7 +95,10 @@ export function createTranslateLoader(http: HttpClient) {
     FooterTwoComponent,
     HomeThreeComponent,
     HeaderThreeComponent,
-    FixedHeaderComponent
+    FixedHeaderComponent,
+    ListaContratistaComponent,
+  
+    
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'embryo-seo-pre'}),
@@ -141,10 +149,13 @@ export function createTranslateLoader(http: HttpClient) {
        }
     }),
     SlickCarouselModule
+    
   ],
    providers: [
       MenuItems,
-      EmbryoService
+      EmbryoService,
+      AllContratistaService,
+      tipoTrabajoService
    ],
    bootstrap: [AppComponent]
 })

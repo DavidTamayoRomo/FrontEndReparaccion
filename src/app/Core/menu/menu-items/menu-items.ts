@@ -54,7 +54,7 @@ const HeaderOneItems= [
  */
  
   {
-    state:'products/accessories',
+    state:'lista-contratistas',
     name:"TRABAJOS",
     type:"link",
     icon: 'party_mode'

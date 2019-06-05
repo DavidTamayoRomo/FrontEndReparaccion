@@ -105,7 +105,7 @@ export class CommonSignInComponent implements OnInit {
           //verificamos que la respuesta sea diferente de null
           //para indicar que existe el usuario
           if(resp != null){
-             this.router.navigate(['/home']);
+             window.location.href = '/home'
           }
           if(resp == null){
             swal('Importante', 'Datos incorrectos', 'warning');

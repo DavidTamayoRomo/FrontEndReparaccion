@@ -24,7 +24,8 @@ import { MatButtonModule,
          MatSliderModule,
          MatRadioModule,
          MatDialogModule,
-         MatGridListModule
+         MatGridListModule,
+         MatPaginatorModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -68,7 +69,8 @@ import { ProductSuggestedGridComponent } from './Grid/ProductSuggestedGrid/Produ
       MatGridListModule,
       GlobalModule,
       FormsModule, 
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatPaginatorModule
    ],
    declarations: [
       ProductGridComponent,

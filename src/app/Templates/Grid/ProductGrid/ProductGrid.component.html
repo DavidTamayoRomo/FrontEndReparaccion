@@ -1,126 +1,61 @@
-<div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap" *ngIf="products && products.length > 0">
-  <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="{{lg}}" fxFlex.xl="{{xl}}" *ngFor="let product of products; let i=index; trackBy: trackByObjectID">
-     <mat-card class="example-card" *ngIf="gridLength && (i<gridLength)">
-      <a class="p-link" [routerLink]="['/products', product?.type, product?.id]">
-        <img width="626" height="800" mat-card-image [src]="product?.image" alt="Photo of a Shiba Inu">
-      </a>
-      <div class="wishlist-icon {{i}}-wishlist">
-         <a (click)="productAddToWishlist(product, i+'-wishlist')"><i  class="material-icons"> favorite </i></a>
-      </div>
-        <mat-card-content class="product-content relative">
-           <h5><a [routerLink]="['/products', product?.type, product?.id]" class="title-link">{{product?.name}}</a> </h5>
-           <div>
-              <div fxFlex fxLayoutAlign="space-between">
-                 <h6 class="accent-color">{{product?.price | currency: currency}}</h6>
-                 <div class="rating-star">
-                    <embryo-Rating [rate]="product.rating"></embryo-Rating>
-                 </div>
-              </div>
-           </div>
-           <div class="m-icon" *ngIf="checkCartAlready(product)">
-              <embryo-AddToCardButton [product]="product" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton>
-           </div>
-           <div class="m-icon" *ngIf="!checkCartAlready(product)">
-               <button mat-fab [routerLink]="['/products', product?.type, product?.id]"><i class="material-icons">remove_red_eye</i> </button>
-           </div>
-           
-        </mat-card-content>
-     </mat-card> -->
-     <!-- Multiple show products grid -->
-     <!-- <mat-card class="example-card" *ngIf="!gridLength">
-        <a class="p-link" *ngIf="product?.id" [routerLink]="['/products', product?.type, product?.id]">
-          <img width="626" height="800" mat-card-image [src]="product?.image" alt="Photo">
-        </a>
-        <a class="p-link" *ngIf="!product?.id" [routerLink]="['/products/accessories/17']">
-          <img width="626" height="800" mat-card-image [src]="product?.image" [ngClass]="{ transparent: !loaded }" (load)="onLoad()" alt="Photo">
-        </a>
-        <div class="wishlist-icon {{i}}-wishlist">
-            <a (click)="productAddToWishlist(product, i+'-wishlist')"><i  class="material-icons"> favorite </i></a>
-         </div>
-        <mat-card-content class="product-content relative">
-           <h5><a *ngIf="product?.id" [routerLink]="['/products', product?.type, product?.id]" class="title-link">{{product?.name}}</a> </h5>
-           <h5><a *ngIf="!product?.id" [routerLink]="['/products/accessories/17']" class="title-link">{{product?.name}}</a> </h5>
-           <div>
-              <div fxFlex fxLayoutAlign="space-between">
-                 <h6 class="accent-color">{{product?.price | currency: currency}}</h6>
-                 <div class="rating-star">
-                    <embryo-Rating [rate]="product.rating"></embryo-Rating>
-                 </div>
-              </div>
-           </div>
-           <div class="m-icon" *ngIf="checkCartAlready(product)">
-              <embryo-AddToCardButton [product]="product" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton>
-           </div>
-            <div class="m-icon" *ngIf="!checkCartAlready(product)">
-               <button mat-fab *ngIf="product?.id" [routerLink]="['/products', product?.type, product?.id]"><i class="material-icons">remove_red_eye</i> </button>
-               <button mat-fab *ngIf="!product?.id"[routerLink]="['/products/accessories/17']"><i class="material-icons">remove_red_eye</i> </button>
-           </div>
-          
-        </mat-card-content>
-     </mat-card>
-  </div>
+<div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap">
+    <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="33" fxFlex.xl="33" *ngFor="let contratista of contratistas?.data">
+
+        <mat-card class="example-card">
+
+            <!--cargamos la imagen-->
+            <a class="p-link">
+                <img width="626" height="800" mat-card-image src="../../../../assets/images/Contratistas/contratista.jpg" alt="Photo">
+            </a>
+
+
+            <mat-card-content class="product-content relative">
+                <h5 *ngFor="let trabajo of contratista.tipotrabajos"><a [routerLink]="['/products/accessories',contratista?.id,trabajo.id ]" class="title-link">{{trabajo?.nombre}}</a> </h5>
+
+
+                <div>
+                    <div fxFlex fxLayoutAlign="space-between">
+                        <h6 class="accent-color">{{contratista.user.name}}</h6>
+                    </div>
+                </div>
+            </mat-card-content>
+
+
+        </mat-card>
+
+    </div>
+
+    <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="33" fxFlex.xl="33" *ngFor="let contratista of trabajos?.contratistas">
+
+        <mat-card class="example-card">
+            <a [routerLink]="['/products/accessories',contratista?.id,trabajos.id ]" class="title-link">
+                <!--cargamos la imagen-->
+                <a class="p-link">
+                    <img width="626" height="800" mat-card-image src="http://localhost/reparaccion-master//storage/users/default.png" alt="Photo">
+                </a>
+
+
+                <mat-card-content class="product-content relative">
+
+
+
+                    <div>
+                        <div fxFlex fxLayoutAlign="space-between">
+                            <h6 class="accent-color">{{contratista.user.name}}</h6>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+            </a>
+
+        </mat-card>
+
+    </div>
+
 </div>
 
+<mat-paginator *ngIf="contratistas?.data" [length]="contratistas?.total" [pageSize]="contratistas?.per_page" (page)="paginar($event)">
+</mat-paginator>
 
- <div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap" *ngIf="products && products.length > 0">
-   <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="{{lg}}" fxFlex.xl="{{xl}}" *ngFor="let product of products; let i=index; trackBy: trackByObjectID">
-      <mat-card class="example-card" *ngIf="gridLength && (i<gridLength)">
-       <a class="p-link" [routerLink]="['/products', product?.type, product?.id]">
-         <img width="626" height="800" mat-card-image [src]="product?.image" alt="Photo of a Shiba Inu">
-       </a>
-       <div class="wishlist-icon {{i}}-wishlist">
-          <a (click)="productAddToWishlist(product, i+'-wishlist')"><i  class="material-icons"> favorite </i></a>
-       </div>
-         <mat-card-content class="product-content relative">
-            <h5><a [routerLink]="['/products', product?.type, product?.id]" class="title-link">{{trabajosDatos?.contratistas?.user?.name}}</a> </h5>
-            <div>
-               <div fxFlex fxLayoutAlign="space-between">
-                  <h6 class="accent-color">{{product?.price | currency: currency}}</h6>
-                  <div class="rating-star">
-                     <embryo-Rating [rate]="product.rating"></embryo-Rating>
-                  </div>
-               </div>
-            </div>
-            <div class="m-icon" *ngIf="checkCartAlready(product)">
-               <embryo-AddToCardButton [product]="product" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton>
-            </div>
-            <div class="m-icon" *ngIf="!checkCartAlready(product)">
-                <button mat-fab [routerLink]="['/products', product?.type, product?.id]"><i class="material-icons">remove_red_eye</i> </button>
-            </div>
-            
-         </mat-card-content>
-      </mat-card> -->
-      <!-- Multiple show products grid -->
-       <!-- <mat-card class="example-card" *ngIf="!gridLength">
-         <a class="p-link" *ngIf="product?.id" [routerLink]="['/products', product?.type, product?.id]">
-           <img width="626" height="800" mat-card-image [src]="product?.image" alt="Photo">
-         </a>
-         <a class="p-link" *ngIf="!product?.id" [routerLink]="['/products/accessories/17']">
-           <img width="626" height="800" mat-card-image [src]="product?.image" [ngClass]="{ transparent: !loaded }" (load)="onLoad()" alt="Photo">
-         </a>
-         <div class="wishlist-icon {{i}}-wishlist">
-             <a (click)="productAddToWishlist(product, i+'-wishlist')"><i  class="material-icons"> favorite </i></a>
-          </div>
-         <mat-card-content class="product-content relative">
-            <h5><a *ngIf="product?.id" [routerLink]="['/products', product?.type, product?.id]" class="title-link">{{product?.name}}</a> </h5>
-            <h5><a *ngIf="!product?.id" [routerLink]="['/products/accessories/17']" class="title-link">{{product?.name}}</a> </h5>
-            <div>
-               <div fxFlex fxLayoutAlign="space-between">
-                  <h6 class="accent-color">{{product?.price | currency: currency}}</h6>
-                  <div class="rating-star">
-                     <embryo-Rating [rate]="product.rating"></embryo-Rating>
-                  </div>
-               </div>
-            </div>
-            <div class="m-icon" *ngIf="checkCartAlready(product)">
-               <embryo-AddToCardButton [product]="product" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton>
-            </div>
-             <div class="m-icon" *ngIf="!checkCartAlready(product)">
-                <button mat-fab *ngIf="product?.id" [routerLink]="['/products', product?.type, product?.id]"><i class="material-icons">remove_red_eye</i> </button>
-                <button mat-fab *ngIf="!product?.id"[routerLink]="['/products/accessories/17']"><i class="material-icons">remove_red_eye</i> </button>
-            </div>
-           
-         </mat-card-content>
-      </mat-card>
-   </div>
- </div> --> 
+<mat-paginator *ngIf="trabajos?.contratistas" [length]="trabajos.contratistas.length" [pageSize]="trabajos?.per_page" (page)="paginar($event)">
+</mat-paginator>
