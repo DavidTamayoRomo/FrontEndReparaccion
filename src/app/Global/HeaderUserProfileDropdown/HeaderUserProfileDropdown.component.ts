@@ -26,7 +26,7 @@ export class HeaderUserProfileDropdownComponent implements OnInit {
     //del servicio se llama a la funcion para enviarle los datos  y se suscribe cuando envia la respuesta
     this._servicioUsuario.logoutUsuario(this.usuarioCompleto).subscribe(resp=>{
       //redirecciona al login
-      window.location.href = '/session/signin'
+      window.location.href = '/session/thank-you'
      
     });
   }

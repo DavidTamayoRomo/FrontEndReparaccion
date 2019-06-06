@@ -92,7 +92,7 @@ export class AllContratistaService {
 
 	contratosContratistas( id ){
 		let url = URL+'contratista-contratos/'+id;
-		return this.http.get(url)	
+		return this.http.get(url);	
 	}
 
 }
