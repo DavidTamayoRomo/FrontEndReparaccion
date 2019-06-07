@@ -2,10 +2,12 @@
     <div fxFlex.xs="100" fxFlex.sm="80" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50">
       <h4 class="primary-color">{{singleProductDetails?.contratista?.user?.name}} </h4>
       <p> {{singleProductDetails?.contratista?.descripcion}}</p>
+      <p> Contratos: {{singleProductDetails?.contratista?.user?.name}}   </p> 
       <h3><embryo-Rating [rate]="singleProductDetails?.rating"></embryo-Rating></h3>
 
       <h5 *ngIf="reviews && reviews.length>0">{{reviews.length}} Reviews</h5>
     </div>
+    
     <div>
       <button mat-raised-button color="accent" class="button-lg" (click)="dialogRef.close()">Volver</button>
     </div>

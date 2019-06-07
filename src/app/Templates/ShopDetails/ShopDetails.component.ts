@@ -5,7 +5,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {EmbryoService } from '../../Services/Embryo.service';
 import { ContratoModel } from '../../Pages/Products/DetailPage/models/contrato.model';
-
+import swal from 'sweetalert';
 
 @Component({
   selector: 'embryo-ShopDetails',
@@ -20,6 +20,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 
    
    @Input() contratista : any;
+   
    contratoForm:FormGroup;
    
    mainImgPath   : any;
@@ -50,6 +51,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
          this.type = null;
          this.type = res.type; 
       });
+     
    }
 
    ngOnChanges() {
@@ -62,6 +64,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 
       this.contratistaDatos = this.contratista;
       console.log(this.contratistaDatos);
+    
       
    }
 
@@ -123,19 +126,20 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    onSumit(){
       
       this.guardarContrato()
+      
 
    }
    contratoGuardado:any;
    guardarContrato(){
       //guarda el contrato
       this.embryoService.createContrato(this.prepareContrato()).subscribe((res)=>{
-         //poner mensaje de guardado
-         alert("guardado");
+         swal('Éxito', 'Contrato creado correctamente', 'success');
+        // alert("guardado");
       
    },error=>{
-      //  swal('Error', 'Error al guardar contrato, por favor inténtelo nuevamente, error:'+error.message, 'warning');
-      console.log(error);
-      alert("error");
+    swal('Error', 'Error al guardar contrato, por favor inténtelo nuevamente', 'warning');
+      //console.log(error);
+      //alert("error");
    })
    }
 
