@@ -54,10 +54,6 @@ export class ProductSuggestedGridComponent implements OnInit ,OnChanges {
    }
 
    
-
-
-
-
    public addToCartProduct(value:any) {
       this.addToCart.emit(value);
    }

@@ -46,7 +46,7 @@ export class DetailPageComponent implements OnInit {
 
    public obtenerContratista(){
       this.embryoService.getContratista(this.contratista_id).subscribe(res => {
-         console.log(res);
+         console.log("Datos de contratista",res);
          this.contratista=res;
          this.contratista.contratista.tipotrabajos=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
          this.contratista.tiposTrabajo=res.tiposTrabajo.filter(trabajo=>trabajo.id!=this.tipotrabajo_id);
@@ -64,9 +64,10 @@ export class DetailPageComponent implements OnInit {
 
    public obtenerContratos(){
       this.embryoService.getContratos(this.contratista_id).subscribe(res => {
-         console.log(res);
+         console.log("datos contratos",res);
          this.contratos=res;
          this.contratos.contratos=res.contratos.filter(contrato=>contrato.id==this.contratista_id);
+         console.log("datos contrato111",this.contratos.contratos);
       });
    }
    
