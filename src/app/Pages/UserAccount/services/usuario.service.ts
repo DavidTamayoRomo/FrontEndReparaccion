@@ -86,9 +86,22 @@ export class UsuarioService {
 	//==================================
 	//			Actualizar usuario
 	//==================================
-	actualizarUsuario( usuario:UsuarioModel ){
-		let url = URL+'user/edit-userap?api_token='+usuario.api_token;	
-		return this.http.put(url, usuario).map( (resp: any) => {
+	actualizarUsuario( usuario ){
+		this.obtenerUsuario();
+		console.log(this.usuarioCompleto);
+		let url = URL+'user/edit-userap?api_token='+this.usuarioCompleto.api_token;
+		return this.http.post(url, usuario).map( (resp: any) => {
+			this.guardarStorage( resp );
+		  });;
+	}
+
+	subirFoto(usuario:FormData,id)
+	{
+		this.obtenerUsuario();
+		console.log(this.usuarioCompleto);
+		console.log('userphot',usuario.get('avatar'));
+		let url = URL+'user/edit-userphoto/'+id+'?api_token='+this.usuarioCompleto.api_token;	
+		return this.http.post(url, usuario).map( (resp: any) => {
 			this.guardarStorage( resp );
 		  });;
 	}

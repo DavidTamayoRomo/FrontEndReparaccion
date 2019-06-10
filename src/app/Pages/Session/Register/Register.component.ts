@@ -29,6 +29,8 @@ export class RegisterComponent implements OnInit {
       username: new FormControl( null , Validators.required ),
       email: new FormControl( null ,[ Validators.required,, Validators.email] ),
       password: new FormControl( null , Validators.required ),
+      telefono: new FormControl( null , Validators.required ),
+      direccion: new FormControl( null , Validators.required ),
       pwd: new FormControl( null , Validators.required ),
       //telefono: new FormControl( null , Validators.required ),
       //direccion: new FormControl( null , Validators.required ),
@@ -64,7 +66,10 @@ export class RegisterComponent implements OnInit {
       this.info1.value.name,
       this.info1.value.email,
       this.info1.value.password, 
-      this.info1.value.username
+      this.info1.value.username,
+      this.info1.value.telefono,
+      this.info1.value.direccion
+    
     );
     this._usuarioService.crearUsuario(usuario)
           .subscribe(resp => {

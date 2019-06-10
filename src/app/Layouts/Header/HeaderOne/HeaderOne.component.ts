@@ -30,7 +30,7 @@ export class HeaderOneComponent implements OnInit {
    }
 
    public openConfirmationPopup(value:any) {
-      let message = "Are you sure you want to delete this product?";
+      let message = "hola";
       this.embryoService.confirmationPopup(message).
          subscribe(res => {this.popupResponse = res},
                    err => console.log(err),
