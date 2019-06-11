@@ -11,10 +11,9 @@
                 <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="35" fxFlex.lg="25" fxFlex.xl="25">
                     <div class="mat-card mb-4">
                         <mat-form-field appearance="outline">
-                            <mat-label>Buscar</mat-label>
-                            <input matInput placeholder="Buscar">
+                            <mat-label>Buscar contratista</mat-label>
+                            <input #buscarf matInput placeholder="Buscar por nombre contratista" (keyup)="buscar(buscarf.value)">
                             <mat-icon matSuffix>search</mat-icon>
-
                         </mat-form-field>
                     </div>
                     <div class="mat-card mb-4">
@@ -30,7 +29,7 @@
 
                     </div>
                     <div class="mat-card mb-4">
-                        Dos
+                        Calificacion
                     </div>
                     <div class="mat-card mb-4">
                         Tres

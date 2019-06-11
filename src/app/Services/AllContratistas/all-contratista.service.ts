@@ -36,6 +36,23 @@ export class AllContratistaService {
 	}
 
 	//====================================================
+	//   obtener contratistas con paginacion BUSQUEDA POR NOMBRE
+	//====================================================
+	
+	getContratistasNombre(nombre: string): Promise<ListaContratistasModel>{
+		this.isLoading = true;
+		let url = URL+"contratista-paginate?term="+nombre;
+        return this.http.get(url)
+        .toPromise()
+        .then((response) => {
+            this.isLoading = false;
+            return response as ListaContratistasModel
+        })
+        .catch(this.handleError);
+	}
+
+
+	//====================================================
 	//   obtener contratistas con paginacion para los botones
 	//====================================================
 	getContratistasUrl(url: string): Promise<ListaContratistasModel>{
@@ -60,18 +77,7 @@ export class AllContratistaService {
         .catch(this.handleError);
 	}
 	
-	//busqueda por tipo de trabajo
-	/*getContratistasUrlTipoTrabajo(n: number): Promise<ContratistasTipoTrabajoModel>{
-		this.isLoading = true;
-		let url = URL+"tipoTrabajo-contratistas/"+n;
-        return this.http.get(url)
-        .toPromise()
-        .then((response) => {
-            this.isLoading = false;
-            return response as ContratistasTipoTrabajoModel
-        })
-        .catch(this.handleError);
-	}*/
+
 	getContratistasUrlTipoTrabajo( n: number ):Observable<ContratistasTipoTrabajoModel>{
 		let url = URL+"tipoTrabajo-contratistas/"+n;
 		return this.http.get<ContratistasTipoTrabajoModel>(url);	

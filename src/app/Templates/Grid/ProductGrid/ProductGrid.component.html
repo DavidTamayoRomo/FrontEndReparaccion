@@ -15,7 +15,7 @@
 
                 <div>
                     <div fxFlex fxLayoutAlign="space-between">
-                        <h6 class="accent-color">{{contratista.user.name}}</h6>
+                        <h6 class="accent-color">{{contratista?.user?.name}}</h6>
                     </div>
                 </div>
             </mat-card-content>
@@ -53,7 +53,7 @@
     </div>
 
 </div>
-
+<p *ngIf="_contratistasService.isLoading">Cargando datos...</p>
 <mat-paginator *ngIf="contratistas?.data" [length]="contratistas?.total" [pageSize]="contratistas?.per_page" (page)="paginar($event)">
 </mat-paginator>
 
