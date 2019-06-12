@@ -18,7 +18,7 @@ declare const gapi:any;
 export class CommonSignInComponent implements OnInit {
   form: FormGroup;
   auth2:any;
-
+  usuarioCompleto:UsuarioModel;
   constructor(public _usuarioService: UsuarioService,
               public router: Router) { }
 
@@ -69,7 +69,10 @@ export class CommonSignInComponent implements OnInit {
         profile.getName(),
         profile.getEmail(),
         null, 
-        profile.getName()
+        profile.getName(),
+        profile.getTelefono(),
+        profile.getDireccion(),
+
       );
       this._usuarioService.loginGoogle(usuario).subscribe(resp =>{
         console.log(resp);
@@ -89,9 +92,9 @@ export class CommonSignInComponent implements OnInit {
     if(forma.invalid){
       return;
     }
-
-    console.log(forma.valid);
-    console.log(forma.value);
+      
+    //console.log(forma.valid);
+    //console.log(forma.value);
 
     let usuario = new LoginModel(
       forma.value.email,
@@ -99,19 +102,7 @@ export class CommonSignInComponent implements OnInit {
     );
     
 
-    this._usuarioService.login(usuario)
-        .subscribe(resp => {
-          console.log(resp);
-          //verificamos que la respuesta sea diferente de null
-          //para indicar que existe el usuario
-          if(resp != null){
-             window.location.href = '/home'
-          }
-          if(resp == null){
-            swal('Importante', 'Datos incorrectos', 'warning');
-          }
-          
-        });
+    this._usuarioService.login(usuario).subscribe();
   }
 
 }

@@ -32,6 +32,13 @@ export class ListaContratistaComponent implements OnInit {
     this.mostrarTiposDeTrabajo();
     
   }
+   //===============================================================
+  //buscar tipo de trabajo
+   //===============================================================
+  buscar(valor){
+    this.mostrarContratistaNombre(valor);
+  }
+
 
   onChange(mrChange: MatRadioChange) {
     let mrButton: MatRadioButton = mrChange.source;   
@@ -41,7 +48,7 @@ export class ListaContratistaComponent implements OnInit {
   onChange1(mrChange: MatRadioChange) {
     let mrButton: MatRadioButton = mrChange.source;   
     this._contratistasService.getContratistas()
-          .then(contratistas=>{this.contratistas=contratistas;console.log(this.contratistas);}); 
+          .then(contratistas=>this.contratistas=contratistas); 
   } 
   //===============================================================
    //                    Todos los tipos de trabajo
@@ -60,6 +67,15 @@ export class ListaContratistaComponent implements OnInit {
       this.contratistas=contratistas
       console.log(this.contratistas);
     });  
+  }
+
+
+  //===============================================================
+   //               Contratistas por  nombre busqueda
+   //===============================================================
+   mostrarContratistaNombre(nombre){
+    this._contratistasService.getContratistasNombre(nombre)
+      .then(contratistas=>this.contratistas=contratistas);  
   }
  
 

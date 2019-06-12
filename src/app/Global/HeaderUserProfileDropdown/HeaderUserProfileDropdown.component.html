@@ -1,5 +1,5 @@
 <button mat-mini-fab class="log-in-user" [matMenuTriggerFor]="loginuser">
-  <img src="assets/images/log-in-user.jpg" width="250" height="250" alt="log-in-user">
+  <img [src]="userAvatar" width="250" height="250" alt="log-in-user">
 </button>
 <mat-menu #loginuser="matMenu">
     <button *ngIf="mostrar" mat-menu-item fxLayoutAlign="start center" [routerLink]="['/account/profile']"><i class="material-icons mr-1">account_circle</i> <span>Perfil</span></button>

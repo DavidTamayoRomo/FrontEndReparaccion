@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnChanges } 
 import { AllContratistaService } from '../../../Services/AllContratistas/all-contratista.service';
 import { ListaContratistasModel } from '../../../Pages/UserAccount/models/contratistaListar/listaContratistas.model';
 import { MatPaginator, PageEvent } from '@angular/material';
+import { UsuarioModel } from '../../../Pages/UserAccount/models/usuario.model';
+import { UsuarioService } from '../../../Pages/UserAccount/services/usuario.service';
 
 
 @Component({
@@ -10,8 +12,8 @@ import { MatPaginator, PageEvent } from '@angular/material';
   styleUrls: ['./ProductGrid.component.scss']
 })
 export class ProductGridComponent implements OnInit, OnChanges {
-  
-  
+ 
+  userAvatar:string;
   @Input()trabajos:any;
   @Input()idTipotTrabajoSeleccionado:any;
   
@@ -22,11 +24,14 @@ export class ProductGridComponent implements OnInit, OnChanges {
     
    @ViewChild(MatPaginator) paginator: MatPaginator;
 
-   constructor(public _contratistasService : AllContratistaService) {}
+   constructor(public _contratistasService : AllContratistaService,
+               public _servicioUsuario:UsuarioService) {}
 
    ngOnInit() {
       this._contratistasService.getContratistas()
           .then(contratistas=>{this.contratistas=contratistas;console.log(this.contratistas);});   
+     
+      this.userAvatar="http://localhost/reparaccion//storage/app/public/"+this.contratistas;
    }
 
   

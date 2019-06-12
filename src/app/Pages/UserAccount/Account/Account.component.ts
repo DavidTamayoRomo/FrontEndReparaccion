@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./Account.component.scss']
 })
 export class AccountComponent implements OnInit {
-
+  userAvatar:string;
   usuarioCompleto:UsuarioModel;
   contratista;
   constructor(private activatedRoute: ActivatedRoute,
@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
      }
  
   ngOnInit() {
-    
+    this.userAvatar="http://localhost/reparaccion//storage/app/public/"+this.usuarioCompleto.avatar;
   }
 
   // obtenerContratista(){

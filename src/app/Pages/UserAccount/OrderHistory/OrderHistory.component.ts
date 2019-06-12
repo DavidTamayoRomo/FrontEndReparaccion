@@ -10,9 +10,9 @@ import { AllContratistaService } from '../../../Services/AllContratistas/all-con
   styleUrls: ['./OrderHistory.component.scss']
 })
 export class OrderHistoryComponent implements OnInit {
-   displayedColumns: string[] = ['id', 'descripcion'];
+   displayedColumns: string[] = ['id', 'descripcion','estado','costo','ubicacion'];
    dataSource :any[]=[]
-   contratista;
+   contratista:any;
 
    constructor(private _contratistaService:ContratistaService,
                public _contratistasService : AllContratistaService) {
@@ -25,11 +25,12 @@ export class OrderHistoryComponent implements OnInit {
      this._contratistaService.getContratistaLogueado().subscribe(res=>{
         this.contratista=res;
         this.mostrarContratistas();
-        console.log(res);
      },error=>{
         alert('error');
      })
-    
+
+     
+     
    }
    
    //===============================================================
@@ -38,7 +39,6 @@ export class OrderHistoryComponent implements OnInit {
    mostrarContratistas(){
       this._contratistasService.contratosContratistas(this.contratista.contratista[0].id)
       .subscribe((res:any)=>{
-         console.log(res);
          this.dataSource=res.contratos;
          console.log(this.dataSource);
       },error=>{
@@ -46,5 +46,7 @@ export class OrderHistoryComponent implements OnInit {
       });  
    }
 
+   
+   
 
 }

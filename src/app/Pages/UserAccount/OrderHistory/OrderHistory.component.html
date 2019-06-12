@@ -15,7 +15,19 @@
             <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="costo">
+            <th mat-header-cell *matHeaderCellDef> Costo </th>
+            <td mat-cell *matCellDef="let element"> ${{element.costo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ubicacion">
+            <th mat-header-cell *matHeaderCellDef> Ubicacion </th>
+            <td mat-cell *matCellDef="let element"> {{element.ubicacion}} </td>
+        </ng-container>
 
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.estado_id}} </td>
+        </ng-container>
 
 
 

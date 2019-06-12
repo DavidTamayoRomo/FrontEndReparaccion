@@ -5,7 +5,7 @@
             <a [routerLink]="['/products/accessories',contratista?.id ]" class="title-link">
             <!--cargamos la imagen-->
             <a class="p-link">
-                <img width="626" height="800" mat-card-image src="../../../../assets/images/Contratistas/contratista.jpg" alt="Photo">
+                <img width="626" height="800" mat-card-image [src]="['http://localhost/reparaccion//storage/app/public/' + contratista.user.avatar]" alt="Photo">
             </a>
 
 
@@ -15,12 +15,10 @@
 
                 <div>
                     <div fxFlex fxLayoutAlign="space-between">
-                        <h6 class="accent-color" >{{contratista.user.name}}</h6>
+                        <h6 class="accent-color">{{contratista?.user?.name}}</h6>
                     </div>
                 </div>
             </mat-card-content>
-
-        </a>
         </mat-card>
 
     </div>
@@ -31,7 +29,11 @@
             <a [routerLink]="['/products/accessories',contratista?.id,trabajos.id ]" class="title-link">
                 <!--cargamos la imagen-->
                 <a class="p-link">
+<<<<<<< HEAD
                     <img width="626" height="800" mat-card-image src="../../../../assets/images/Contratistas/contratista.jpg" alt="Photo">
+=======
+                    <img width="626" height="800" mat-card-image [src]="['http://localhost/reparaccion//storage/app/public/' + contratista.user.avatar]" alt="Photo">
+>>>>>>> 2a1591ecd04b6602afa8a24ac338442d35ffce5e
                 </a>
 
 
@@ -53,7 +55,7 @@
     </div>
 
 </div>
-
+<p *ngIf="_contratistasService.isLoading">Cargando datos...</p>
 <mat-paginator *ngIf="contratistas?.data" [length]="contratistas?.total" [pageSize]="contratistas?.per_page" (page)="paginar($event)">
 </mat-paginator>
 

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormBuilder,FormArray, Validators } from '@angu
 import { ToastaService, ToastaConfig, ToastOptions, ToastData} from 'ngx-toasta';
 import { UsuarioModel } from '../models/usuario.model';
 import { UsuarioService } from '../services/usuario.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-EditProfile',
@@ -11,7 +12,12 @@ import { UsuarioService } from '../services/usuario.service';
   styleUrls: ['./EditProfile.component.scss']
 })
 export class EditProfileComponent implements OnInit {
+   userAvatar:string;
+  
+   environmentThis = environment;
    usuarioCompleto:UsuarioModel;
+   selectedFile: File = null;
+   localUrl: any;
    
    type         : string;
    info         : FormGroup;
@@ -29,6 +35,7 @@ export class EditProfileComponent implements OnInit {
    constructor(private route: ActivatedRoute,
                private router: Router,
                private formGroup : FormBuilder,
+               private enviandoImagen: UsuarioService,
                private toastyService: ToastaService,
                public _usuarioService: UsuarioService) {
 
@@ -41,12 +48,32 @@ export class EditProfileComponent implements OnInit {
       //inicializao el usuario
       this.usuarioCompleto = _usuarioService.usuarioCompleto;
    }
+   cargandoImagen(event) {
+      this.selectedFile = <File>event.target.files[0];
+   }
+
+   showPreviewImage(event: any) {
+      if (event.target.files && event.target.files[0]) {
+         var reader = new FileReader();
+         reader.onload = (event: any) => {
+            ///UrlProvicional
+            this.localUrl = event.target.result;
+            console.log(this.localUrl);
+         }
+         reader.readAsDataURL(event.target.files[0]);
+      }
+   }
+
 
    ngOnInit() {
+      this.userAvatar="http://localhost/reparaccion//storage/app/public/"+this.usuarioCompleto.avatar;
       this.info = this.formGroup.group({
          name   : ['', [Validators.required]],
          username    : ['', [Validators.required]],
-         email        : ['', [Validators.required, Validators.pattern(this.emailPattern)]]
+         email        : ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+         avatar: ['', [Validators.required]],
+         telefono: ['', [Validators.required]],
+         direccion: ['', [Validators.required]]
       });
       
    }
@@ -59,13 +86,24 @@ export class EditProfileComponent implements OnInit {
       this.usuarioCompleto.direccion=usuario.direccion;
       this.usuarioCompleto.ubicacion=usuario.ubicacion;
       this.usuarioCompleto.role_id=usuario.role_id;
+      
+      console.log('campo avatar', this.selectedFile);
+      // this.usuarioCompleto.avatar=this.info.controls.avatar.value;
+      // console.log('form',this.info.value);
+      const f = new FormData();
+      f.append('avatar', this.selectedFile, this.selectedFile.name);
       console.log(this.usuarioCompleto);
+
       this._usuarioService.actualizarUsuario(this.usuarioCompleto)
                           .subscribe(resp =>{
+                           console.log("Peticion realizada");
                               console.log(resp);
+                              this._usuarioService.subirFoto(f,this.usuarioCompleto.id)
+                              .subscribe(resp => {
                               this.router.navigate(['/account/profile']);
                               
                           });
+                        });
    }
 
    
