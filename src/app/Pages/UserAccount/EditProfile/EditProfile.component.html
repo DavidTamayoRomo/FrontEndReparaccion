@@ -45,20 +45,19 @@
             </form>
         </div>
         {{localUrl}}
-        <img fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50" class="edit-profile"
-            style="background-image: url(assets/images/user-edit.png)" [src]="environmentThis.urlImg+usuarioCompleto.avatar" *ngIf="usuarioCompleto.avatar">
+        <img fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="50" fxFlex.lg="50" fxFlex.xl="50" class="edit-profile" style="background-image: url(assets/images/user-edit.png)" [src]="environmentThis.urlImg+usuarioCompleto.avatar" *ngIf="usuarioCompleto.avatar">
     </div>
     <div class="px-3">
         <!--input de tipo file y a este vamos a agregarle una accion de change para que detecte si hay algun cambio internamente-->
         <!--input accept, accept acepta varios valores -->
-        <input type="file" name="avatar" (change)="cargandoImagen($event)" accept="image/*" >   
-           <!-- <input type="file" name="file" (change)="subiendoando($event)" accept="image/*" />  --> -->
+        <input type="file" name="avatar" (change)="cargandoImagen($event)" accept="image/*">
+        <!-- <input type="file" name="file" (change)="subiendoando($event)" accept="image/*" />  -->-->
         <!-- <input #fileInput style="display: none" name="avatar" (change)="showPreviewImage($event)" type="file" id="file"
             accept="imagen/*"> -->
-        
-            <!-- <input #fileInput style="display: none" name="file" (change)="onFileChange($event)" type="file" id="file"
+
+        <!-- <input #fileInput style="display: none" name="file" (change)="onFileChange($event)" type="file" id="file"
             accept="imagen/*"> -->
-            
+
         <a class="btn btn-dark rounded-btn" [routerLink]="" (click)="fileInput.click()">Cambiar Imagen</a>
     </div>
 

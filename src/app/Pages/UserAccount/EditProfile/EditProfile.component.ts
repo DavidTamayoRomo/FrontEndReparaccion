@@ -12,6 +12,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./EditProfile.component.scss']
 })
 export class EditProfileComponent implements OnInit {
+   userAvatar:string;
+  
    environmentThis = environment;
    usuarioCompleto:UsuarioModel;
    selectedFile: File = null;
@@ -64,6 +66,7 @@ export class EditProfileComponent implements OnInit {
 
 
    ngOnInit() {
+      this.userAvatar="http://localhost/reparaccion//storage/app/public/"+this.usuarioCompleto.avatar;
       this.info = this.formGroup.group({
          name   : ['', [Validators.required]],
          username    : ['', [Validators.required]],

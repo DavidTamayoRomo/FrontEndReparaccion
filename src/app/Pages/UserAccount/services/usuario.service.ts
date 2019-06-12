@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UsuarioModel } from '../models/usuario.model';
 import { RegistroModel } from '../models/registro.model';
 import { LoginModel } from '../models/login.model';
+import swal from 'sweetalert';
 const URL=environment.url1;
 
 @Injectable({
@@ -29,7 +30,7 @@ export class UsuarioService {
 		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
 	}
 	guardarStorage( usuario: UsuarioModel ) {
-		console.log(usuario);
+		//console.log(usuario);
 		localStorage.setItem('usuario1', JSON.stringify(usuario) );
 		this.usuarioCompleto = usuario;
 	  } 
@@ -52,11 +53,17 @@ export class UsuarioService {
 		let url = URL+'loginAPI';
 		return this.http.post(url, usuario)
 			.map( (resp: any) => {
-				console.log(resp);
-				this.guardarStorage( resp );
-				//aki esta de modificar el siempre true
-				return true;
-		  	});
+				console.log(resp.name);
+				if(resp.name==undefined){
+					swal('Importante', 'Datos incorrectos, revisar correo o contraseña', 'warning');
+				}else{
+					this.guardarStorage( resp );
+					window.location.href = '/home';
+				}
+				
+					
+				
+			  });
 		
 	}
 

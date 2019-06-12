@@ -12,10 +12,19 @@ export class HeaderUserProfileDropdownComponent implements OnInit {
   usuarioCompleto:UsuarioModel;
   mostrar:boolean;
   mostrar1:boolean;
+  userAvatar:string;
    constructor(public router: Router,public _servicioUsuario:UsuarioService) { }
 
    ngOnInit() {
     this.verificarUsuarioLogeado();
+    this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
+    
+    if(this.usuarioCompleto==null){
+      this.userAvatar="http://localhost/reparaccion//storage/app/public/users/default.png";
+    }else{
+      this.userAvatar="http://localhost/reparaccion//storage/app/public/"+this.usuarioCompleto.avatar;
+    }
+    
    }
 
   
