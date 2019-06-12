@@ -5,7 +5,7 @@
         <div fxLayout='row wrap' class="col-gap position-relative">
           <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=50 fxFlex.lg="50" fxFlex.xl="50">
             <div fxLayout='row wrap'>
-              <div fxFlex.xs="85" fxFlex.sm="85" fxFlex.md="85" fxFlex.lg="85" fxFlex.xl="85" class="relative" *ngIf="mainImgPath">
+              <div fxFlex.xs="85" fxFlex.sm="85" fxFlex.md="85" fxFlex.lg="85" fxFlex.xl="85" class="relative" *ngIf="mainImgPath"> 
                 <embryo-ImgZoom 
                 [imgSrc]="mainImgPath" 
                     imgStyle="width:auto; height:auto;" 
@@ -13,20 +13,22 @@
                                    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                                     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); top: 0;left: 100%;"
                     lensStyle="width:100px; height:100px"
-                    containerStyle="">
-                </embryo-ImgZoom>
+                    containerStyle=""> 
+                </embryo-ImgZoom> 
+              </div> 
+              <div fxLayoutAlign="start center" class="mb-3">
+                <div>
+                  <br><a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">MÁS INFORMACIÓN...</a>
+                </div>
               </div>
             </div>
           </div>
           <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=50 fxFlex.lg="50" fxFlex.xl="50">
             <div class="product-detail-content">
               <a href="javascript:void(0)"  [routerLink]="['/']">Inicio</a>
-              <h3>{{contratistaDatos?.contratista?.user?.name}}</h3>
-              <div fxLayoutAlign="start center" class="mb-3">
-                <div>
-                  <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">MÁS INFORMACIÓN...</a>
-                </div>
-              </div>
+              <!-- <h3>{{contratistaDatos?.contratista?.user?.name}}</h3>  -->
+
+              
               <div class="product-detail-price">
                 <h4 class="accent-color">{{totalPrice | currency:currency}} </h4>
               </div>
@@ -45,16 +47,16 @@
                 </li>
               </ul>
               <div class="short-des">
-                <p>{{contratistaDatos?.contratista?.descripcion}}
-                </p>
+                <h5>{{contratistaDatos?.contratista?.descripcion}}</h5>
+                
               </div>
               <form class="example-form" [formGroup]="contratoForm">
 
                 <mat-form-field class="example-full-width">
-                  <input matInput #message maxlength="256" placeholder="Descripción de trabajo solicitado" formControlName="descripcion" >
+                  <textarea matInput #message maxlength="256" placeholder="Descripción de trabajo solicitado" formControlName="descripcion" ></textarea>
                   <mat-hint align="start"><strong></strong> </mat-hint>
                   <mat-error *ngIf="f.descripcion.touched && f.descripcion.errors?.required">
-                        <strong>La descrición es requerida</strong>
+                        <strong>La descripción es requerida</strong>
                   </mat-error>
                   <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
                   
@@ -63,17 +65,21 @@
               </form> <br> 
 
               <div class="bullets-points">
-                <span class="font-medium">Además realiza los siguientes trabajos: </span>
+                <span class="font-medium">Realizo trabajos en el área de: </span>
                 <ul class="bullets-list">
                   <li  *ngFor="let trabajo of contratistaDatos.tiposTrabajo">
-                    <a [routerLink]="['/products', 'accessories',contratista.contratista.id,trabajo.id]">{{trabajo.nombre}}</a> 
+                    <!-- <a [routerLink]="['/products', 'accessories',contratista.contratista.id,trabajo.id]">{{trabajo.nombre}}</a>  -->
+                    {{trabajo.nombre}}
                   </li>
                 </ul>
               </div><br> 
+              
               <div class="mb-5 detail-btns">
                 <button mat-raised-button  color="accent" class="button-lg mr-3" [routerLink]="['/products', type]">Cancelar</button>
                 <button class="button-lg"   mat-raised-button (click)="onSumit()">Aceptar</button>
               </div>
+              
+
               <!-- <div fxLayoutAlign="start center">
                 <div class="mr-3"> <span>Share Now</span></div>
                 <div class="detail-product-share">

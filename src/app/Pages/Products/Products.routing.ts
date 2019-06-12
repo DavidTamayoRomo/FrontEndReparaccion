@@ -12,6 +12,10 @@ export const ProductsRoutes : Routes = [
 		path: ':type/:id/:trabajo_id',
 		component: DetailPageComponent
 	},
+	{
+		path: ':type/:id',
+		component: DetailPageComponent
+	},
    { 
       path: ':type', 
       component: ProductsListComponent 

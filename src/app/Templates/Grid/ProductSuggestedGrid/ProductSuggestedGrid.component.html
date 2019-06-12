@@ -1,4 +1,4 @@
-<div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap" *ngIf="trabajosDatos && trabajosDatos?.contratistas.length > 0">
+<div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap" *ngIf="trabajosDatos && trabajosDatos?.contratistas?.length > 0">
   <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="{{lg}}" fxFlex.xl="{{xl}}" *ngFor="let trabajo of trabajosDatos?.contratistas; let i=index; trackBy: trackByObjectID">
      <mat-card class="example-card" *ngIf="gridLength && (i<gridLength)">
       <a class="p-link" [routerLink]="['/trabajosDatos', trabajo?.type, trabajo?.id]">
@@ -7,10 +7,41 @@
       <div class="wishlist-icon {{i}}-wishlist">
          <a (click)="productAddToWishlist(trabajo, i+'-wishlist')"><i  class="material-icons"> favorite </i></a>
       </div> 
-  
-   <!-- [routerLink]="['/trabajosDatos', trabajo?.type, trabajo?.id]"  -->
         <mat-card-content class="product-content relative">
            <h5><a [routerLink]="['/products', 'accessories',trabajo.id,trabajosDatos.id]" class="title-link">{{trabajo?.user?.name}}</a> </h5>
+           <div>
+              <div fxFlex fxLayoutAlign="space-between">
+                 <h6 class="accent-color">{{trabajo?.price | currency: currency}}</h6>
+                 <div class="rating-star">
+                    <embryo-Rating [rate]="trabajo.rating"></embryo-Rating>
+                 </div>
+              </div>
+           </div>
+           <!-- <div class="m-icon" *ngIf="checkCartAlready(trabajo)">
+              <embryo-AddToCardButton [product]="trabajo" (addToCart)="addToCartProduct($event)"></embryo-AddToCardButton>
+           </div> -->
+           <!-- <div class="m-icon" *ngIf="!checkCartAlready(trabajo)">
+               <button mat-fab [routerLink]="['/trabajosDatos', trabajo?.type, trabajo?.id]"><i class="material-icons">remove_red_eye</i> </button>
+           </div>
+            -->
+        </mat-card-content>
+     </mat-card> 
+
+
+   </div>
+ </div> 
+<!-- Para todos los contratistas porque es otra url y otra estructura -->
+ <div fxLayout="row wrap" fxLayoutAlign="none" class="col-gap" *ngIf="trabajosDatos && trabajosDatos?.length > 0">
+  <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="{{lg}}" fxFlex.xl="{{xl}}" *ngFor="let trabajo of trabajosDatos; let i=index; trackBy: trackByObjectID">
+     <mat-card class="example-card" *ngIf="gridLength && (i<gridLength)">
+      <a class="p-link" [routerLink]="['/trabajosDatos', trabajo?.id]">
+        <img width="626" height="800" mat-card-image src="../../../../assets/images/user-5.jpg" alt="Contratista">
+      </a>
+      <div class="wishlist-icon {{i}}-wishlist">
+         <a (click)="productAddToWishlist(trabajo, i+'-wishlist')"><i  class="material-icons"> favorite </i></a>
+      </div> 
+        <mat-card-content class="product-content relative">
+           <h5><a [routerLink]="['/products', 'accessories',trabajo.id]" class="title-link">{{trabajo?.user?.name}}</a> </h5>
            <div>
               <div fxFlex fxLayoutAlign="space-between">
                  <h6 class="accent-color">{{trabajo?.price | currency: currency}}</h6>

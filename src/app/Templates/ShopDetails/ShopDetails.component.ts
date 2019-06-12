@@ -20,7 +20,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 
    
    @Input() contratista : any;
-   @Input() contratos : any;
+   @Input() ncontratos : any;
    contratoForm:FormGroup;
    
    mainImgPath   : any;
@@ -31,7 +31,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    quantityArray : number[] = [1,2,3,4,5,6,7,8,9,10];
    productReviews : any;
    contratistaDatos : any;
-   contratosDatos : any;
+   ncontratosDatos : any;
   
 
    constructor(private route: ActivatedRoute,
@@ -63,10 +63,12 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       // this.totalPrice  = this.detailData.price; 
       this.totalPrice  = null; 
 
+      //importando datos de contratista y de contratos
       this.contratistaDatos = this.contratista;
-      console.log("contratistas",this.contratistaDatos);
-      this.contratosDatos = this.contratos;
-      console.log("contratos",this.contratosDatos);
+      console.log("contratistass",this.contratistaDatos);
+      this.ncontratosDatos = this.ncontratos;
+      console.log("ncontratos",this.ncontratosDatos);
+      
     
       
    }

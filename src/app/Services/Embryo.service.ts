@@ -437,6 +437,11 @@ export class EmbryoService {
 		return this.http.get<any>(URL+'/tipoTrabajo-contratistas/'+tipotrabajo_id);
    }
 
+   getContratistas(): Observable<any> {
+		return this.http.get<any>(URL+'/contratista-paginate');
+   }
+
+
    getContratos(contratista_id): Observable<any> {
 		console.log(contratista_id);
 		return this.http.get<any>(URL+'/contratista-contratos/'+contratista_id);

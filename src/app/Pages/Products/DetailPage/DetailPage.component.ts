@@ -18,7 +18,7 @@ export class DetailPageComponent implements OnInit {
    productsList      : any;
    contratista       : any;
    trabajos          : any;
-   contratos         :any;
+   ncontratos         :any;
 
    
 
@@ -30,14 +30,18 @@ export class DetailPageComponent implements OnInit {
 
    ngOnInit() {
       this.route.params.subscribe(res => {
-         console.log(res.id);
-         console.log(res.trabajo_id)
+         // console.log(res.id);
+         // console.log(res.trabajo_id)
+         if(res.trabajo_id!=undefined){
+            this.tipotrabajo_id = res.trabajo_id;
+            this.obtenerTrabajosPorID();
+         }else{
+            this.obtenerContratistas();
+         }
          this.contratista_id=res.id;
-         this.tipotrabajo_id = res.trabajo_id;
          this.type = res.type;
-         this.getData();
+         // this.getData();
          this.obtenerContratista();
-         this.obtenerTrabajos();
          this.obtenerContratos();
 
       })
@@ -49,25 +53,31 @@ export class DetailPageComponent implements OnInit {
          console.log("Datos de contratista",res);
          this.contratista=res;
          this.contratista.contratista.tipotrabajos=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
-         this.contratista.tiposTrabajo=res.tiposTrabajo.filter(trabajo=>trabajo.id!=this.tipotrabajo_id);
+         //this.contratista.tiposTrabajo=res.tiposTrabajo.filter(trabajo=>trabajo.id!=this.tipotrabajo_id);
       });
 
    }
-   public obtenerTrabajos(){
+   public obtenerTrabajosPorID(){
       this.embryoService.getTrabajos(this.tipotrabajo_id).subscribe(res => {
          console.log(res);
          this.trabajos=res;
          this.trabajos.contratistas=res.contratistas.filter(trabajo=>trabajo.id!=this.contratista_id);
       });
    }
+   public obtenerContratistas(){
+      this.embryoService.getContratistas().subscribe(res=>{
+         console.log(res);
+         this.trabajos=res.data;
+         
+      });
+   }
 
 
    public obtenerContratos(){
       this.embryoService.getContratos(this.contratista_id).subscribe(res => {
-         console.log("datos contratos",res);
-         this.contratos=res;
-         this.contratos.contratos=res.contratos.filter(contrato=>contrato.id==this.contratista_id);
-         console.log("datos contrato111",this.contratos.contratos);
+         // console.log("datos contratos antes de enviar al hijo",res);
+         this.ncontratos=res;
+         console.log("datos contratos antes de enviar al hijo",this.ncontratos);
       });
    }
    
@@ -75,9 +85,6 @@ export class DetailPageComponent implements OnInit {
 
 
 
-   public getData() {
-      this.embryoService.getProducts().valueChanges().subscribe(res => this.checkResponse(res));
-   }
 
    public checkResponse(response) {
       this.productsList = null;

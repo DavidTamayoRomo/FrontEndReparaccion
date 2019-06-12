@@ -13,6 +13,8 @@ export class ProductGridComponent implements OnInit, OnChanges {
   
   
   @Input()trabajos:any;
+  @Input()idTipotTrabajoSeleccionado:any;
+  
 
   contratistas:ListaContratistasModel;
    

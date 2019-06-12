@@ -2,7 +2,7 @@
     <div fxFlex.xs="100" fxFlex.sm="50" fxFlex.md="50" fxFlex.lg="33" fxFlex.xl="33" *ngFor="let contratista of contratistas?.data">
 
         <mat-card class="example-card">
-
+            <a [routerLink]="['/products/accessories',contratista?.id ]" class="title-link">
             <!--cargamos la imagen-->
             <a class="p-link">
                 <img width="626" height="800" mat-card-image src="../../../../assets/images/Contratistas/contratista.jpg" alt="Photo">
@@ -10,17 +10,17 @@
 
 
             <mat-card-content class="product-content relative">
-                <h5 *ngFor="let trabajo of contratista.tipotrabajos"><a [routerLink]="['/products/accessories',contratista?.id,trabajo.id ]" class="title-link">{{trabajo?.nombre}}</a> </h5>
+                <!-- <h5 *ngFor="let trabajo of contratista.tipotrabajos"><a [routerLink]="['/products/accessories',contratista?.id ]" class="title-link">{{trabajo?.nombre}}</a> </h5> -->
 
 
                 <div>
                     <div fxFlex fxLayoutAlign="space-between">
-                        <h6 class="accent-color">{{contratista.user.name}}</h6>
+                        <h6 class="accent-color" >{{contratista.user.name}}</h6>
                     </div>
                 </div>
             </mat-card-content>
 
-
+        </a>
         </mat-card>
 
     </div>
