@@ -32,6 +32,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    productReviews : any;
    contratistaDatos : any;
    ncontratosDatos : any;
+   ubicacion:any;
   
 
    constructor(private route: ActivatedRoute,
@@ -67,7 +68,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       this.contratistaDatos = this.contratista;
       console.log("contratistass",this.contratistaDatos);
       this.ncontratosDatos = this.ncontratos;
-      console.log("ncontratos",this.ncontratosDatos);
+      console.log("numerocontratos",this.ncontratosDatos);
       
     
       
@@ -98,7 +99,10 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
         reviews = review.user_rating;
       }
 
-      this.embryoService.reviewPopup(contratistaDatos, reviews);
+      this.embryoService.reviewPopup(contratistaDatos, reviews).subscribe(res=>{
+         this.ubicacion=res;
+         console.log(res);   
+      });
    }
 
    public addToWishlist(value:any) {
@@ -123,6 +127,8 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       _contrato.estado_id = 1;
       _contrato.descripcion = controls['descripcion'].value;
       _contrato.foto = 'por confirmar';
+      _contrato.ubicacion=JSON.stringify(this.ubicacion);
+      console.log(_contrato);
 
 		return _contrato;
 	}
