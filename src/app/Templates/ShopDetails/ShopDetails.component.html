@@ -63,14 +63,14 @@
               <div fxLayoutAlign="start center" class="mb-3">
                 <div>
                   <br> <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">Añadir Ubicación...</a>
-                  <br><label>Importante: La ubicación es obligatoria</label>
+                  <br><label *ngIf="ubicacion==undefined">Importante: La ubicación es obligatoria</label>
                 </div>
               </div>
-              <div class="px-3">
+              <!-- <div class="px-3">
                 <p>Seleccione imagen del daño</p>
                   <input type="file" name="avatar" (change)="cargandoImagen($event)" accept="image/*">
-                  <!-- <a class="btn btn-dark rounded-btn" [routerLink]="" (click)="fileInput.click()">Cambiar Imagen</a> -->
-              </div>
+                   <a class="btn btn-dark rounded-btn" [routerLink]="" (click)="fileInput.click()">Cambiar Imagen</a> 
+              </div> -->
               <div class="bullets-points">
                 <br><span class="font-medium">Realizo trabajos en el área de: </span>
                 <ul class="bullets-list">

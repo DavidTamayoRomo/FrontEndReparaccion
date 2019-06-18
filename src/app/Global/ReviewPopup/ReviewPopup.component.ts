@@ -14,21 +14,38 @@ export class ReviewPopupComponent implements OnInit {
    singleProductDetails : any;
    reviews : any;
    
-  lat = 51.678418;
-  lng = 7.809007;
+  lat:number;
+  lng:number;
    constructor(public dialogRef: MatDialogRef<ReviewPopupComponent>) { }
 
    ngOnInit() {
+    this.ubicacion();
    }
 
-   agregarMarcador( evento ) {
+   ubicacion(){
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 6000,
+      maximumAge: 0
+    };
+  
+    navigator.geolocation.getCurrentPosition( (success:any) =>{
+      console.log(success.coords)
+      this.lat=success.coords.latitude;
+      this.lng=success.coords.longitude;
+      
+    }, error=>{
+        console.log(error);
+    }, options );
+    
+  }
 
-    const coords: { lat: number, lng: number } = evento.coords;
+  agregarMarcador( evento ) {
 
-    const nuevoMarcador = new Marcador( coords.lat, coords.lng );
+    const nuevoMarcador = new Marcador( evento.coords.lat, evento.coords.lng );
      if(this.marcadores.length==0){
       this.marcadores.push( nuevoMarcador );
-      this.guardarStorage();
+  
     }
 
   }
@@ -36,7 +53,7 @@ export class ReviewPopupComponent implements OnInit {
   borrarMarcador( i: number ) {
 
     this.marcadores.splice(i, 1);
-    this.guardarStorage();
+    
     
   }
 
@@ -44,11 +61,11 @@ export class ReviewPopupComponent implements OnInit {
     this.dialogRef.close(this.marcadores[0])
   }
 
-  guardarStorage() {
 
-    localStorage.setItem('marcadores', JSON.stringify( this.marcadores ) );
 
-  }
+  
+
+  
 
    
 

@@ -15,8 +15,6 @@
             <agm-marker *ngFor="let marcador of marcadores; let i = index" [latitude]="marcador.lat" [longitude]="marcador.lng">
 
                 <agm-info-window>
-                   
-
                     <div>
                         <button (click)="borrarMarcador(i)" mat-raised-button color="warn">Borrar</button>
                     </div>

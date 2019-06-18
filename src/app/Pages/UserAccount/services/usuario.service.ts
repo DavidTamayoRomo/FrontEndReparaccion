@@ -129,4 +129,17 @@ export class UsuarioService {
 		});
 		
 	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//para actualizar el estado del contrato
+	updateContrato( contrato ){
+		let url = URL+'contrato/edit/'+contrato.id;
+		return this.http.post(url,contrato);	
+	}
+
+//Listar contratos de usuario
+	getContratosUsuario(id): Observable<any> {
+		console.log(id);
+		return this.http.get<any>(URL+'user-contratos-contratista/'+id);
+   }
 }
