@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UsuarioModel } from '../models/usuario.model';
 import { RegistroModel } from '../models/registro.model';
 import { LoginModel } from '../models/login.model';
+import swal from 'sweetalert';
 const URL=environment.url1;
 
 @Injectable({
@@ -29,7 +30,7 @@ export class UsuarioService {
 		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
 	}
 	guardarStorage( usuario: UsuarioModel ) {
-		console.log(usuario);
+		//console.log(usuario);
 		localStorage.setItem('usuario1', JSON.stringify(usuario) );
 		this.usuarioCompleto = usuario;
 	  } 
@@ -52,11 +53,17 @@ export class UsuarioService {
 		let url = URL+'loginAPI';
 		return this.http.post(url, usuario)
 			.map( (resp: any) => {
-				console.log(resp);
-				this.guardarStorage( resp );
-				//aki esta de modificar el siempre true
-				return true;
-		  	});
+				console.log(resp.name);
+				if(resp.name==undefined){
+					swal('Importante', 'Datos incorrectos, revisar correo o contraseña', 'warning');
+				}else{
+					this.guardarStorage( resp );
+					window.location.href = '/home';
+				}
+				
+					
+				
+			  });
 		
 	}
 
@@ -86,9 +93,22 @@ export class UsuarioService {
 	//==================================
 	//			Actualizar usuario
 	//==================================
-	actualizarUsuario( usuario:UsuarioModel ){
-		let url = URL+'user/edit-userap?api_token='+usuario.api_token;	
-		return this.http.put(url, usuario).map( (resp: any) => {
+	actualizarUsuario( usuario ){
+		this.obtenerUsuario();
+		console.log(this.usuarioCompleto);
+		let url = URL+'user/edit-userap?api_token='+this.usuarioCompleto.api_token;
+		return this.http.post(url, usuario).map( (resp: any) => {
+			this.guardarStorage( resp );
+		  });;
+	}
+
+	subirFoto(usuario:FormData,id)
+	{
+		this.obtenerUsuario();
+		console.log(this.usuarioCompleto);
+		console.log('userphot',usuario.get('avatar'));
+		let url = URL+'user/edit-userphoto/'+id+'?api_token='+this.usuarioCompleto.api_token;	
+		return this.http.post(url, usuario).map( (resp: any) => {
 			this.guardarStorage( resp );
 		  });;
 	}
@@ -109,4 +129,17 @@ export class UsuarioService {
 		});
 		
 	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+	//para actualizar el estado del contrato
+	updateContrato( contrato ){
+		let url = URL+'contrato/edit/'+contrato.id;
+		return this.http.post(url,contrato);	
+	}
+
+//Listar contratos de usuario
+	getContratosUsuario(id): Observable<any> {
+		console.log(id);
+		return this.http.get<any>(URL+'user-contratos-contratista/'+id);
+   }
 }

@@ -69,7 +69,10 @@ export class CommonSignInComponent implements OnInit {
         profile.getName(),
         profile.getEmail(),
         null, 
-        profile.getName()
+        profile.getName(),
+        profile.getTelefono(),
+        profile.getDireccion(),
+
       );
       this._usuarioService.loginGoogle(usuario).subscribe(resp =>{
         console.log(resp);

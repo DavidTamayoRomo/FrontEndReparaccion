@@ -83,9 +83,6 @@ export class DetailPageComponent implements OnInit {
    
 
 
-
-
-
    public checkResponse(response) {
       this.productsList = null;
       this.productsList = response[this.type];

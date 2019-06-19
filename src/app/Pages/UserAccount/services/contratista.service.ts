@@ -55,6 +55,4 @@ export class ContratistaService {
 		return this.http.put<any>(URL+'/contratista/'+contratista.id, contratista);
 	}
 
-
-
 }

@@ -16,17 +16,13 @@
                     containerStyle=""> 
                 </embryo-ImgZoom> 
               </div> 
-              <div fxLayoutAlign="start center" class="mb-3">
-                <div>
-                  <br><a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">MÁS INFORMACIÓN...</a>
-                </div>
-              </div>
+              
             </div>
           </div>
           <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md=50 fxFlex.lg="50" fxFlex.xl="50">
             <div class="product-detail-content">
               <a href="javascript:void(0)"  [routerLink]="['/']">Inicio</a>
-              <!-- <h3>{{contratistaDatos?.contratista?.user?.name}}</h3>  -->
+              <h6>{{contratistaDatos?.contratista?.user?.username}} ha realizado: {{ncontratosDatos?.contratos?.length}} contratos</h6>  
 
               
               <div class="product-detail-price">
@@ -47,9 +43,10 @@
                 </li>
               </ul>
               <div class="short-des">
-                <h5>{{contratistaDatos?.contratista?.descripcion}}</h5>
+                <p>{{contratistaDatos?.contratista?.descripcion}}</p>
                 
               </div>
+              
               <form class="example-form" [formGroup]="contratoForm">
 
                 <mat-form-field class="example-full-width">
@@ -62,10 +59,20 @@
                   
                 </mat-form-field>
                 
-              </form> <br> 
-
+              </form> 
+              <div fxLayoutAlign="start center" class="mb-3">
+                <div>
+                  <br> <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">Añadir Ubicación...</a>
+                  <br><label *ngIf="ubicacion==undefined">Importante: La ubicación es obligatoria</label>
+                </div>
+              </div>
+              <!-- <div class="px-3">
+                <p>Seleccione imagen del daño</p>
+                  <input type="file" name="avatar" (change)="cargandoImagen($event)" accept="image/*">
+                  <a class="btn btn-dark rounded-btn" [routerLink]="" (click)="fileInput.click()">Cambiar Imagen</a>
+              </div> -->
               <div class="bullets-points">
-                <span class="font-medium">Realizo trabajos en el área de: </span>
+                <br><span class="font-medium">Realizo trabajos en el área de: </span>
                 <ul class="bullets-list">
                   <li  *ngFor="let trabajo of contratistaDatos.tiposTrabajo">
                     <!-- <a [routerLink]="['/products', 'accessories',contratista.contratista.id,trabajo.id]">{{trabajo.nombre}}</a>  -->
@@ -75,8 +82,8 @@
               </div><br> 
               
               <div class="mb-5 detail-btns">
-                <button mat-raised-button  color="accent" class="button-lg mr-3" [routerLink]="['/products', type]">Cancelar</button>
-                <button class="button-lg"   mat-raised-button (click)="onSumit()">Aceptar</button>
+                <button mat-raised-button  color="accent" class="button-lg mr-3" [routerLink]="['/lista-contratistas']">Cancelar</button>
+                <button class="button-lg"   mat-raised-button (click)="onSumit()" [disabled]="ubicacion==undefined" [routerLink]="['/account/profile']">Enviar Solicitud</button>
               </div>
               
 
@@ -93,6 +100,3 @@
     </div>
   </div>
 </div>
-
- 
-
