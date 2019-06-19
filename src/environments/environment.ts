@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: "73552048992"
   },
 
-
+  //url1:"http://localhost/Backend/reparaccion/api/",//para compu david
   urlImg:"http://localhost/reparaccion/public/storage/",
   url1:"http://localhost/reparaccion/api/",
   url:"http://localhost/reparaccion/api"

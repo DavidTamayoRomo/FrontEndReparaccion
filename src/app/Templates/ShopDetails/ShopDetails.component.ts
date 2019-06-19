@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {EmbryoService } from '../../Services/Embryo.service';
 import { ContratoModel } from '../../Pages/Products/DetailPage/models/contrato.model';
+import { UsuarioService} from '../../Pages/UserAccount/services/usuario.service';
+
 import swal from 'sweetalert';
 
 @Component({
@@ -38,6 +40,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
    constructor(private route: ActivatedRoute,
                private router: Router, 
                public embryoService : EmbryoService,
+               public UsuarioService : UsuarioService,
                private _formBuilder: FormBuilder
                ) {
       this.embryoService.getProductReviews().valueChanges().subscribe(res => {this.productReviews = res});
@@ -53,7 +56,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
          this.type = null;
          this.type = res.type; 
       });
-     
+      this.UsuarioService.obtenerUsuario();
    }
 
    ngOnChanges() {
@@ -123,7 +126,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 		const controls = this.contratoForm.controls;
 		const _contrato = new ContratoModel();
       _contrato.contratista_id = this.contratistaDatos.contratista.id;
-      _contrato.user_id = this.contratistaDatos.contratista.user_id;
+      _contrato.user_id = this.UsuarioService.usuarioCompleto.id;
       _contrato.estado_id = 1;
       _contrato.descripcion = controls['descripcion'].value;
       _contrato.foto = 'por confirmar';
