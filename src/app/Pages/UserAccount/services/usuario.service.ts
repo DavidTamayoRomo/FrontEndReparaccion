@@ -60,9 +60,7 @@ export class UsuarioService {
 					this.guardarStorage( resp );
 					window.location.href = '/home';
 				}
-				
-					
-				
+	
 			  });
 		
 	}
