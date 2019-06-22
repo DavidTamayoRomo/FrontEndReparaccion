@@ -79,7 +79,12 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
 
    ngOnInit() {
       this.mostrarTiposDeTrabajo();
-      this.mostrarContratistasTiposDeTrabajo(1);
+      let myNumeroAleatorio = Math.floor(Math.random()*(4+1));
+      if(myNumeroAleatorio==0){
+         myNumeroAleatorio+=1;
+      }
+      
+      this.mostrarContratistasTiposDeTrabajo(myNumeroAleatorio);
    }
 
    //===============================================================

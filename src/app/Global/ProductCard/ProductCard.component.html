@@ -1,7 +1,7 @@
 <mat-card class="example-card">
 
     <a class="p-link" [routerLink]="">
-        <img width="626" height="800" mat-card-image src="http://localhost/reparaccion-master//storage/users/default.png" alt="Photo">
+        <img width="626" height="800" mat-card-image [src]="['http://localhost/reparaccion//storage/app/public/' + product.user.avatar]" alt="Photo">
     </a>
     <mat-card-content class="product-content relative">
         <h5>{{product.user.name}} </h5>
