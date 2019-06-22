@@ -199,7 +199,7 @@ const HeaderOneItems= [
       }
     ]
   },*/
-  {
+  /*{
   state: "pages",
   name: "PAGES",
   type: "sub",
@@ -246,25 +246,25 @@ const HeaderOneItems= [
          icon: 'arrow_right_alt',
        }
     ]
-},
+},*/
 {
     state:'session',
-    name:"SESSION",
+    name:"USUARIO",
     type:"sub",
     icon: 'supervised_user_circle',
     children: [
         {  
         state: 'session/signin', 
-        name: 'SIGN IN',
+        name: 'INGRESAR',
         type: 'link',
         icon: 'arrow_right_alt',
         },
         {  
             state: 'session/signup', 
-            name: 'REGISTER',
+            name: 'REGISTRAR',
             type: 'link',
             icon: 'arrow_right_alt',
-        },
+        }/*,
         {  
             state: 'session/forgot-password', 
             name: 'FORGET PASSWORD',
@@ -276,12 +276,12 @@ const HeaderOneItems= [
             name: 'THANK YOU',
             type: 'link',
             icon: 'arrow_right_alt',
-        }
+        }*/
     ]
   },
   {
     state:'contact',
-    name:"CONTACT US",
+    name:"CONTACTANOS",
     type:"link",
     icon: 'perm_contact_calendar'
   }
