@@ -3,6 +3,12 @@ import { MatTabChangeEvent } from '@angular/material';
 import { ChangeDetectorRef } from '@angular/core';
 
 import { EmbryoService } from '../../../Services/Embryo.service';
+import { tipodeTrabajoModel } from '../../UserAccount/models/contratistaListar/tipodeTrabajo.model';
+import { AllContratistaService } from '../../../Services/AllContratistas/all-contratista.service';
+import { FormControl } from '@angular/forms';
+import { tipoTrabajoService } from '../../../Services/tipoTrabajo.service';
+import { ContratistasTipoTrabajoModel } from '../../UserAccount/models/contratistaListar/contratistasTipoTrabajo.model';
+import { ListaContratistasModel } from '../../UserAccount/models/contratistaListar/listaContratistas.model';
 
 @Component({
   selector: 'app-homeone',
@@ -11,11 +17,18 @@ import { EmbryoService } from '../../../Services/Embryo.service';
 })
 export class HomeoneComponent implements OnInit, AfterViewChecked{
 
+   tipos:tipodeTrabajoModel;
+   contratistas:ContratistasTipoTrabajoModel=null;
+   
+
+   selected = new FormControl(0);
+
    blogList              : any;
    productReviews        : any;
    productsArray         : any;
    productsSliderData    : any;
    newProductsSliderData : any;
+
    slideConfig = {
       slidesToShow: 4,
       slidesToScroll:4,
@@ -50,43 +63,12 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
       ]
    };
 
-   rtlSlideConfig = {
-      slidesToShow: 4,
-      slidesToScroll:4,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      dots: true,
-      rtl: true,
-      responsive: [
-         {
-            breakpoint: 992,
-            settings: {
-               arrows: false,
-               slidesToShow: 2,
-               slidesToScroll:1
-            }
-         },
-         {
-            breakpoint: 768,
-            settings: {
-               arrows: false,
-               slidesToShow: 2,
-               slidesToScroll:1
-            }
-         },
-         {
-            breakpoint: 480,
-            settings: {
-               arrows: false,
-               slidesToShow: 1,
-               slidesToScroll:1
-            }
-         }
-      ]
-   };
+   
 
    constructor(public embryoService: EmbryoService,
-               private cdRef : ChangeDetectorRef) {
+               private cdRef : ChangeDetectorRef,
+               public _contratistasService : AllContratistaService,
+               public _tipoTrabajoService : tipoTrabajoService) {
       this.getFeaturedProducts();
       this.getBlogList();
       this.getProductRevies();
@@ -96,8 +78,45 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
    }
 
    ngOnInit() {
+      this.mostrarTiposDeTrabajo();
+      this.mostrarContratistasTiposDeTrabajo(1);
    }
 
+   //===============================================================
+   //               Contratistas por  tipo de trabajo
+   //===============================================================
+   mostrarContratistasTiposDeTrabajo(num){
+      this._contratistasService.getContratistasUrlTipoTrabajo(num)
+      .subscribe(contratistas=>{
+        this.contratistas=contratistas
+        console.log(this.contratistas);
+      });  
+    }
+
+   //===============================================================
+   //                    Todos los tipos de trabajo
+   //===============================================================
+   mostrarTiposDeTrabajo(){
+      this._tipoTrabajoService.getTipoTrabajos()
+      .then(tipos=>this.tipos=tipos);  
+   }
+
+
+//me devuelve el numero de index del TAB
+//es decir obtengo el id de tipo de trabajo
+   tabChanged(event) {
+      console.log('Clicked: ' + event.index);
+      if( event.index >0 ){
+         this.mostrarContratistasTiposDeTrabajo( event.index);
+      }
+      if(event.index == 0){
+         //todos los trabajos
+         
+      }
+      
+  }
+
+   
    ngAfterViewChecked() : void {
       this.cdRef.detectChanges();
    }

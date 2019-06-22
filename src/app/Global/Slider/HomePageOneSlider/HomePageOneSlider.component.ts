@@ -21,7 +21,7 @@ export class HomePageOneSliderComponent implements OnInit, OnChanges {
          slidesToShow: 1,
          slidesToScroll:1,
          autoplay: true,
-         autoplaySpeed: 2000,
+         autoplaySpeed: 200,
          dots: false,
          rtl: this.isRTL,
          responsive: [

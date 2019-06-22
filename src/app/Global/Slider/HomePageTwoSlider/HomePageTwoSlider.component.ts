@@ -14,28 +14,20 @@ export class HomePageTwoSliderComponent implements OnInit, OnChanges {
 
    slides = [
       {
-         img: "assets/images/home2-slider-1.jpg",
-         content:"<h4>New Arrival</h4><h1 class='text-main'>Biggest Sale</h1><h1 class='text-bold mb-4'>50% <sup class='bold-sup'>Flat Off</sup></h1>"
+         img: "assets/images/slider-1.jpg",
+         content:"<h4>Servicio</h4><h1 class='text-main'></h1><h1 class='text-bold mb-4'>Plomeria <sup class='bold-sup'></sup></h1>"
       },
       {
-         img: "assets/images/home2-slider-2.jpg",
-         content:"<h4>Women's Special</h4><h1 class='text-main'>Winter Sale </h1><h1 class='text-bold mb-4'>40% <sup class='bold-sup'>Off</sup></h1>"
+         img: "assets/images/slider-2.jpg",
+         content:"<h4>Servicio</h4><h1 class='text-main'> </h1><h1 class='text-bold mb-4'>Carpinteria <sup class='bold-sup'></sup></h1>"
       },
       {
-         img: "assets/images/home2-slider-3.jpg",
-         content:"<h4>Special Deal</h4><h1 class='text-main'>Mens Collection</h1><h1 class='text-bold mb-4'>30% <sup class='bold-sup'>Off</sup></h1>"
+         img: "assets/images/slider-3.jpg",
+         content:"<h4> Servicio</h4><h1 class='text-main'></h1><h1 class='text-bold mb-4'>Limpieza <sup class='bold-sup'></sup></h1>"
       },
       {
-         img: "assets/images/home2-slider-4.jpg",
-         content:"<h4>Sunglasses</h4><h1 class='text-main'>Weekly Offer</h1><h1 class='text-bold mb-4'>30% <sup class='bold-sup'>Off</sup></h1>"
-      },
-      {
-         img: "assets/images/home2-slider-5.jpg",
-         content:"<h4>New Arrival</h4><h1 class='text-main'>Sports Shoes</h1><h1 class='text-bold mb-4'>50% <sup class='bold-sup'>Flat Off</sup></h1>"
-      },
-      {
-         img: "assets/images/home2-slider-6.jpg",
-         content:"<h4>Accessories</h4><h1 class='text-main'>Smart Offer</h1><h1 class='text-bold mb-4'>40% <sup class='bold-sup'>Flat Off</sup></h1>"
+         img: "assets/images/slider-4.jpg",
+         content:"<h4>Servicio</h4><h1 class='text-main'> </h1><h1 class='text-bold mb-4'>Electrico <sup class='bold-sup'></sup></h1>"
       }
    ];
 

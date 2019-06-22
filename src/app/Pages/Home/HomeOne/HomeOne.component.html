@@ -1,9 +1,14 @@
+<!--slider -->
+<embryo-HomePageTwoSlider [isRTL]="embryoService.isDirectionRtl">
+
+</embryo-HomePageTwoSlider>
+<!--
 <div class="home-main-banner mb-5">
     <div class="container">
         <div fxLayout='row wrap' fxLayoutGap="0px">
             <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="63" fxFlex.xl="63">
                 <div class="home-slider">
-                    <embryo-HomePageOneSlider [isRTL]="embryoService.isDirectionRtl"></embryo-HomePageOneSlider>
+                    <embryo-HomePageOneSlider></embryo-HomePageOneSlider>
                 </div>
             </div>
             <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="37" fxFlex.xl="37">
@@ -18,6 +23,8 @@
         </div>
     </div>
 </div>
+-->
+
 
 <div class="feature-section">
     <div class="container">
@@ -29,32 +36,27 @@
         <h2>SERVICIOS</h2>
     </div>
     <div class="container">
-        <mat-tab-group [(selectedIndex)]="embryoService.featuredProductsSelectedTab">
-            <mat-tab label="Fontaneria"></mat-tab>
-            <mat-tab label="Carpinteria"></mat-tab>
-            <mat-tab label="Limpieza"></mat-tab>
-            <mat-tab label="Electricidad"></mat-tab>
+
+
+
+        <mat-tab-group [selectedIndex]="selected.value" (selectedIndexChange)="selected.setValue($event)" (selectedTabChange)="tabChanged($event)">
+            <mat-tab label="Tipos de trabajos" disabled> </mat-tab>
+            <mat-tab *ngFor="let tipo of tipos; let index = index" [label]="tipo.nombre" id="tipo.id" selected></mat-tab>
         </mat-tab-group>
-        
-        <ng-container *ngIf="onFeaturedSelectedTab(embryoService.featuredProductsSelectedTab)">
-            <ngx-slick-carousel *ngIf="embryoService.isDirectionRtl" class="carousel" [config]="rtlSlideConfig">
-                <div ngxSlickItem *ngFor="let product of productsSliderData; let i=index">
-                    <embryo-ProductCard [product]="product" (addToCart)="addToCart($event)" [currency]="embryoService.currency" (addToWishlist)="addToWishlist($event)" [index]="i"></embryo-ProductCard>
+
+
+
+        <ng-container>
+            <ngx-slick-carousel class="carousel" [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let product of contratistas?.contratistas; let i=index">
+                    <embryo-ProductCard [product]="product" [index]="i"></embryo-ProductCard>
                 </div>
             </ngx-slick-carousel>
-            <ngx-slick-carousel *ngIf="!embryoService.isDirectionRtl" class="carousel" [config]="slideConfig">
-                <div ngxSlickItem *ngFor="let product of productsSliderData; let i=index">
-                    <embryo-ProductCard [product]="product" (addToCart)="addToCart($event)" [currency]="embryoService.currency" (addToWishlist)="addToWishlist($event)" [index]="i"></embryo-ProductCard>
-                </div>
-            </ngx-slick-carousel>
+
         </ng-container>
     </div>
 </div>
-<div class="detail-offer section-gap bg-white">
-    <div class="container" *ngIf="productsArray">
-        <embryo-DealOfTheDay [currency]="embryoService?.currency" [singleProduct]="productsArray?.men['2']"></embryo-DealOfTheDay>
-    </div>
-</div>
+
 <div class="quick-shop">
     <embryo-Sales></embryo-Sales>
 </div>
@@ -74,6 +76,6 @@
         <h2>Shop By Brands</h2>
     </div>
     <div class="container">
-        <embryo-BrandsLogo [isRTL]="embryoService.isDirectionRtl"></embryo-BrandsLogo>
+        <embryo-BrandsLogo></embryo-BrandsLogo>
     </div>
 </div>

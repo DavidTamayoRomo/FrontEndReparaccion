@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
+import { ListaContratistasModel } from '../../Pages/UserAccount/models/contratistaListar/listaContratistas.model';
+import { AllContratistaService } from '../../Services/AllContratistas/all-contratista.service';
+import { UsuarioService } from '../../Pages/UserAccount/services/usuario.service';
+import { DataModel } from '../../Pages/UserAccount/models/contratistaListar/data.model';
+import { ContratistasTipoTrabajoModel } from '../../Pages/UserAccount/models/contratistaListar/contratistasTipoTrabajo.model';
 declare var $: any;
 
 @Component({
@@ -6,7 +11,7 @@ declare var $: any;
   templateUrl: './ProductCard.component.html',
   styleUrls: ['./ProductCard.component.scss']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements OnInit, OnChanges {
 
    @Input() product : any;
 
@@ -18,12 +23,36 @@ export class ProductCardComponent implements OnInit {
 
    @Output() addToWishlist: EventEmitter<any> = new EventEmitter();
 
-   constructor() { }
+   //modificacion
+   contratistas:DataModel;
+   contratistas1:ContratistasTipoTrabajoModel=null;
+   @Input()trabajos:any;
+
+   constructor(public _contratistasService : AllContratistaService,
+               public _servicioUsuario:UsuarioService) { }
 
    ngOnInit() {
+      console.log("inicie");
+      this.mostrarContratistasTiposDeTrabajo(1);
    }
 
-   public addToCartProduct(value:any) {
+   //a;ado
+   ngOnChanges(){
+      
+      this.contratistas=this.product;
+
+      
+   }
+
+   mostrarContratistasTiposDeTrabajo(num){
+      this._contratistasService.getContratistasUrlTipoTrabajo(num)
+      .subscribe(contratistas=>{
+        this.contratistas1=contratistas
+        console.log(this.contratistas);
+      });  
+    }
+
+   /*public addToCartProduct(value:any) {
       this.addToCart.emit(value);
    }
 
@@ -40,6 +69,6 @@ export class ProductCardComponent implements OnInit {
       if (!products.some((item) => item.id == singleProduct.id)) {
          return true;
       }
-   }
+   }*/
 
 }
