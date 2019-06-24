@@ -48,7 +48,8 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 
    ngOnInit() {
       this.createForm();
-      this.mainImgPath = "assets/images/gadgets/g-2-a.jpg";
+      this.contratistaDatos = this.contratista;
+      this.mainImgPath = "http://localhost/reparaccion//storage/"+this.contratistaDatos.contratista.user.avatar;
       
       // this.totalPrice  = this.detailData.price; 
 
@@ -61,7 +62,7 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 
    ngOnChanges() {
 
-      this.mainImgPath = "assets/images/gadgets/g-2-a.jpg";      
+            
       this.totalPrice  = null;
       // this.mainImgPath = this.detailData.image;
       // this.totalPrice  = this.detailData.price; 
@@ -72,8 +73,10 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
       console.log("contratistass",this.contratistaDatos);
       this.ncontratosDatos = this.ncontratos;
       console.log("numerocontratos",this.ncontratosDatos);
+      this.mainImgPath = "http://localhost/reparaccion//storage/"+this.contratistaDatos.contratista.user.avatar;
       
     
+
       
    }
 

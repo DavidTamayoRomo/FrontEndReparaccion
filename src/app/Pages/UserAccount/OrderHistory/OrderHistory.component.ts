@@ -23,12 +23,6 @@ export class OrderHistoryComponent implements OnInit {
 
    
    ngOnInit() {
-   //   this._contratistaService.getContratistaLogueado().subscribe(res=>{
-   //      this.contratista=res;
-   //      this.mostrarContratistas();
-   //   },error=>{
-   //      alert('error');
-   //   })
       this.getContratosUsuario();
    }
 
@@ -56,7 +50,7 @@ export class OrderHistoryComponent implements OnInit {
    }
 
    //===============================================================
-   //                    Todos los contratis
+   //                    Todos los contratistas
    //===============================================================
    mostrarContratistas(){
       this._contratistasService.contratosContratistas(this.contratista.contratista[0].id)
