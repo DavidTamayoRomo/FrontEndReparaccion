@@ -55,8 +55,11 @@
                             </form>
                             <div fxLayoutAlign="start center" class="mb-3">
                                 <div>
-                                    <br> <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">Añadir Ubicación...</a>
-                                    <br><label *ngIf="ubicacion==undefined">Importante: La ubicación es obligatoria</label>
+                                    <mat-chip-list aria-label="Fish selection">
+                                        <mat-chip color="accent" selected (click)="reviewPopup(contratistaDatos)">Añadir Ubicación</mat-chip>
+                                    </mat-chip-list>
+                                    <label *ngIf="ubicacion==undefined">Importante: La ubicación es obligatoria</label>
+                                    <!-- <br> <a href="javascript:void(0)" class="text-underline" (click)="reviewPopup(contratistaDatos)">Añadir Ubicación...</a> -->
                                 </div>
                             </div>
                             <!-- <div class="px-3">
