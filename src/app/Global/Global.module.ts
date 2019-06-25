@@ -74,6 +74,7 @@ import { DownloadAppSectionComponent } from './DownloadAppSection/DownloadAppSec
 import { HomePageThreeSliderComponent } from './Slider/HomePageThreeSlider/HomePageThreeSlider.component';
 import { NewProductsCardComponent } from './NewProductsCard/NewProductsCard.component';
 import { AgmCoreModule } from '@agm/core';
+import { ProductCardComponent1 } from './ProductCard1/ProductCard1.component';
 @NgModule({
    imports: [
       CommonModule,
@@ -139,6 +140,7 @@ import { AgmCoreModule } from '@agm/core';
       ImgZoomComponent,
       CommonSignInComponent,
       ProductCardComponent,
+      ProductCardComponent1,
       HeaderUserProfileDropdownComponent,
       AppLogoComponent,
       LighteningDealsComponent,
@@ -189,6 +191,7 @@ import { AgmCoreModule } from '@agm/core';
       CTATwoComponent,
       CollectionGalleryComponent,
       ProductCategoryCardComponent,
+      ProductCardComponent1,
       CTASingleBannerComponent,
       DownloadAppSectionComponent,
       HomePageThreeSliderComponent,

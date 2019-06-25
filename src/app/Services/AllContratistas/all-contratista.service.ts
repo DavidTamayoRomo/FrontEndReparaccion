@@ -18,7 +18,17 @@ export class AllContratistaService {
 	
 	public isLoading: boolean = false;
 
-  	constructor(public http: HttpClient) { }
+	  constructor(public http: HttpClient) { }
+	  
+	//====================================================
+	//   obtener anuncios
+	//====================================================
+
+	getAnuncios(){
+		let url = "";
+		return this.http.get(url);
+	}
+	
 	//====================================================
 	//   obtener contratistas
 	//====================================================	

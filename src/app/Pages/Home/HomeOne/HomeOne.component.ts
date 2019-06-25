@@ -9,6 +9,7 @@ import { FormControl } from '@angular/forms';
 import { tipoTrabajoService } from '../../../Services/tipoTrabajo.service';
 import { ContratistasTipoTrabajoModel } from '../../UserAccount/models/contratistaListar/contratistasTipoTrabajo.model';
 import { ListaContratistasModel } from '../../UserAccount/models/contratistaListar/listaContratistas.model';
+import { AnuncioModel } from '../../UserAccount/models/anuncio.model';
 
 @Component({
   selector: 'app-homeone',
@@ -19,7 +20,7 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
 
    tipos:tipodeTrabajoModel;
    contratistas:ContratistasTipoTrabajoModel=null;
-   
+   anuncios:AnuncioModel;
 
    selected = new FormControl(0);
 
@@ -85,6 +86,15 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
       }
       
       this.mostrarContratistasTiposDeTrabajo(myNumeroAleatorio);
+
+      this. mostrarAnuncios();
+   }
+
+   //===============================================================
+   //                       Anuncios c
+   //===============================================================
+   mostrarAnuncios(){
+      this._contratistasService.getAnuncios();
    }
 
    //===============================================================

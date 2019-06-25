@@ -2,30 +2,44 @@
 <embryo-HomePageTwoSlider [isRTL]="embryoService.isDirectionRtl">
 
 </embryo-HomePageTwoSlider>
-<!--
-<div class="home-main-banner mb-5">
-    <div class="container">
-        <div fxLayout='row wrap' fxLayoutGap="0px">
-            <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="63" fxFlex.xl="63">
-                <div class="home-slider">
-                    <embryo-HomePageOneSlider></embryo-HomePageOneSlider>
-                </div>
-            </div>
-            <div fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="100" fxFlex.lg="37" fxFlex.xl="37">
-                <div class="aside-banner">
-                    <a [routerLink]="['/products/accessories']" class="card-shadow"> <img src="assets/images/aside-1.jpg" alt="side" width="547" height="315"></a>
+
+<!-- ANUNCIOS -->
+<br>
+<div class="shop-card-wrapper section-gap pt-0 pb-5 grid-card-wrapper tab-sldier-v2">
+    <div class="block-title text-center">
+        <h2>TOP CONTRATISTAS</h2>
+
+    </div>
+    <mat-toolbar style="height:270px;background-color:rgb(12, 25, 41)" class="section-title-toolbar grid-toolbar">
+        <mat-toolbar-row>
+            <div class="container">
+                <div class="w-100 mb-3">
+                    <div class="block-title mb-2">
+                        <h2 class="text-inverse mb-0 text-xxl font-light">DESTACADO
+                            <mat-icon aria-hidden="false" aria-label="Example home icon">star</mat-icon>
+                        </h2>
+                    </div>
                 </div>
 
-                <div class="aside-banner">
-                    <a [routerLink]="['/products/accessories']" class="card-shadow"><img src="assets/images/aside-2.jpg" alt="side" width="547" height="315"></a>
-                </div>
             </div>
-        </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div class="container">
+        <ng-container>
+            <ng-container>
+                <ngx-slick-carousel class="carousel" [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let anuncio of anuncios; let i=index">
+                        <embryo-ProductCard1 [anuncio]="anuncio" [index]="i"></embryo-ProductCard1>
+                    </div>
+                </ngx-slick-carousel>
+
+            </ng-container>
+        </ng-container>
     </div>
 </div>
--->
 
-
+<!--SERVICIOS -->
 <div class="feature-section">
     <div class="container">
         <embryo-Features></embryo-Features>
