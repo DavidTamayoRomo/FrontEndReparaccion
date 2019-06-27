@@ -100,14 +100,8 @@ export class EditProfileComponent implements OnInit {
                               console.log(resp);
                               this._usuarioService.subirFoto(f,this.usuarioCompleto.id)
                               .subscribe(resp => {
-                              this.router.navigate(['/account/profile']);
-                              
+                              this.router.navigate(['/account/profile']);                             
                           });
                         });
    }
-
-   
-
-   
-
 }
