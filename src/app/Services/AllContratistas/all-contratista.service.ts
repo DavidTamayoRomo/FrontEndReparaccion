@@ -8,6 +8,7 @@ import 'rxjs/add/operator/toPromise';
 import { Http } from '@angular/http';
 import { ContratistasTipoTrabajoModel } from 'src/app/Pages/UserAccount/models/contratistaListar/contratistasTipoTrabajo.model';
 import { Observable } from 'rxjs';
+import { AnuncioModel } from '../../Pages/UserAccount/models/anuncio.model';
 
 const URL=environment.url1;
 
@@ -24,9 +25,9 @@ export class AllContratistaService {
 	//   obtener anuncios
 	//====================================================
 
-	getAnuncios(){
-		let url = "";
-		return this.http.get(url);
+	getAnuncios():Observable<AnuncioModel>{
+		let url = URL+"anuncio-aprobados";
+		return this.http.get<AnuncioModel>(url);	
 	}
 	
 	//====================================================

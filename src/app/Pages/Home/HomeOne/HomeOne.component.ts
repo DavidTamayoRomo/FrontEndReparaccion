@@ -91,10 +91,14 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
    }
 
    //===============================================================
-   //                       Anuncios c
+   //                       Anuncios 
    //===============================================================
    mostrarAnuncios(){
-      this._contratistasService.getAnuncios();
+      this._contratistasService.getAnuncios()
+      .subscribe(anuncios=>{
+        this.anuncios=anuncios
+        console.log(this.anuncios);
+      }); 
    }
 
    //===============================================================
@@ -104,7 +108,7 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
       this._contratistasService.getContratistasUrlTipoTrabajo(num)
       .subscribe(contratistas=>{
         this.contratistas=contratistas
-        console.log(this.contratistas);
+        //console.log(this.contratistas);
       });  
     }
 

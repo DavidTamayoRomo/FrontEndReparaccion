@@ -33,7 +33,7 @@ export class ProductCardComponent implements OnInit, OnChanges {
 
    ngOnInit() {
       console.log("inicie");
-      this.mostrarContratistasTiposDeTrabajo(1);
+      //this.mostrarContratistasTiposDeTrabajo(1);
    }
 
    //a;ado
@@ -44,13 +44,13 @@ export class ProductCardComponent implements OnInit, OnChanges {
       
    }
 
-   mostrarContratistasTiposDeTrabajo(num){
+   /*mostrarContratistasTiposDeTrabajo(num){
       this._contratistasService.getContratistasUrlTipoTrabajo(num)
       .subscribe(contratistas=>{
         this.contratistas1=contratistas
-        console.log(this.contratistas);
+        //console.log(this.contratistas);
       });  
-    }
+    }*/
 
    /*public addToCartProduct(value:any) {
       this.addToCart.emit(value);
