@@ -9,6 +9,8 @@ import { HomeThreeComponent } from './Pages/Home/HomeThree/HomeThree.component';
 import { CartComponent } from './Pages/Cart/Cart.component';
 import { NotFoundComponent } from './Pages/NotFound/NotFound.component';
 import { ListaContratistaComponent } from './Pages/lista-contratista/lista-contratista.component';
+import { AuthGuard } from './guards/auth.guard';
+
 
 export const AppRoutes : Routes = [
    {
@@ -33,7 +35,8 @@ export const AppRoutes : Routes = [
          },
          {
             path: 'products',
-            loadChildren: './Pages/Products/Products.module#ProductsModule'
+            loadChildren: './Pages/Products/Products.module#ProductsModule',
+            canActivate:[AuthGuard]
          },
          {
             path: 'lista-contratistas',
@@ -65,7 +68,8 @@ export const AppRoutes : Routes = [
          },
          {
             path: 'account',
-            loadChildren: './Pages/UserAccount/UserAccount.module#UserAccountModule'
+            loadChildren: './Pages/UserAccount/UserAccount.module#UserAccountModule',
+            canActivate:[AuthGuard]
          }
       ]
    },

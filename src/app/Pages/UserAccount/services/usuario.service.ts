@@ -7,6 +7,7 @@ import { UsuarioModel } from '../models/usuario.model';
 import { RegistroModel } from '../models/registro.model';
 import { LoginModel } from '../models/login.model';
 import swal from 'sweetalert';
+import { isNullOrUndefined } from 'util';
 const URL=environment.url1;
 
 @Injectable({
@@ -22,6 +23,19 @@ export class UsuarioService {
 		console.log('Se esta usando el Servicio de Usuario');
 		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
 	}
+	//====================================================
+	//			obtener usuario logeado
+	//====================================================
+	getUsuarioActual() {
+		let user_string = localStorage.getItem("usuario1");
+		if (!isNullOrUndefined(user_string)) {
+			console.log('verifico usuario si esta log');
+		  this.usuarioCompleto = JSON.parse(user_string);
+		  return this.usuarioCompleto;
+		} else {
+		  return null;
+		}
+	}
 
 	//====================================================
 	//						LocalStorage
@@ -29,11 +43,12 @@ export class UsuarioService {
 	obtenerUsuario(){
 		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
 	}
+
 	guardarStorage( usuario: UsuarioModel ) {
 		//console.log(usuario);
 		localStorage.setItem('usuario1', JSON.stringify(usuario) );
 		this.usuarioCompleto = usuario;
-	  } 
+	} 
 
 	  //Para eliminar 
 	  borrarStorage() {
@@ -53,11 +68,12 @@ export class UsuarioService {
 		let url = URL+'loginAPI';
 		return this.http.post(url, usuario)
 			.map( (resp: any) => {
-				console.log(resp.name);
+				
 				if(resp.name==undefined){
 					swal('Importante', 'Datos incorrectos, revisar correo o contraseña', 'warning');
 				}else{
 					this.guardarStorage( resp );
+					
 					window.location.href = '/home';
 				}
 	
