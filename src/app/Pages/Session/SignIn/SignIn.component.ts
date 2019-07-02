@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'signIn',
@@ -10,6 +11,7 @@ export class SignInComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

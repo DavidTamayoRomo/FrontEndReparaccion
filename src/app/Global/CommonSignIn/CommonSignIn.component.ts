@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { UsuarioService } from '../../Pages/UserAccount/services/usuario.service';
 import { UsuarioModel } from '../../Pages/UserAccount/models/usuario.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RegistroModel } from '../../Pages/UserAccount/models/registro.model';
 import { LoginModel } from '../../Pages/UserAccount/models/login.model';
 import swal from 'sweetalert';
@@ -19,7 +19,9 @@ export class CommonSignInComponent implements OnInit {
   form: FormGroup;
   auth2:any;
   usuarioCompleto:UsuarioModel;
-  constructor(public _usuarioService: UsuarioService,
+  
+  returnUrl: string;
+  constructor(public _usuarioService: UsuarioService,private route: ActivatedRoute,
               public router: Router) { }
 
   ngOnInit() {
@@ -28,7 +30,10 @@ export class CommonSignInComponent implements OnInit {
     this.form = new FormGroup({
       email: new FormControl( null ,[ Validators.required,, Validators.email] ),
       password: new FormControl( null , Validators.required )   
-    })
+    });
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log('este es el login');
+    console.log(this.returnUrl);
   }
   
   //================================================

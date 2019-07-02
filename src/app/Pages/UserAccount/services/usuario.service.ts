@@ -8,6 +8,7 @@ import { RegistroModel } from '../models/registro.model';
 import { LoginModel } from '../models/login.model';
 import swal from 'sweetalert';
 import { isNullOrUndefined } from 'util';
+import { ActivatedRoute, Router } from '@angular/router';
 const URL=environment.url1;
 
 @Injectable({
@@ -18,11 +19,22 @@ export class UsuarioService {
 	usuario:LoginModel;
 	usuarioCompleto:UsuarioModel;
 	
-
-  constructor( public http: HttpClient ) { 
+	returnUrl: string;
+  constructor(private route: ActivatedRoute, public http: HttpClient,private router: Router ) { 
 		console.log('Se esta usando el Servicio de Usuario');
 		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
+		
+		
+		//codigo para continuar con la ruta previamente seleccionada
+		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+		/*console.log("este es el servicio");
+		console.log(this.returnUrl);
+		console.log("termina servicio usuario");*/
 	}
+	ngOnInit() {
+        // get return url from route parameters or default to '/'
+		this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 	//====================================================
 	//			obtener usuario logeado
 	//====================================================
@@ -73,8 +85,8 @@ export class UsuarioService {
 					swal('Importante', 'Datos incorrectos, revisar correo o contraseña', 'warning');
 				}else{
 					this.guardarStorage( resp );
-					
-					window.location.href = '/home';
+					//this.router.navigateByUrl(this.returnUrl);
+					window.location.href = this.returnUrl;
 				}
 	
 			  });

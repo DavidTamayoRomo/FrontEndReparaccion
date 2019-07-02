@@ -8,13 +8,19 @@ import { UsuarioService } from '../Pages/UserAccount/services/usuario.service';
 })
 export class AuthGuard implements CanActivate {
   constructor(private authService: UsuarioService, private router: Router) { }
-  canActivate() {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    //console.log(route);
+    console.log(state.url);//ruta en la que estuve antes de iniciar sesion
+    let url=state.url;
     if (this.authService.getUsuarioActual()) {
       // login TRUE
       return true;
     } else {
-        this.router.navigate(['session/signin']);
+        //{queryParams: {returnUrl: state.url}} sirve para guardar la ruta en la url
+        //y luego recuperarla con snapshot
+        this.router.navigate(['session/signin'],{queryParams: {returnUrl: state.url}});
         return false;
     }
+    
   }
 }
