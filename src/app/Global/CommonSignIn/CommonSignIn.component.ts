@@ -20,7 +20,8 @@ export class CommonSignInComponent implements OnInit {
   auth2:any;
   usuarioCompleto:UsuarioModel;
   
-  returnUrl: string;
+  
+
   constructor(public _usuarioService: UsuarioService,private route: ActivatedRoute,
               public router: Router) { }
 
@@ -31,9 +32,7 @@ export class CommonSignInComponent implements OnInit {
       email: new FormControl( null ,[ Validators.required,, Validators.email] ),
       password: new FormControl( null , Validators.required )   
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    console.log('este es el login');
-    console.log(this.returnUrl);
+    
   }
   
   //================================================

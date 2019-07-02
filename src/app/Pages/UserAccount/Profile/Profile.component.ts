@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
                  //inicializao el usuario
                  this.usuarioCompleto = _usuarioService.usuarioCompleto;
                  
-                console.log(this.usuarioCompleto.role_id);
+                //console.log(this.usuarioCompleto.role_id);
                  
 
     }

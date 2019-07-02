@@ -51,9 +51,9 @@ export class HeaderUserProfileDropdownComponent implements OnInit {
       this.mostrar=true;//usuario  logeado
       this.mostrar1=false;//usuario no Logeado
     }
-    console.log("este es el verificar usuario");
-    console.log(this.mostrar);
-    console.log(this.mostrar1);
+    //console.log("este es el verificar usuario");
+    //console.log(this.mostrar);
+    //console.log(this.mostrar1);
   }
   
 

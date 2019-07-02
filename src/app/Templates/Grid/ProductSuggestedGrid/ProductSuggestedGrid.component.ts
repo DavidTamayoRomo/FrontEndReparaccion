@@ -49,7 +49,7 @@ export class ProductSuggestedGridComponent implements OnInit ,OnChanges {
    ngOnChanges() {
 
       this.trabajosDatos = this.trabajos;
-      console.log("trabajos",this.trabajosDatos);
+      //console.log("trabajos",this.trabajosDatos);
       
    }
 

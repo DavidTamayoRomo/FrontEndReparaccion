@@ -21,7 +21,7 @@ export class UsuarioService {
 	
 	returnUrl: string;
   constructor(private route: ActivatedRoute, public http: HttpClient,private router: Router ) { 
-		console.log('Se esta usando el Servicio de Usuario');
+		
 		this.usuarioCompleto = JSON.parse( localStorage.getItem('usuario1') );
 		
 		
@@ -41,7 +41,7 @@ export class UsuarioService {
 	getUsuarioActual() {
 		let user_string = localStorage.getItem("usuario1");
 		if (!isNullOrUndefined(user_string)) {
-			console.log('verifico usuario si esta log');
+			//console.log('verifico usuario si esta log');
 		  this.usuarioCompleto = JSON.parse(user_string);
 		  return this.usuarioCompleto;
 		} else {
@@ -121,7 +121,7 @@ export class UsuarioService {
 	//==================================
 	actualizarUsuario( usuario ){
 		this.obtenerUsuario();
-		console.log(this.usuarioCompleto);
+		//console.log(this.usuarioCompleto);
 		let url = URL+'user/edit-userap?api_token='+this.usuarioCompleto.api_token;
 		return this.http.post(url, usuario).map( (resp: any) => {
 			this.guardarStorage( resp );
@@ -131,8 +131,8 @@ export class UsuarioService {
 	subirFoto(usuario:FormData,id)
 	{
 		this.obtenerUsuario();
-		console.log(this.usuarioCompleto);
-		console.log('userphot',usuario.get('avatar'));
+		//console.log(this.usuarioCompleto);
+		//console.log('userphot',usuario.get('avatar'));
 		let url = URL+'user/edit-userphoto/'+id+'?api_token='+this.usuarioCompleto.api_token;	
 		return this.http.post(url, usuario).map( (resp: any) => {
 			this.guardarStorage( resp );
@@ -165,7 +165,7 @@ export class UsuarioService {
 
 //Listar contratos de usuario
 	getContratosUsuario(id): Observable<any> {
-		console.log(id);
+		//console.log(id);
 		return this.http.get<any>(URL+'user-contratos-contratista/'+id);
    }
 }

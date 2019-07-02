@@ -32,43 +32,13 @@ export class ProductCardComponent implements OnInit, OnChanges {
                public _servicioUsuario:UsuarioService) { }
 
    ngOnInit() {
-      console.log("inicie");
+      
       //this.mostrarContratistasTiposDeTrabajo(1);
    }
 
    //a;ado
-   ngOnChanges(){
-      
-      this.contratistas=this.product;
-
-      
+   ngOnChanges(){     
+      this.contratistas=this.product; 
    }
-
-   /*mostrarContratistasTiposDeTrabajo(num){
-      this._contratistasService.getContratistasUrlTipoTrabajo(num)
-      .subscribe(contratistas=>{
-        this.contratistas1=contratistas
-        //console.log(this.contratistas);
-      });  
-    }*/
-
-   /*public addToCartProduct(value:any) {
-      this.addToCart.emit(value);
-   }
-
-   public productAddToWishlist(value:any, parentClass) {
-      if(!($('.'+parentClass).hasClass('wishlist-active'))) {
-         $('.'+parentClass).addClass('wishlist-active');
-      }
-      
-      this.addToWishlist.emit(value);
-   }
-
-   public checkCartAlready(singleProduct) {
-      let products = JSON.parse(localStorage.getItem("cart_item")) || [];
-      if (!products.some((item) => item.id == singleProduct.id)) {
-         return true;
-      }
-   }*/
 
 }

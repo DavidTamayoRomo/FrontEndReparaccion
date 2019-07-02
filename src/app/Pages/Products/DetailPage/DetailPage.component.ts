@@ -50,7 +50,7 @@ export class DetailPageComponent implements OnInit {
 
    public obtenerContratista(){
       this.embryoService.getContratista(this.contratista_id).subscribe(res => {
-         console.log("Datos de contratista",res);
+         //console.log("Datos de contratista",res);
          this.contratista=res;
          this.contratista.contratista.tipotrabajos=res.contratista.tipotrabajos.filter(trabajo=>trabajo.id==this.tipotrabajo_id);
          //this.contratista.tiposTrabajo=res.tiposTrabajo.filter(trabajo=>trabajo.id!=this.tipotrabajo_id);
@@ -59,14 +59,14 @@ export class DetailPageComponent implements OnInit {
    }
    public obtenerTrabajosPorID(){
       this.embryoService.getTrabajos(this.tipotrabajo_id).subscribe(res => {
-         console.log(res);
+         //console.log(res);
          this.trabajos=res;
          this.trabajos.contratistas=res.contratistas.filter(trabajo=>trabajo.id!=this.contratista_id);
       });
    }
    public obtenerContratistas(){
       this.embryoService.getContratistas().subscribe(res=>{
-         console.log(res);
+         //console.log(res);
          this.trabajos=res.data;
          
       });
@@ -77,7 +77,7 @@ export class DetailPageComponent implements OnInit {
       this.embryoService.getContratos(this.contratista_id).subscribe(res => {
          // console.log("datos contratos antes de enviar al hijo",res);
          this.ncontratos=res;
-         console.log("datos contratos antes de enviar al hijo",this.ncontratos);
+         //console.log("datos contratos antes de enviar al hijo",this.ncontratos);
       });
    }
    

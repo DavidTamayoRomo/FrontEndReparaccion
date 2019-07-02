@@ -70,9 +70,9 @@ export class ShopDetailsComponent implements OnInit, OnChanges {
 
       //importando datos de contratista y de contratos
       this.contratistaDatos = this.contratista;
-      console.log("contratistass",this.contratistaDatos);
+      //console.log("contratistass",this.contratistaDatos);
       this.ncontratosDatos = this.ncontratos;
-      console.log("numerocontratos",this.ncontratosDatos);
+      //console.log("numerocontratos",this.ncontratosDatos);
       this.mainImgPath = "http://localhost/reparaccion//storage/"+this.contratistaDatos.contratista.user.avatar;
       
     

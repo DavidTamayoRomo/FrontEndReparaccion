@@ -29,7 +29,10 @@ export class ProductGridComponent implements OnInit, OnChanges {
 
    ngOnInit() {
       this._contratistasService.getContratistas()
-          .then(contratistas=>{this.contratistas=contratistas;console.log(this.contratistas);});   
+          .then(contratistas=>{
+            this.contratistas=contratistas;
+            //console.log(this.contratistas);
+          });   
      
       this.userAvatar="http://localhost/reparaccion//storage/app/public/"+this.contratistas;
    }

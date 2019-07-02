@@ -23,7 +23,7 @@ export class ProductCardComponent1 implements OnInit, OnChanges {
    constructor() { }
 
    ngOnInit() {  
-      console.log(this.anuncio);
+      //console.log(this.anuncio);
       this.anuncios=this.anuncio; 
    }
 

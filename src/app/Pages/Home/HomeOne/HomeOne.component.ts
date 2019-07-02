@@ -97,7 +97,7 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
       this._contratistasService.getAnuncios()
       .subscribe(anuncios=>{
         this.anuncios=anuncios
-        console.log(this.anuncios);
+        //console.log(this.anuncios);
       }); 
    }
 
@@ -124,7 +124,7 @@ export class HomeoneComponent implements OnInit, AfterViewChecked{
 //me devuelve el numero de index del TAB
 //es decir obtengo el id de tipo de trabajo
    tabChanged(event) {
-      console.log('Clicked: ' + event.index);
+      //console.log('Clicked: ' + event.index);
       if( event.index >0 ){
          this.mostrarContratistasTiposDeTrabajo( event.index);
       }

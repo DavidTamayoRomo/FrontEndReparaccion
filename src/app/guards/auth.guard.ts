@@ -10,8 +10,8 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: UsuarioService, private router: Router) { }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     //console.log(route);
-    console.log(state.url);//ruta en la que estuve antes de iniciar sesion
-    let url=state.url;
+    //console.log(state.url);//ruta en la que estuve antes de iniciar sesion
+    
     if (this.authService.getUsuarioActual()) {
       // login TRUE
       return true;

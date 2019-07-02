@@ -428,12 +428,12 @@ export class EmbryoService {
 	}
 
    createContrato(contrato): Observable<any> {
-		console.log(contrato);
+		//console.log(contrato);
 		return this.http.post<any>(URL+'/contrato', contrato);
    }
    
    getTrabajos(tipotrabajo_id): Observable<any> {
-		console.log(tipotrabajo_id);
+		//console.log(tipotrabajo_id);
 		return this.http.get<any>(URL+'/tipoTrabajo-contratistas/'+tipotrabajo_id);
    }
 
@@ -443,7 +443,7 @@ export class EmbryoService {
 
 
    getContratos(contratista_id): Observable<any> {
-		console.log(contratista_id);
+		//console.log(contratista_id);
 		return this.http.get<any>(URL+'/contratista-contratos/'+contratista_id);
    }
 
