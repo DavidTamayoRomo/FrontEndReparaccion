@@ -18,6 +18,12 @@ const HeaderOneItems= [
     type: "link",
     icon: "home",
   },
+  {
+    state:'como-funciona',
+    name:"¿COMO FUNCIONA?",
+    type:"link",
+    icon: 'como-funciona',
+  },
   /*
   {
     state: "",

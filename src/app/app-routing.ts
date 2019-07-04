@@ -10,6 +10,7 @@ import { CartComponent } from './Pages/Cart/Cart.component';
 import { NotFoundComponent } from './Pages/NotFound/NotFound.component';
 import { ListaContratistaComponent } from './Pages/lista-contratista/lista-contratista.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ComoFuncionaComponent } from './Pages/como-funciona/como-funciona.component';
 
 
 export const AppRoutes : Routes = [
@@ -41,6 +42,10 @@ export const AppRoutes : Routes = [
          {
             path: 'lista-contratistas',
             component: ListaContratistaComponent
+         },
+         {
+            path: 'como-funciona',
+            component: ComoFuncionaComponent
          },
          {
             path: 'cart',

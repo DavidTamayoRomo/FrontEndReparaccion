@@ -68,6 +68,8 @@ import { PaymentDetailSideBarComponent } from './Layouts/PaymentDetailSideBar/Pa
 import { FixedHeaderComponent } from './Layouts/Header/FixedHeader/FixedHeader.component';
 import { AllContratistaService } from './Services/AllContratistas/all-contratista.service';
 import { ListaContratistaComponent } from './Pages/lista-contratista/lista-contratista.component';
+import { ComoFuncionaComponent } from './Pages/como-funciona/como-funciona.component';
+
 //paginacion
 import { tipoTrabajoService } from './Services/tipoTrabajo.service';
 
@@ -97,6 +99,7 @@ export function createTranslateLoader(http: HttpClient) {
     HeaderThreeComponent,
     FixedHeaderComponent,
     ListaContratistaComponent,
+    ComoFuncionaComponent,
   
     
   ],
