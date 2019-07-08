@@ -9,9 +9,9 @@
                 <br>
                 <br>
                 <!--INICIO DE PLAN -->
-                <label id="example-radio-group-label">Elija el plan</label>
+                <!-- <label id="example-radio-group-label">Elija el plan</label>
                 <br>
-                <br>
+                <br> 
                 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" formControlName="plan_id">
                     <mat-radio-button class="example-radio-button" *ngFor="let plan of arrayPlanes" [value]="plan.id">
                         {{plan?.titulo}} 
@@ -19,14 +19,37 @@
                     <mat-error *ngIf="f.plan_id.errors?.required && f.plan_id.touched">
                         <strong>EL plan es requerido</strong>
                     </mat-error>
-                </mat-radio-group>
+                </mat-radio-group>  -->
+                <h5>Seleccionar el plan</h5>
+                <mat-grid-list cols="4" rowHeight="100px" >
+                    <mat-grid-tile
+                        [colspan]="3"
+                        [rowspan]="2"> 
+                        <mat-card  class="example-card flex-container" [ngClass]="{'seleccion': true}" *ngFor="let plan of arrayPlanes">
+                            <mat-card-header>
+                              <mat-card-title>{{plan?.titulo}}</mat-card-title>
+                            </mat-card-header>
+                            <mat-card-content>
+                              <p>
+                                {{plan?.cantidad}} Anuncios
+                              </p>
+                            </mat-card-content>
+                            <mat-card-actions>
+                                <button mat-button (click)="seleccionar(plan?.id)" color="primary">Seleccionar</button>
+                              </mat-card-actions>
+                        </mat-card>
+                    </mat-grid-tile>
+                    <mat-error *ngIf="f.plan_id.errors?.required && f.plan_id.touched">
+                            <strong>EL plan es requerido</strong>
+                        </mat-error>
+                </mat-grid-list>
                 <!--FIN DE PLAN -->
                 <br>
                 <br>
-
+                <div class="example-container">
                 <mat-form-field>
-                    <textarea matInput placeholder="Descripcion" formControlName="descripcion" name="descripcion"></textarea>
-                     <mat-error *ngIf="f.descripcion.touched && f.descripcion.errors?.required">
+                <textarea matInput placeholder="Descripción" formControlName="descripcion" name="descripcion"> </textarea>                
+                      <mat-error *ngIf="f.descripcion.touched && f.descripcion.errors?.required">
                         <strong>La descrición es requerida</strong>
                     </mat-error>
                     <mat-error *ngIf="f.descripcion.touched && f.descripcion.errors?.maxlength">
@@ -34,6 +57,7 @@
                     </mat-error>
                 </mat-form-field>
 
+            </div>
 
                 <div>
                     <button mat-button matStepperNext>Siguiente</button>
@@ -61,7 +85,14 @@
                             </mat-option>
                         </mat-autocomplete>                    
                 </mat-form-field>
+                <!-- <mat-form-field>
+                    <mat-label>Seleccionar Tipos de Trabajo</mat-label>
+                    <mat-select [formControl]="trabajoControl" multiple>
+                      <mat-option *ngFor="let trabajo of trabajosSelecionados" [value]="trabajoControl">{{trabajo.nombre}}</mat-option>
+                    </mat-select>
+                  </mat-form-field> -->
                 <br>
+            
                 <div>
                     <button mat-button matStepperPrevious>Atrás</button>
                     <button mat-button matStepperNext>Siguiente</button>

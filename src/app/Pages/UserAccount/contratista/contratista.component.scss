@@ -1,4 +1,5 @@
 @import 'https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300';
+
 $padding:30px;
 * {
     box-sizing: border-box;
@@ -112,3 +113,25 @@ p {
         transform: scale(.5) rotateY(-180deg) translateZ(1px);
     }
 }
+
+.example-card :focus{
+    width: 33.3%;
+      
+  }
+
+
+.seleccion:focus{
+    background:orangered;
+}
+  .example-full-width {
+    width: 100%;
+  }
+
+  .example-container > * {
+    width: 80%;
+  }
+
+  .example-additional-selection {
+    opacity: 0.75;
+    font-size: 0.75em;
+  }

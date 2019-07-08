@@ -97,7 +97,7 @@ export class ContratistaComponent implements OnInit {
   getPlanes(){
     this._contratistaService.getPlanes().subscribe(res=>{
       this.arrayPlanes=res;
-      console.log(this.arrayPlanes);
+      console.log("arrayplanes",this.arrayPlanes);
     },error=>{
       swal('Error', 'Error al obtener los planes, por favor recarge nuevamente la página, error:'+error.message, 'warning');
     })
@@ -138,6 +138,11 @@ export class ContratistaComponent implements OnInit {
 	}
 
   //crear nuevo contratista
+  seleccionar(id){
+    this.contratistaForm.patchValue({"plan.id":id})
+    console.log(id);
+
+  }
   onSumit(){
     if(this.contratista){
       this.updateContratista();
@@ -147,6 +152,7 @@ export class ContratistaComponent implements OnInit {
     }
 
   }
+  
 
   contratistaGuardado:any;
   guardarContratista(){
